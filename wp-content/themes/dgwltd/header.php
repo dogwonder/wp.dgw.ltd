@@ -22,7 +22,7 @@
 <style>
 <?php require locate_template( 'dist/css/critical.php' ); ?>
 </style>
-<script async defer data-domain="dgw.ltd" src="https://analytics.dgw.ltd/js/index.js"></script>
+<script defer data-domain="dogwonder.dev" src="https://plausible.io/js/plausible.js"></script>
 <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="<?php echo get_template_directory_uri(); ?>/dist/images/fav/favicon-128x128.png" type="image/x-icon">
 <link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/dist/images/fav/favicon-128x128.png">
 <meta name="apple-mobile-web-app-title" content="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" />
