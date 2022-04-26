@@ -1,0 +1,26 @@
+//These are custom block sections to allow block background colors
+.dgwltd-section {
+    //Bump it out to full width
+    padding:0 !important;
+    grid-column: 1 / span 3 !important;
+    display: grid;
+    //Then create a subgrid
+    grid-template-columns: 1fr minmax(min-content, var(--containerWidth)) 1fr;
+    .wp-block-cover__inner-container, 
+    .dgwltd-section__inner {
+        //Snap back to our container
+        grid-column: 2 / span 1;
+    }
+}
+
+.dgwltd-section--grey {
+    background-color: var(--alt);
+}
+
+.dgwltd-section--blue {
+    background-color: var(--primary);
+}
+
+.dgwltd-section--pink {
+    background-color: var(--secondary);
+}

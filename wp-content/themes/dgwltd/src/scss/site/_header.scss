@@ -1,0 +1,331 @@
+//Vars
+$nav-height: 64px;
+
+//Masthead
+.dgwltd-masthead {
+  margin: 0;
+  padding: 0;
+  // position: sticky;
+  // top: 0;
+  z-index: 9999;
+  background-color: var(--background);
+  .logo {
+    fill: var(--highlight);
+    width: 50px;
+    height: 50px;
+  }
+}
+
+
+.dgwltd-masthead-container {
+
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  //Width
+  @extend %container;
+  width:100%;
+
+  //Logo
+  .dgwltd-masthead__logo {
+    line-height: 1;
+    > a {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      &:visited {
+        color: inherit;
+      }
+      &:focus {
+        box-shadow: none;
+        background-color: white;
+      }
+    }
+
+    svg {
+      width: 60px;
+      height: auto;
+      fill: black;
+    }
+  }
+
+  //CTA
+  .dgwltd-masthead__cta {
+    .dgwltd-button {
+      margin:0;
+    }
+  }
+
+
+}
+
+.govuk-skip-link:link, 
+.govuk-skip-link:focus {
+  color: black !important;
+  text-decoration: underline;
+}
+
+.dgwltd-nav {
+  z-index: $z-low;
+  display: flex;
+  
+  .dgwltd-menu {
+    margin:0;
+    padding: 0;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
+    .menu-item {
+      list-style-type: none;
+      @include rhythm(18, 60);
+      text-align: left;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      &:last-of-type {
+        margin: 0;
+      }
+      a {
+        display: block;
+        text-decoration: none;
+        padding:0 var(--gap-20);
+        @include mq($from: desktop) {
+          padding:0 8px;
+          margin:0;
+        }
+        display: inline-block;
+        color: var(--highlight);
+        &:hover {
+          text-decoration: underline;
+        }
+        &:focus {
+          text-decoration: none;
+          border: 0;
+        }
+      }
+
+      // &.current-menu-ancestor,
+      &.current-menu-item {
+        > a {
+          color: var(--highlight);
+          text-decoration: underline;
+          // font-weight: 700;
+          &:focus {
+            text-decoration: none;
+          }
+        }
+      }
+
+      &.menu-item-has-children {
+        @include mq($from: desktop) {
+          display: flex;
+          align-items: center;
+          > a {
+            padding-right:0;
+            margin-right:0;
+          }
+        }
+      }
+
+      //Hover/Click method
+      // &.menu-item-has-children:focus-within,
+      // &.menu-item-has-children:hover {
+      //   border-color: var(--border);
+      //   .sub-menu {
+      //     display: block;
+      //   }
+      // }
+
+      //With JS - see a11yMenu()
+      &.menu-item-has-children a:hover {
+        ~ .sub-menu {
+          display: block;
+        }
+      }
+
+      &.menu-item-has-children.menu-open {
+        .sub-menu {
+          display: block;
+        }
+        //a11y menu for opening menu via button
+        .button-show-subnav {
+          &:after {
+            @include mq($from: desktop) {
+              top: 6px;
+              @include dgwltd-shape-arrow(
+                $direction: up,
+                $base: 8px,
+                $display: inline-block
+              );
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+
+}
+
+
+//Navigation Toggle
+.nav-toggle {
+  margin: 0 0 0 auto;
+  padding: 0;
+  display: none;
+  color: var(--alt);
+  box-shadow: none;
+  font-size: var(--size-19);
+  font-weight: bold;
+  background-color: transparent;
+  border:0;
+  width: 44px;
+  height: 44px;
+  &:hover {
+    background-color: transparent;
+  }
+  svg {
+    fill: var(--text-color);
+    width: 40px;
+    height: 40px;
+    margin-left:auto;
+    &.close {
+      stroke: white;
+      stroke-width: 50;
+    }
+  }
+}
+
+%dgMenu {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  z-index: 9998;
+  padding: var(--gap-20) 0 0;
+  font-size: var(--size-21);
+  background-color: rgba(26,30,30,.9);
+  backdrop-filter: blur(5px) contrast(.8);
+  width: 100%;
+  height: 100vh;
+  max-width: 100%;
+  .menu-item {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    @include rhythm(21, 21);
+    > a {
+      display: block;
+      color: var(--alt);
+    }
+    &.menu-item-has-children {
+      @include mq($from: desktop) {
+        display: flex;
+      }
+    }
+  }
+  .sub-menu {
+    background-color: transparent;
+    margin-bottom: var(--gap-20);
+    .menu-item {
+      margin: 0;
+      @include rhythm(17, 17);
+    }
+  }
+}
+
+//Attempt at fixing Cumulative Layout Shift issue with menu before JS kicks in
+.no-js {
+  .dgwltd-masthead {
+    /* browser decide if x is ok to scroll and show bars on, y hidden */
+    overflow: auto hidden;
+    /* prevent scroll chaining on x scroll */
+    overscroll-behavior-x: contain;
+    /* scrolling should snap children on x */
+    scroll-snap-type: x mandatory;
+    
+    @media (hover: none) {
+      scrollbar-width: none;
+  
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+      }
+    }
+  
+    .dgwltd-nav {
+      display: flex;
+      /* defend against <main> needing 100% */
+      flex-shrink: 0;
+      /* fixes cross browser quarks */
+      min-block-size: fit-content;
+    }
+  }
+
+  
+}
+
+//JS progressive enhancement
+.js-enabled {
+  .dgwltd-menu { 
+    //Cumulative Layout Shift fix - hide the menu if JS is enabled to avoid layout shift, maybe becuase ResizeObserver is too slow? 🤷
+    @include mq($until: tablet) {
+      display: none;  
+    }
+  }
+  .dgwltd-masthead {
+
+    //If we are in the mobile view (<769px), we need to show the burger menu
+    &[enabled="true"] {
+      .nav-toggle { 
+        display: block; 
+        .open {display: block;}
+        .close {display: none;}
+      }    
+      .dgwltd-menu { 
+        display: none;  
+        content-visibility: hidden;
+      }
+
+      //If the status is open and the menu is not visible, show the menu
+      [status="open"] {
+        
+        &.dgwltd-menu {
+          content-visibility: visible;
+          @extend %dgMenu;
+
+          .menu-item {
+            @include rhythm(21, 44);
+          }
+
+        }
+
+      }
+      
+    }
+
+    //Switch the menu icons
+    &.masthead-is-open {
+      .nav-toggle {
+        position: relative;
+        z-index:9999;
+        .open {display: none;}
+        .close {display: block;}
+      }
+    }
+
+    &[enabled="false"] { 
+      
+    }
+
+  }
+
+}

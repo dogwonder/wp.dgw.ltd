@@ -1,0 +1,21 @@
+{
+    "short_name": "dgwltd",
+    "name": "DGW.ltd",
+    "icons": [
+      {
+        "src": "/wp-content/themes/dgwltd/dist/images/fav/favicon-192x192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/wp-content/themes/dgwltd/dist/images/fav/favicon-512x512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "/?source=pwa",
+    "background_color": "#75e6ef",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#75e6ef"
+}
