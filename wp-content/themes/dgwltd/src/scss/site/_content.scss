@@ -1,11 +1,5 @@
 //WP entry-content e.g. posts
 .entry-content {
-  .has-medium-font-size {
-    @extend %dgwltd-body-m;
-  }
-  .has-large-font-size {
-    @extend %dgwltd-body-l;
-  }
   //Hide empty paragraphs
   p:empty {
     display:none;
@@ -13,8 +7,8 @@
   //Lists
   ul,
   ol {
-    padding: 0 0 0 var(--gap-20);
-    margin: 0 0 var(--gap-20);
+    padding: 0 0 0 var(--gap-medium);
+    margin: 0 0 var(--gap-medium);
     list-style-type: disc;
     li {
       @extend %dgwltd-body;
@@ -26,11 +20,6 @@
   ol {
     list-style-type: decimal;
   }
-  .dgwltd-list {
-    margin-left: 0;
-    padding-left: 0;
-    list-style-type: none;
-  }
   img {
     max-width: 100%;
     height: auto;
@@ -39,7 +28,7 @@
   .wp-block-image {
     width: 100%;
     height: auto;
-    margin: 0 0 var(--gap-20);
+    margin: 0 0 var(--gap-medium);
     figure {
       width: 100%;
       margin: 0;
@@ -52,7 +41,7 @@
       font-size: 1rem;
       text-align: left;
       margin: 0;
-      padding: var(--gap-20);
+      padding: var(--gap-medium);
       color: var(--text-color);
     }
     .alignright,
@@ -67,7 +56,7 @@
   }
   // Embed
   .wp-block-embed {
-    margin: var(--gap-20) 0;
+    margin: var(--gap-medium) 0;
     width: 100%;
     .wp-block-embed__wrapper {
       max-width: 100%;
@@ -81,8 +70,8 @@
   }
   //Seperator
   .wp-block-separator {
-    margin: var(--gap-20) 0;
-    @include mq($from: tablet) {
+    margin: var(--gap-medium) 0;
+    @include mq($from: md) {
       margin: var(--gap-30) 0;
     }
     height: 1px;
@@ -92,41 +81,37 @@
   //Blockquote
   .wp-block-quote {
     position: relative;
-    margin: var(--gap-30) 0;
-    border-left: 4px solid var(--highlight);
-    padding: var(--gap-40) var(--gap-20) var(--gap-20);
+    margin: var(--gap-large) 0;
+    padding-top: 1.75rem !important;
     background-color: transparent;
+    border: 0;
     quotes: "\201C""\201D""\2018""\2019";
     &:before {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      color: var(--border);
+      font-family: var(--body);
+      color: var(--text-color);
       content: open-quote;
-      @include rhythm(80, 80);
+      font-size: 6rem;
+      line-height: 1;
       position: absolute;
       z-index: 1;
-      top:0;
+      top: -30px;
       left: var(--gap-15);
     }
     cite {
       position: relative;
       z-index: 2;
       font-style: normal;
+      @extend %dgwltd-heading-m;
     }
     p {
       z-index: 2;
       position: relative;
       text-indent: 0;
+      @extend %dgwltd-heading-l;
+      line-height: 1;
       &:last-child {
         margin: 0;
       }
-    }
-  }
-  //Audio
-  .wp-block-audio {
-    margin: var(--gap-40) 0;
-    figcaption {
-      @extend %dgwltd-body-s;
-      color: var(--text-color);
     }
   }
   //Buttons
@@ -140,12 +125,12 @@
   .cat-links > a {
     display: inline-block;
     font-weight: $bold;
-    padding: var(--gap-10) var(--gap-20);
+    padding: var(--gap-small) var(--gap-medium);
     border: 1px solid var(--border);
     border-radius: 2px;
     color: var(--text-color);
     text-decoration: none;
-    margin-left: var(--gap-10);
+    margin-left: var(--gap-small);
     &:hover {
       color: var(--highlight);
       border-color: var(--button-light-hover);
@@ -157,24 +142,6 @@
   }
 }
 
-//Single post
-.single-post {
-  .entry-meta {
-    font-size: 1rem;
-    margin-top: 0;
-    .posted-on {
-      margin-right: var(--gap-20);
-    }
-  }
-  .entry-header {
-    margin: 0 0 var(--gap-30) 0;
-  }
-  .entry-title {
-    margin: 0 0 var(--gap-10);
-  }
-  .entry-footer {
-    border-top: 1px solid var(--border);
-    padding: var(--gap-20) 0 0 0;
-    margin: var(--gap-40) 0;
-  }
+.entry-meta {
+  @extend %dgwltd-body-s;
 }

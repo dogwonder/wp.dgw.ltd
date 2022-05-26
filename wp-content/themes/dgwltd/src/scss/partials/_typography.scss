@@ -1,24 +1,38 @@
-html { font-family: var(--sans), Helvetica, Arial, sans-serif; }
+html { font-family: var(--body), Helvetica, Arial, sans-serif; }
 
-/*
-line height to at least 1½ × the font size;
-space below paragraphs to at least 2 × the font size;
-letter spacing to at least 0.12 × the font size;
-word spacing to at least 0.16 × the font size.
-from https://www.w3.org/TR/WCAG21/#text-spacing
-*/
+//Global
+html {
+  font-size: 100%;
+}
 
 body {
-  @include rhythm(18, 21);
-  @include mq($from: tablet) {
-    @include rhythm(22, 27);
-  }
+  font-family: var(--body);
   font-weight: normal;
-  -webkit-font-smoothing: antialiased;
-  background: var(--background);
-  color: var(--text-color);
+  font-size: var(--wp--preset--font-size--normal); //18px
+  line-height: var(--wp--custom--typography--line-height--medium);
+  letter-spacing: 1rem * 0.02;
+  word-spacing: 1rem * 0.04;
   text-align: left;
+  background-color: var(--background);
+  color: var(--text);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
+
+//Line heights
+// "tiny": 1.15,
+// "small": 1.2,
+// "medium": 1.4,
+// "normal": 1.6
+
+//TODO fluid typraphy
+// "font-size": {
+//   "huge": "clamp(2.25rem, 4vw, 2.75rem)",
+//   "gigantic": "clamp(2.75rem, 6vw, 3.25rem)",
+//   "colossal": "clamp(3.25rem, 8vw, 6.25rem)"
+// },
+
+//Based on base size of 16px and 1.333 type scale - https://type-scale.com
 
 //Typography
 h1,
@@ -28,79 +42,62 @@ h4,
 h5,
 h6 {
   color: var(--text-color);
-  font-weight: bold;
+  font-family: var(--wp--preset--font-family--soehne-dreiviertelfett);
   line-height: 1;
-  margin: 0 0 var(--gap-15);
-  letter-spacing: 0.1px;
+  margin: 0;
+  margin-bottom: var(--wp--custom--spacing--baseline);
 }
 
 //Usage @extend %dgwltd-heading-m;
-
-//Override typeface
-.govuk-heading-xl,
-.govuk-heading-l,
-.govuk-heading-m,
-.govuk-heading-s {
-  font-weight: bold;
-  color: var(--text-color);
-  margin-bottom: var(--gap-10);
-}
-
 %dgwltd-heading-xl,
 .dgwltd-heading-xl,
 h1 {
-  font-weight: bold;
-  @include rhythm(32, 35);
-  @include mq($from: tablet) {
-    @include rhythm(48, 50);
-    letter-spacing: -1px;
-  }
-  margin-bottom: var(--gap-20);
+  // clamp(2.369rem,1.9937619048rem + 1.8761904762vw,3.157rem)
+  font-size: clampCalc($type-extra-large, $type-huge, sm, lg);
+  line-height: var(--wp--custom--typography--line-height--tiny);
+  margin-bottom: var(--gap-large);
+  letter-spacing: 0.0125em;
 }
 
 %dgwltd-heading-l,
 .dgwltd-heading-l,
 h2 {
-  font-weight: bold;
-  @include rhythm(24, 30);
-  @include mq($from: tablet) {
-    @include rhythm(32, 35);
-    letter-spacing: -1px;
-  }
-  margin-bottom: var(--gap-10);
+  // clamp(1.777rem,1.4950952381rem + 1.4095238095vw,2.369rem)
+  font-size: clampCalc($type-large, $type-extra-large, sm, lg);
+  line-height: var(--wp--custom--typography--line-height--tiny);
+  margin-bottom: var(--gap-medium);
+  letter-spacing: 0.0125em;
 }
 
 %dgwltd-heading-m,
 .dgwltd-heading-m,
 h3 {
-  font-weight: bold;
-  @include rhythm(22, 27);
-  @include mq($from: tablet) {
-    @include rhythm(24, 30);
-  }
-  margin-bottom: var(--gap-10);
+  // clamp(1.333rem,1.1215714286rem + 1.0571428571vw,1.777rem)
+  font-family: var(--wp--preset--font-family--soehne-halbfett);
+  font-size: clampCalc($type-medium, $type-large, sm, lg);
+  line-height: var(--wp--custom--typography--line-height--small);
+  margin-bottom: var(--gap-small);
+  letter-spacing: 0;
 }
 
 %dgwltd-heading-s,
 .dgwltd-heading-s,
 h4 {
-  font-weight: bold;
-  @include rhythm(18, 21);
-  @include mq($from: tablet) {
-    @include rhythm(22, 27);
-  }
-  margin-bottom: var(--gap-10);
+  // clamp(1.125rem,1.025952381rem + .4952380952vw,1.333rem)
+  font-family: var(--wp--preset--font-family--soehne-halbfett);
+  font-size: clampCalc($type-normal, $type-medium, sm, lg);
+  line-height: var(--wp--custom--typography--line-height--medium);
+  margin-bottom: var(--gap-small);  
 }
 
 %dgwltd-heading-xs,
 .dgwltd-heading-xs,
 h5,
 h6 {
-  font-weight: bold;
-  @include rhythm(14, 16);
-  @include mq($from: tablet) {
-    @include rhythm(16, 20);
-  }
+  font-family: var(--wp--preset--font-family--soehne-halbfett);
+  font-size: var(--wp--preset--font-size--normal);
+  line-height: var(--wp--custom--typography--line-height--medium);
+  margin-bottom: var(--gap-small);
 }
 
 %dgwltd-body,
@@ -108,39 +105,44 @@ h6 {
 .govuk-body, 
 p {
   font-weight: normal;
-  font-family: var(--sans);
-  @include rhythm(16, 24);
-  @include mq($from: tablet) {
-    @include rhythm(19, 27);
-  }
-}
-
-%dgwltd-body-m,
-.dgwltd-body-m {
-  @include rhythm(22, 27);
-  @include mq($from: tablet) {
-    @include rhythm(26, 32);
-  }
-  margin-bottom: var(--gap-20);
+  margin-bottom: var(--gap-medium);
 }
 
 %dgwltd-body-l,
 .dgwltd-body-l {
-  @include rhythm(24, 30);
-  @include mq($from: tablet) {
-    @include rhythm(36, 40);
-  }
-  margin-bottom: var(--gap-20);
+  font-size: clampCalc($type-medium, $type-large, sm, lg);
+  line-height: var(--wp--custom--typography--line-height--small);
+  margin-bottom: var(--gap-medium);
+}
+
+
+%dgwltd-body-m,
+.dgwltd-body-m {
+  font-size: clampCalc($type-normal, $type-medium, sm, lg);
+  line-height: var(--wp--custom--typography--line-height--medium);
+  margin-bottom: var(--gap-medium);
 }
 
 %dgwltd-body-s,
 .dgwltd-body-s {
-  @include rhythm(16, 20);
-  @include mq($from: tablet) {
-    @include rhythm(18, 21);
-  }
+  font-size: var(--wp--preset--font-size--small);
+  line-height: var(--wp--custom--typography--line-height--medium);
+  margin-bottom: var(--gap-small);
 }
 
+%dgwltd-body-xs,
+.dgwltd-body-xs {
+  font-size: var(--wp--preset--font-size--tiny);
+  line-height: var(--wp--custom--typography--line-height--medium);
+}
+
+%dgwltd-navigation,
+.dgwltd-navigation {
+  text-transform: uppercase;
+  font-family: var(--wp--preset--font-family--soehne-leicht);
+  font-size: var(--wp--preset--font-size--medium);
+  line-height: 1;
+} 
 
 ul,
 ol {
@@ -152,20 +154,3 @@ blockquote p {
   hanging-punctuation: first;
   text-indent: -5px;
 }
-
-//reset button link style
-.not-a-button,
-%not-a-button {
-  border:0;
-  padding:0;
-  font-size:inherit;
-  text-decoration: underline;
-  &:hover {
-      text-decoration: none;
-  }
-  @include rhythm(18, 21);
-  @include mq($from: tablet) {
-      @include rhythm(22, 27);
-  }
-}
-

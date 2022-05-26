@@ -6,23 +6,19 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 0 var(--gap-20);
+    padding: 0 var(--gap-medium);
     &.full-width {
       padding: 0;
     }
     .frame {
-      --x: 1;
-      --y: 1;
       aspect-ratio: 1/1;
       -ms-scroll-limit-y-min: 1;
       img {
         object-position: 50% 0;
       }
     }
-    @include mq($from: desktop) {
+    @include mq($from: lg) {
       .frame {
-        --x: 16;
-        --y: 4;
         aspect-ratio: 16/4;
       }
     }
@@ -42,5 +38,5 @@
 
 .wp-block-group .dgwltd-block__image {
   padding: 0;
-  margin: var(--gap-40) 0;
+  margin: var(--gap-large) 0;
 }

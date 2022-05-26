@@ -1,15 +1,4 @@
 <?php
-
-/**
- * Register all actions and filters for the plugin
- *
- * @link       https://dgw.ltd
- * @since      1.0.0
- *
- * @package    Dgwltd_Blocks
- * @subpackage Dgwltd_Blocks/includes
- */
-
 /**
  * Register all actions and filters for the plugin.
  *
@@ -17,11 +6,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Dgwltd_Blocks
- * @subpackage Dgwltd_Blocks/includes
+ * @package    dgwltd_Blocks
+ * @subpackage dgwltd_Blocks/includes
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class Dgwltd_Blocks_Loader {
+class dgwltd_Blocks_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

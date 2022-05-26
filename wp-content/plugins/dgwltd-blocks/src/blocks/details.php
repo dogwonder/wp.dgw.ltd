@@ -13,13 +13,19 @@ $block_id = 'block-' . $block['id'];
 if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
-// Create class attribute allowing for custom "className"
+
+// Create class attribute allowing for custom "className" and "align" values. and "align" values.
 $class_name = 'dgwltd-block dgwltd-block--details';
 if ( ! empty( $block['className'] ) ) {
 	$class_name .= ' ' . $block['className'];
 }
-$summary = esc_html( get_field( 'summary' ) ) ?: '';
-$details = esc_html( get_field( 'details' ) ) ?: '';
+
+if ( ! empty( $block['align'] ) ) {
+	$class_name .= 'align' . $block['align'];
+}
+
+$summary = esc_html( get_field( 'summary' ) ) ? : '';
+$details = esc_html( get_field( 'details' ) ) ? : '';
 ?>
 <div id="<?php echo esc_attr( $block_id ); ?>" class="<?php echo esc_attr( $class_name ); ?>">
   <details class="govuk-details" data-module="govuk-details">

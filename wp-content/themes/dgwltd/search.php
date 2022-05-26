@@ -10,8 +10,7 @@
 get_header();
 ?>
 
-	<div id="primary" class="govuk-width-container">
-		<div class="govuk-main-wrapper">
+	<div id="primary" class="dgwltd-content-wrapper">
 
 		<?php if ( have_posts() && ! empty( $_GET['s'] ) ) : ?>
 
@@ -72,7 +71,8 @@ get_header();
 				get_template_part( 'template-parts/_templates/content-no-results' );
 			endif;
 			?>
-		</div><!-- .govuk-main-wrapper -->
+			</div>
+			<!-- .govuk-main-wrapper -->
 	</div><!-- #primary -->
 
 <?php

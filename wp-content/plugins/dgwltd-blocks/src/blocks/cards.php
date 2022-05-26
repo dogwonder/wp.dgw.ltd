@@ -13,21 +13,26 @@ $block_id = 'block-' . $block['id'];
 if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
-// Create class attribute allowing for custom "className"
-$class_name = 'dgwltd-block dgwltd-block--cards';
+// Create class attribute allowing for custom "className" and "align" values. and "align" values.
+$class_name = 'dgwltd-block dgwltd-block--cards dgwltd-section';
 if ( ! empty( $block['className'] ) ) {
 	$class_name .= ' ' . $block['className'];
 }
 
+if ( ! empty( $block['align'] ) ) {
+	$class_name .= 'align' . $block['align'];
+}
+
 // Content & Layout
-$cards        = get_field( 'cards' ) ?: '';
-$cards_manual = get_field( 'cards_manual' ) ?: '';
-$cards_type   = get_field( 'cards_type' ) ?: '';
+$cards        = get_field( 'cards' ) ? : '';
+$cards_manual = get_field( 'cards_manual' ) ? : '';
+$cards_type   = get_field( 'cards_type' ) ? : '';
 
 // Block options
-$heading_type = get_field( 'heading_type' ) ?: '';
-$reversed     = get_field( 'reversed' ) ?: '';
-$inverse      = get_field( 'inverse' ) ?: '';
+$hide_image     = get_field( 'hide_image' ) ? : '';
+$hide_description	= get_field( 'hide_description' ) ? : '';
+$heading_type = get_field( 'heading_type' ) ? : '';
+$reversed     = get_field( 'reversed' ) ? : '';
 
 // Count the cards
 if ( $cards_type === 'relationship' && ! empty( $cards ) ) :
@@ -39,7 +44,9 @@ else :
 endif;
 
 // Classes
-$block_classes = array( $class_name, $cards_count );
+$block_image   = $show_image ? 'hide-image ' : '';
+$block_description   = $show_description ? 'hide-description ' : '';
+$block_classes = array( $class_name, $cards_count, $block_description );
 
 // Card index
 $card_index = 0;
@@ -64,39 +71,43 @@ $block_template = array(
 ?>
 <div id="<?php echo esc_attr( $block_id ); ?>" class="<?php echo esc_attr( implode( ' ', $block_classes ) ); ?>">
 
-	<InnerBlocks allowedBlocks="<?php echo esc_attr( wp_json_encode( $allowed_blocks ) ); ?>" template="<?php echo esc_attr( wp_json_encode( $block_template ) ); ?>" />
+	<div class="dgwltd-section__inner">
 
-	<div class="dgwltd-block--cards_inner">
-  
-	<?php if ( $cards_type === 'relationship' ) : ?>
-		<?php
-		if ( $cards ) :
-			?>
-			<?php foreach ( $cards as $card ) : ?>
-				<?php // print_r($card) ?>
-				<?php $card_index++; ?>
-				<?php include locate_template( 'template-parts/_organisms/card-id.php' ); ?>
-	<?php endforeach; ?>
-			<?php wp_reset_postdata(); // IMPORTANT - reset the $post object so the rest of the page works correctly ?>
-		<?php endif; ?>
+		<InnerBlocks allowedBlocks="<?php echo esc_attr( wp_json_encode( $allowed_blocks ) ); ?>" template="<?php echo esc_attr( wp_json_encode( $block_template ) ); ?>" />
 
-	<?php elseif ( $cards_type === 'manual' ) : ?>
-		<?php
-		if ( ! empty( $cards_manual ) ) :
-			// check if the repeater field has rows of data
-			if ( have_rows( 'cards_manual' ) ) :
-				// loop through the rows of data
-				while ( have_rows( 'cards_manual' ) ) :
-					the_row();
-					?>
+		<div class="dgwltd-block--cards_inner">
+	
+		<?php if ( $cards_type === 'relationship' ) : ?>
+			<?php
+			if ( $cards ) :
+				?>
+				<?php foreach ( $cards as $card ) : ?>
+					<?php // print_r($card) ?>
 					<?php $card_index++; ?>
-					<?php include locate_template( 'template-parts/_organisms/card-manual.php' ); ?>
-					<?php
-				endwhile;
-		endif;
-			?>
-		<?php endif; ?>
+					<?php include locate_template( 'template-parts/_organisms/card-id.php' ); ?>
+		<?php endforeach; ?>
+				<?php wp_reset_postdata(); // IMPORTANT - reset the $post object so the rest of the page works correctly ?>
+			<?php endif; ?>
 
-	<?php endif; // end cards type check ?>
+		<?php elseif ( $cards_type === 'manual' ) : ?>
+			<?php
+			if ( ! empty( $cards_manual ) ) :
+				// check if the repeater field has rows of data
+				if ( have_rows( 'cards_manual' ) ) :
+					// loop through the rows of data
+					while ( have_rows( 'cards_manual' ) ) :
+						the_row();
+						?>
+						<?php $card_index++; ?>
+						<?php include locate_template( 'template-parts/_organisms/card-manual.php' ); ?>
+						<?php
+					endwhile;
+			endif;
+				?>
+			<?php endif; ?>
+
+		<?php endif; // end cards type check ?>
+		</div>
+
 	</div>
 </div>

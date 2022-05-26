@@ -6,8 +6,8 @@
  * @link       https://dgw.ltd
  * @since      1.0.0
  *
- * @package    Dgwltd_Blocks
- * @subpackage Dgwltd_Blocks/public
+ * @package    dgwltd_Blocks
+ * @subpackage dgwltd_Blocks/public
  */
 
 /**
@@ -16,20 +16,20 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    Dgwltd_Blocks
- * @subpackage Dgwltd_Blocks/public
+ * @package    dgwltd_Blocks
+ * @subpackage dgwltd_Blocks/public
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class Dgwltd_Blocks_Public {
+class dgwltd_Blocks_Public {
 
 	/**
 	 * The ID of this plugin.
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $Dgwltd_Blocks    The ID of this plugin.
+	 * @var      string    $dgwltd_Blocks    The ID of this plugin.
 	 */
-	private $Dgwltd_Blocks;
+	private $dgwltd_Blocks;
 
 
 	/**
@@ -45,12 +45,12 @@ class Dgwltd_Blocks_Public {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string $Dgwltd_Blocks       The name of the plugin.
+	 * @param      string $dgwltd_Blocks       The name of the plugin.
 	 * @param      string $version    The version of this plugin.
 	 */
-	public function __construct( $Dgwltd_Blocks, $version ) {
+	public function __construct( $dgwltd_Blocks, $version ) {
 
-		$this->Dgwltd_Blocks = $Dgwltd_Blocks;
+		$this->dgwltd_Blocks = $dgwltd_Blocks;
 		$this->version       = $version;
 
 	}
@@ -60,21 +60,21 @@ class Dgwltd_Blocks_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function dgwltd_enqueue_theme_styles() {
 
 		/**
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Dgwltd_Blocks_Loader as all of the hooks are defined
+		 * defined in dgwltd_Blocks_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Dgwltd_Blocks_Loader will then create the relationship
+		 * The dgwltd_Blocks_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		// wp_enqueue_style( $this->Dgwltd_Blocks, plugin_dir_url( __FILE__ ) . 'css/theme.css', array(), $this->version, 'all' );
+		// wp_enqueue_style( $this->dgwltd_Blocks, plugin_dir_url( __FILE__ ) . 'css/dgwltd-blocks-theme.css', array(), $this->version, 'all' );
 	}
 
 	/**
@@ -82,21 +82,22 @@ class Dgwltd_Blocks_Public {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function dgwltd_enqueue_theme_scripts() {
 
 		/**
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Dgwltd_Blocks_Loader as all of the hooks are defined
+		 * defined in dgwltd_Blocks_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Dgwltd_Blocks_Loader will then create the relationship
+		 * The dgwltd_Blocks_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
-		wp_enqueue_script( $this->Dgwltd_Blocks, plugin_dir_url( __FILE__ ) . 'scripts/app.js', array( 'jquery' ), $this->version, false );
+		
+		// Remove array('jquery') from wp_enqueue_script as we don't want to be dependant on the WP jQuery core
+		wp_enqueue_script( $this->dgwltd_Blocks, plugin_dir_url( __FILE__ ) . 'scripts/dgwltd-blocks.js', array(), $this->version, false );
 
 	}
 

@@ -1,20 +1,19 @@
 const {dest, src} = require('gulp');
 const cleanCSS = require('gulp-clean-css');
-const sassProcessor = require('gulp-sass');
+const sassProcessor = require('gulp-sass')(require('sass'));
 const sourcemaps = require("gulp-sourcemaps");
-
-// We want to be using canonical Sass, rather than node-sass
-sassProcessor.compiler = require('sass');
 
 // Flags wether we compress the output etc
 const isProduction = process.env.NODE_ENV === 'production';
 
 const options = {
   in: './src/scss/*.scss',
-  out: './dist/css',
-  criticalOut: './dist/css',
+  out: './dist/css/specific/',
+  criticalOut: './dist/css/',
   criticalStyles: [
-    'critical.scss'
+    'critical.scss', 
+    'vendor.scss', 
+    'print.scss'
   ]
 }
 

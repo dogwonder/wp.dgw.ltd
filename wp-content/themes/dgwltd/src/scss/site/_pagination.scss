@@ -25,7 +25,7 @@
   }
 
   .dgwltd-pagination__link-label {
-    font-size: 1rem;
+    @extend %dgwltd-body-xs;
     text-decoration: underline;
     margin: var(--gap-5) 0 0 23px;
     display: inline-block;
@@ -34,7 +34,7 @@
   .dgwltd-pagination__link {
     display: block;
     text-decoration: none;
-    padding: var(--gap-15) var(--gap-10) var(--gap-20);
+    padding: var(--gap-15) var(--gap-small) var(--gap-medium);
     color: var(--highlight);
     
     > * {
@@ -83,7 +83,7 @@
   }
   &.dgwltd-pagination--pages {
     .dgwltd-pagination__list {
-      @include mq($from: tablet) {
+      @include mq($from: md) {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -92,7 +92,7 @@
   }
   &.dgwltd-pagination--noprev {
     .dgwltd-pagination__list {
-      @include mq($from: tablet) {
+      @include mq($from: md) {
         justify-content: flex-end;
       }
     }

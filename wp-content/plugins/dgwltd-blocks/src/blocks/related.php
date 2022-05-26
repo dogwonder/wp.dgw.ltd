@@ -13,12 +13,18 @@ $block_id = 'block-' . $block['id'];
 if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
-// Create class attribute allowing for custom "className"
+
+// Create class attribute allowing for custom "className" and "align" values. and "align" values.
 $class_name = 'dgwltd-block dgwltd-block--related';
 if ( ! empty( $block['className'] ) ) {
 	$class_name .= ' ' . $block['className'];
 }
-$related_pages = get_field( 'related' ) ?: '';
+
+if ( ! empty( $block['align'] ) ) {
+	$class_name .= 'align' . $block['align'];
+}
+
+$related_pages = get_field( 'related' ) ? : '';
 ?>
 <div id="<?php echo esc_attr( $block_id ); ?>" class="<?php echo esc_attr( $class_name ); ?>">
 	<?php if ( $related_pages ) : ?>

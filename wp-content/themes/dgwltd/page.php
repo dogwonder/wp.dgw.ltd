@@ -15,9 +15,8 @@
 get_header();
 ?>
 
-	<div id="primary" class="govuk-width-container">
-		<div class="govuk-main-wrapper">
-
+	<div id="primary" class="dgwltd-content-wrapper">
+		
 		<?php
 		while ( have_posts() ) :
 			the_post();
@@ -27,7 +26,6 @@ get_header();
 		endwhile; // End of the loop.
 		?>
 	
-		</div><!-- .govuk-main-wrapper -->
 	</div><!-- #primary -->
 
 <?php

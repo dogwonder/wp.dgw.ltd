@@ -8,8 +8,8 @@
  * @link       https://dgw.ltd
  * @since      1.0.0
  *
- * @package    Dgwltd_Blocks
- * @subpackage Dgwltd_Blocks/admin/partials
+ * @package    dgwltd_Blocks
+ * @subpackage dgwltd_Blocks/admin/partials
  */
 ?>
 

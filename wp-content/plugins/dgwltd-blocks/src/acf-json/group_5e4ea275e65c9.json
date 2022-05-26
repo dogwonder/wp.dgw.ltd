@@ -112,16 +112,20 @@
                         "class": "",
                         "id": ""
                     },
+                    "uploader": "",
+                    "acfe_thumbnail": 0,
                     "return_format": "array",
                     "preview_size": "medium",
-                    "library": "all",
                     "min_width": "",
                     "min_height": "",
                     "min_size": "",
                     "max_width": "",
                     "max_height": "",
                     "max_size": "",
-                    "mime_types": ""
+                    "mime_types": "",
+                    "translations": "copy_once",
+                    "acfe_field_group_condition": 0,
+                    "library": "all"
                 },
                 {
                     "key": "field_5e4ea674f1cd9",
@@ -254,8 +258,8 @@
         },
         {
             "key": "field_5e553cf3b3282",
-            "label": "Has image",
-            "name": "has_image",
+            "label": "Hide image",
+            "name": "hide_image",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -274,10 +278,31 @@
                 "id": ""
             },
             "message": "",
-            "default_value": 1,
+            "default_value": 0,
             "ui": 1,
             "ui_on_text": "",
-            "ui_off_text": ""
+            "ui_off_text": "",
+            "translations": "copy_once"
+        },
+        {
+            "key": "field_623c51fa83e51",
+            "label": "Hide description",
+            "name": "hide_description",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "translations": "copy_once"
         },
         {
             "key": "field_5e4fc10746a57",
@@ -319,25 +344,6 @@
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
-        },
-        {
-            "key": "field_5ee2463d03830",
-            "label": "Inverse",
-            "name": "inverse",
-            "type": "true_false",
-            "instructions": "Invert the background and text colour",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
         }
     ],
     "location": [
@@ -357,5 +363,13 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1605612379
+    "show_in_rest": 0,
+    "acfe_autosync": [
+        "json"
+    ],
+    "acfe_form": 0,
+    "acfe_display_title": "",
+    "acfe_meta": "",
+    "acfe_note": "",
+    "modified": 1651741603
 }

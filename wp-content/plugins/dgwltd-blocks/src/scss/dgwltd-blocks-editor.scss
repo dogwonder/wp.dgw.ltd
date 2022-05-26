@@ -1,0 +1,348 @@
+//Wordpress color palette https://codepen.io/ryelle/full/WNGVEjw
+
+//CSS Vars - usage var(--background)
+:root {
+  --primary: hsl(225, 96%, 45%); //#270D88
+  --secondary: hsl(15, 87%, 50%); //#ED4911
+  --dark: hsl(98, 0%, 0%);
+  --light: hsl(0, 0%, 98%);
+  --azul: hsla(231, 80%, 16%); //#081248
+  --teal:  hsla(176, 78%, 29%); //#10827b
+  --neon:  hsla(171, 100%, 50%); //#00FFD9
+  --red:  #bf1238;
+  --plum: hsla(320, 71%, 27%); //#761456
+  --fuchsia:  hsla(327, 70%, 65%); //#e465ab
+  --peach:  hsla(17, 100%, 74%); //#ffa07a
+}
+
+ 
+//Fetch nested spaces
+@function map-deep-get($spaces, $keys) {
+  $value: $spaces;
+  @each $key in $keys {
+      $value: map-get($value, $key);
+  }
+  @return $value;
+}
+
+$palettes: (
+  themes: (
+    primary: (
+        background: var(--primary),
+        text: var(--light), 
+        border: var(--light), 
+        inverse: var(--dark)
+    ),
+    secondary: (
+        background: var(--secondary),
+        text: var(--light), 
+        border: var(--light), 
+        inverse: var(--dark)
+    ),
+    dark: (
+        background: var(--dark),
+        text: var(--light), 
+        border: var(--light), 
+        inverse: var(--dark)
+    ),
+    light: (
+        background: var(--light),
+        text: var(--dark), 
+        border: var(--dark), 
+        inverse: var(--light)
+    ), 
+    azul: (
+        background: var(--azul),
+        text: var(--light), 
+        border: var(--light), 
+        inverse: var(--dark)
+    ),
+    teal: (
+        background: var(--teal),
+        text: var(--light), 
+        border: var(--light), 
+        inverse: var(--dark)
+    ),
+    neon: (
+        background: var(--neon),
+        text: var(--dark), 
+        border: var(--dark), 
+        inverse: var(--light)
+    ),
+    plum: (
+        background: var(--plum),
+        text: var(--light), 
+        border: var(--light), 
+        inverse: var(--dark)
+    ),
+    fuchsia: (
+        background: var(--fuchsia),
+        text: var(--dark), 
+        border: var(--dark), 
+        inverse: var(--light)
+    ),
+    peach: (
+        background: var(--peach),
+        text: var(--dark), 
+        border: var(--dark), 
+        inverse: var(--light)
+    ),
+  )
+);
+
+  //Color themes for background colours
+@each $theme in map-keys(map-get($palettes, themes)) {
+  //Colors
+  .c--#{"" + $theme} {
+    color: map-deep-get( $palettes, themes $theme background) !important;
+  }
+  //Borders
+  .border--#{"" + $theme} {
+    border-color: map-deep-get( $palettes, themes $theme border) !important;
+  }
+  //Background themes
+  .bg--#{"" + $theme} {
+    background-color: map-deep-get($palettes, themes $theme background) !important;
+    h1, h2, h3, > * {
+      color: map-deep-get($palettes, themes $theme text) !important;
+    }
+  }
+}
+
+//Button
+.dgwltd-button {
+    display: inline-block;
+    color: #ffffff;
+    background-color: black;
+    box-shadow: 0 2px 0 #111;
+    border: 0;
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 1em;
+    padding: 10px 20px;
+    text-decoration: none;
+    &:link,
+    &:visited,
+    &:active {
+      color: #ffffff;
+    }
+}
+
+//Innerblocks styling
+[data-type='acf/dgwltd-hero'], 
+[data-type='acf/dgwltd-actionkit'], 
+[data-type='acf/dgwltd-feature'], 
+[data-type='acf/dgwltd-cta'], 
+[data-type='acf/dgwltd-cards'] {
+  box-sizing: border-box;
+  max-width: 100%;
+  width: clamp(16rem, 90vw, 52rem);
+  border: 1px solid #000;
+  border-radius: 2px;
+  background-color: #fff;
+  .wp-block {
+  max-width: 100%;
+  }
+  .wp-block-button {
+  margin-left:0;
+  }
+  .acf-block-preview {
+  padding: 0;
+  }
+  //If full alignment 
+  [data-align='full'] & {
+    width: 100%;
+  }
+}
+//Hero
+[data-type='acf/dgwltd-hero'] {
+
+}
+
+//Actionkit
+[data-type='acf/dgwltd-actionkit'] {
+  padding: 20px;
+  #ak-form {
+  display: none;
+  }
+}
+  
+  
+  //Feature
+  [data-type='acf/dgwltd-hero'] {
+  
+  }
+  
+  //CTA
+  [data-type='acf/dgwltd-cta'] {
+  
+  }
+  
+  //Cards
+  [data-type='acf/dgwltd-cards'] {
+    padding: 20px;
+    .dgwltd-block--cards_inner {
+      //Auto grid
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+      grid-gap: 20px;
+      .dgwltd-card__heading {
+        font-size: 1rem;
+      }
+      .dgwltd-card__inner {
+        background-color:white;
+        padding:10px;
+      }
+    }
+  
+  }
+  
+  //Hero & feature
+  .dgwltd-block--actionkit, 
+  .dgwltd-block--hero, 
+  .dgwltd-block--cta, 
+  .dgwltd-block--feature {
+    background-size: cover;
+    &.has-bg, 
+    &.has-image {
+      position: relative;
+      padding:20px;
+      &:before {
+        content: "";
+        position: absolute;
+        z-index:2;
+        top:0;
+        right:0;
+        bottom:0;
+        left: 0;
+        width:100%;
+        height:100%;
+        background-color: inherit;
+      }
+      .dgwltd-feature__wrapper, 
+      .dgwltd-hero__wrapper, 
+      .dgwltd-cta__inner {
+        z-index:3;
+        position: relative;
+      }
+    }
+  }
+
+  .dgwltd-block--feature, 
+  .dgwltd-block--hero {
+    &.has-image {
+      &:before {
+        background-color: white;
+        opacity: 0.5;
+      }
+      .block__background {
+        z-index:1;
+      }
+    }
+  }
+  
+  .dgwltd-block--cta {
+    &.has-image {
+      padding:0;
+    }
+  }
+  
+  //Background image
+  .block__background {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    figure {
+      margin: 0;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    img {
+      object-fit: cover;
+      object-position: 50% 50%;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+  }
+  
+  
+  //CTA block
+  .dgwltd-block--cta {
+    h2 {
+      margin-top: 0;
+    }
+    
+    .govuk-body-l {
+      margin-bottom: 20px;
+    }
+  
+    .dgwltd-cta__content {
+      padding:1rem;
+    }
+    
+    &.has-image {
+      .govuk-grid-row {
+        margin: 0;
+      }
+      [class^="govuk-grid-column-"] {
+        padding: 20px;
+      }
+      .dgwltd-cta__inner {
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+      }
+      .dgwltd-cta__content {
+        padding:20px;
+        flex-basis: 50%;
+      }
+      .dgwltd-cta__image {
+        margin: 0;
+        max-width: 50%;
+      }
+      .frame {
+        aspect-ratio: 1 / 1;
+        height: 100%;
+      }
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        margin: 0;
+      }
+      
+    }
+  
+    &[data-state='reversed'] {
+      display: flex;
+      flex-direction: column-reverse;
+      .dgwltd-cta__image {
+        order: 1;
+      }
+      .dgwltd-cta__content {
+        order: 2;
+      }
+    }
+  }
+  
+  //Columns 
+  .dgwltd-block-group {
+    &.dgwltd-block-group--dark {
+      h2 > a,
+      h3 > a {
+        color:white;
+      }
+    }
+    &.dgwltd-block-group--light {
+    }
+  }

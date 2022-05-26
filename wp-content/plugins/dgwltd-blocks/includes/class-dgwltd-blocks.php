@@ -9,8 +9,8 @@
  * @link       https://dgw.ltd
  * @since      1.0.0
  *
- * @package    Dgwltd_Blocks
- * @subpackage Dgwltd_Blocks/includes
+ * @package    dgwltd_Blocks
+ * @subpackage dgwltd_Blocks/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Dgwltd_Blocks
- * @subpackage Dgwltd_Blocks/includes
+ * @package    dgwltd_Blocks
+ * @subpackage dgwltd_Blocks/includes
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class Dgwltd_Blocks {
+class dgwltd_Blocks {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class Dgwltd_Blocks {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Dgwltd_Blocks_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      dgwltd_Blocks_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -44,9 +44,9 @@ class Dgwltd_Blocks {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $Dgwltd_Blocks    The string used to uniquely identify this plugin.
+	 * @var      string    $dgwltd_Blocks    The string used to uniquely identify this plugin.
 	 */
-	protected $Dgwltd_Blocks;
+	protected $dgwltd_Blocks;
 
 	/**
 	 * The current version of the plugin.
@@ -67,12 +67,12 @@ class Dgwltd_Blocks {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'DGWLTD_BLOCKS_VERSION' ) ) {
-			$this->version = DGWLTD_BLOCKS_VERSION;
+		if ( defined( 'ONE_BLOCKS_VERSION' ) ) {
+			$this->version = ONE_BLOCKS_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->Dgwltd_Blocks = 'dgwltd-blocks';
+		$this->dgwltd_Blocks = 'dgwltd-blocks';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -80,6 +80,7 @@ class Dgwltd_Blocks {
 		$this->define_public_hooks();
 		$this->define_acf_hooks();
 		$this->define_block_patterns_hooks();
+		$this->define_block_rules();
 
 	}
 
@@ -88,10 +89,10 @@ class Dgwltd_Blocks {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Dgwltd_Blocks_Loader. Orchestrates the hooks of the plugin.
-	 * - Dgwltd_Blocks_I18n. Defines internationalization functionality.
-	 * - Dgwltd_Blocks_Admin. Defines all hooks for the admin area.
-	 * - Dgwltd_Blocks_Public. Defines all hooks for the public side of the site.
+	 * - dgwltd_Blocks_Loader. Orchestrates the hooks of the plugin.
+	 * - dgwltd_Blocks_I18n. Defines internationalization functionality.
+	 * - dgwltd_Blocks_Admin. Defines all hooks for the admin area.
+	 * - dgwltd_Blocks_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -134,14 +135,20 @@ class Dgwltd_Blocks {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dgwltd-blocks-patterns.php';
 
-		$this->loader = new Dgwltd_Blocks_Loader();
+		/**
+		 * The class responsible for defining all actions that occur for building out the custom rules
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dgwltd-blocks-rules.php';
+
+
+		$this->loader = new dgwltd_Blocks_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Dgwltd_Blocks_I18n class in order to set the domain and to register the hook
+	 * Uses the dgwltd_Blocks_I18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -149,7 +156,7 @@ class Dgwltd_Blocks {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Dgwltd_Blocks_I18n();
+		$plugin_i18n = new dgwltd_Blocks_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -164,10 +171,10 @@ class Dgwltd_Blocks {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Dgwltd_Blocks_Admin( $this->get_Dgwltd_Blocks(), $this->get_version() );
+		$plugin_admin = new dgwltd_Blocks_Admin( $this->get_dgwltd_Blocks(), $this->get_version() );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'dgwltd_enqueue_admin_styles' );
+		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'dgwltd_enqueue_admin_scripts' );
 	}
 
 	/**
@@ -179,7 +186,7 @@ class Dgwltd_Blocks {
 	 */
 	private function define_acf_hooks() {
 
-		$plugin_acf = new Dgwltd_Blocks_ACF();
+		$plugin_acf = new dgwltd_Blocks_ACF();
 
 		$this->loader->add_action( 'acf/init', $plugin_acf, 'dgwltd_register_blocks' );
 		$this->loader->add_action( 'acf/settings/save_json', $plugin_acf, 'dgwltd_acf_json_save_point' );
@@ -196,7 +203,7 @@ class Dgwltd_Blocks {
 	 */
 	private function define_block_patterns_hooks() {
 
-		$plugin_patterns = new Dgwltd_Blocks_Patterns();
+		$plugin_patterns = new dgwltd_Blocks_Patterns();
 
 		$this->loader->add_action( 'init', $plugin_patterns, 'dgwltd_register_block_categories' );
 		$this->loader->add_action( 'init', $plugin_patterns, 'dgwltd_register_block_patterns' );
@@ -212,11 +219,25 @@ class Dgwltd_Blocks {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Dgwltd_Blocks_Public( $this->get_Dgwltd_Blocks(), $this->get_version() );
+		$plugin_public = new dgwltd_Blocks_Public( $this->get_dgwltd_Blocks(), $this->get_version() );
 
-		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'dgwltd_enqueue_theme_styles' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'dgwltd_enqueue_theme_scripts' );
 
+	}
+
+	/**
+	 * Register all of the hooks related to the ACF blocks area functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_block_rules() {
+
+		$plugin_rules = new ONE_Blocks_Rules();
+		$this->loader->add_filter( 'allowed_block_types_all', $plugin_rules, 'one_register_block_rules' );
+		
 	}
 
 	/**
@@ -235,15 +256,15 @@ class Dgwltd_Blocks {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_Dgwltd_Blocks() {
-		return $this->Dgwltd_Blocks;
+	public function get_dgwltd_Blocks() {
+		return $this->dgwltd_Blocks;
 	}
 
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Dgwltd_Blocks_Loader    Orchestrates the hooks of the plugin.
+	 * @return    dgwltd_Blocks_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

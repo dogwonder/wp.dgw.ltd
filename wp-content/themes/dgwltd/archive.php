@@ -10,8 +10,7 @@
 get_header();
 ?>
 
-	<div id="primary" class="govuk-width-container">
-		<div class="govuk-main-wrapper">
+	<div id="primary" class="dgwltd-content-wrapper">
 
 				<?php if ( have_posts() ) : ?>
 
@@ -47,7 +46,6 @@ get_header();
 					endif;
 					?>
 
-		</div><!-- .govuk-main-wrapper -->
 	</div><!-- #primary -->
 
 <?php

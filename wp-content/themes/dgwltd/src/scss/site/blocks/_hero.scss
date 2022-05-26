@@ -1,9 +1,21 @@
 
 //Hero block
 .dgwltd-block--hero {
+
+    .dgwltd-hero__content {
+      ul {
+        @extend %list;
+      }
+      .wp-block-button__link {
+        margin: 0;
+      }
+    }
     
-    min-height:calc(100vh - 64px);
+    &.has-height {
+      min-height:60vh;
+    }
     
+    &.has-bg, 
     &.has-image, 
     &.has-video {
       display: flex;
@@ -11,30 +23,27 @@
       align-items: center;
       position: relative;
       background-color:var(--footer);
-      min-height:80vh;
       grid-column: 1 / span 3 !important;
-      padding:0 !important;
-      h1 {
-        @include mq($from: tablet) {
-          @include rhythm(64, 64);
-        }
+      min-height: 17.5rem;
+      @include mq($from: lg) {
+        min-height: 25rem;
       }
-      h1, p, .govuk-body {
+      padding:0 !important;
+      h1, h2 {
+        @extend %dgwltd-heading-xl;
+      }
+      h1, h2, p, .govuk-body {
         color:inherit;
+        margin: 0;
       }
       .dgwltd-hero__wrapper {
         z-index:2;
         //Width
         @extend %container;
         .dgwltd-hero__inner {
-          max-width: var(--contentWidth);
-        }
-        h1 {
-          margin-bottom:var(--gap-30);
-        }
-        p {
-          margin-bottom:var(--gap-20);
-          @extend %dgwltd-body-l;
+          //Extra spacing
+          padding-top: var(--gap-medium);
+          padding-bottom: var(--gap-medium);
         }
       }
     }
@@ -46,6 +55,46 @@
 
     &.has-video {
 
+    }
+
+    &.has-popout {
+      margin-bottom: 4.625rem;
+      //Uses https://css-tricks.com/less-absolute-positioning-with-modern-css/ for layout positioning
+      .dgwltd-hero__wrapper {
+        height: 100%;
+        display: grid;
+        width: fit-content;
+        > * {
+          grid-area: 1 / -1;
+        }
+      }
+      .dgwltd-hero__inner {
+        align-self: center;
+        padding-bottom: 6.25rem; //Offset negative margin
+      }
+      .image-popout {
+        align-self: end;
+        max-width: var(--containerWidth);
+        z-index: 3;
+        margin: 0;
+        margin-bottom: -6.25rem;
+        img {
+          width: auto;
+          max-height: 10rem;
+          @include mq($from: lg) {
+            max-height: 12.5rem;
+          }
+        }
+      }
+    }
+
+    &.block-type--solid {
+      min-height: auto !important;
+      &.has-bg {
+        .dgwltd-hero__wrapper {
+          padding: var(--gap-large) var(--gap-medium);
+        }
+      }
     }
      
   }
@@ -92,16 +141,15 @@
 .popup-modal {
   height: 150px;
   width: 300px;
-  @include mq($from: desktop) {
-    height: 365px;
-    width: 650px;
+  @include mq($from: lg) {
+    height: 505px;
+    width: 853px;
   }
-  padding: 40px;
-  margin:0;
+  padding: 0;
   background-color: #000;
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 20rem;
   transform: translate(-50%, -50%);
   padding: 0;
   opacity: 0;
@@ -112,29 +160,32 @@
   &.is--visible {
     opacity: 1;
     pointer-events: auto;
+    
   }
-  
+
+  &__heading {
+    padding: 1.5rem;
+  }
+
   &__close {
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: 1.25rem;
+    top: 1.75rem;
     cursor: pointer;
+    svg {
+      width:40px;
+      height:40px;
+      fill:none;
+      > * {
+        stroke: white;
+        stroke-width: 5;
+      }
+    }
   }
 
   iframe {
     width: 100%;
+    max-width: 100%;
     height: 100%;
-  }
-}
-
-.popup-modal__close {
-  svg {
-    width:40px;
-    height:40px;
-    fill:none;
-    > * {
-      stroke: white;
-      stroke-width: 5;
-    }
   }
 }

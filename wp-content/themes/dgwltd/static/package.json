@@ -1,0 +1,26 @@
+{
+  "name": "ONE11ty",
+  "version": "1.2.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "clean": "trash \"./dist/\"",
+    "watch": "npx eleventy --serve",
+    "build": "NODE_ENV=production npm run clean && NODE_ENV=production npx eleventy"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@11ty/eleventy": "^1.0.1",
+    "@11ty/eleventy-img": "^2.0.0",
+    "concurrently": "^5.3.0",
+    "del": "^5.1.0",
+    "dotenv": "^16.0.0",
+    "flat-cache": "^3.0.4",
+    "gulp": "^4.0.2",
+    "html-minifier": "^4.0.0",
+    "jsdom": "^19.0.0",
+    "node-fetch": "^2.6.7",
+    "trash-cli": "^5.0.0"
+  }
+}

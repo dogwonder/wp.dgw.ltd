@@ -1,0 +1,7 @@
+<footer class="dgwltd-footer">
+  <ul>
+    {% for menu in menusFooter -%}
+      <li class="{{ menu.classes }}">{{ menu.label }}</li>
+    {%- endfor %}
+  </ul>
+</footer>

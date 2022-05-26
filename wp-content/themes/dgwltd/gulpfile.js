@@ -6,7 +6,6 @@ const {series, parallel, watch} = require('gulp');
 const sass = require('./gulp-tasks/sass.js');
 const scripts = require('./gulp-tasks/scripts.js');
 const images = require('./gulp-tasks/images.js');
-// const fonts = require('./gulp-tasks/fonts.js');
 
 //Utlitiy tasks
 const favicon = require('./gulp-tasks/icons.js');
@@ -18,7 +17,6 @@ const rename = require('./gulp-tasks/rename.js');
 //Build tasks
 const bump = require('./gulp-tasks/bump.js');
 const sw = require('./gulp-tasks/sw.js');
-const serve = require('./gulp-tasks/serve.js');
 
 //Warnings
 // const beep = require('beepbeep');
@@ -33,10 +31,7 @@ const watcher = () => {
   watch('./src/scss/**/*.scss', {ignoreInitial: true}, parallel(sass, rename));
 };
 
-//Public tasks are exported from this gulpfile, which allows them to be run by the gulp command, e.g. gulp watch, gulp serve
-
-//Local server - see serve.js
-exports.serve = serve;
+//Public tasks are exported from this gulpfile, which allows them to be run by the gulp command, e.g. gulp watch, gulp build
 
 // The default (if someone just runs `gulp`) is to run each task in parrallel
 exports.default = series(clean, parallel(sass, scripts, images, move), rename);

@@ -13,16 +13,22 @@ $block_id = 'block-' . $block['id'];
 if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
-// Create class attribute allowing for custom "className"
+
+// Create class attribute allowing for custom "className" and "align" values. and "align" values.
 $class_name = 'dgwltd-block dgwltd-block--summary-list';
 if ( ! empty( $block['className'] ) ) {
 	$class_name .= ' ' . $block['className'];
 }
-$summary_list = get_field( 'summary_list' ) ?: '';
+
+if ( ! empty( $block['align'] ) ) {
+	$class_name .= 'align' . $block['align'];
+}
+
+$summary_list = get_field( 'summary_list' ) ? : '';
 
 // Title and Content
-$title   = get_field( 'title' ) ?: '';
-$content = get_field( 'content' ) ?: '';
+$title   = get_field( 'title' ) ? : '';
+$content = get_field( 'content' ) ? : '';
 ?>
 <div id="<?php echo esc_attr( $block_id ); ?>" class="<?php echo esc_attr( $class_name ); ?>">
 
@@ -44,11 +50,11 @@ $content = get_field( 'content' ) ?: '';
 				?>
 				<?php // print_r($summary_list); ?>
 				<?php
-				$summary_list_text        = esc_html( get_sub_field( 'term' ) ) ?: '';
+				$summary_list_text        = esc_html( get_sub_field( 'term' ) ) ? : '';
 				$summary_list_details_type = get_sub_field( 'details_type' ) ? : 'text';
-				$summary_list_details     = esc_html( get_sub_field( 'details' ) )?: '';
-				$summary_list_details_link = esc_url( get_sub_field( 'details_link' ) ) ?: '';
-				$summary_list_details_html = get_sub_field( 'details_embed' )	?: '';
+				$summary_list_details     = esc_html( get_sub_field( 'details' ) )? : '';
+				$summary_list_details_link = esc_url( get_sub_field( 'details_link' ) ) ? : '';
+				$summary_list_details_html = get_sub_field( 'details_embed' )	? : '';
 				?>
 		<div class="govuk-summary-list__row">
 				<?php if ( ! empty( $summary_list_text ) ) : ?>

@@ -1,13 +1,12 @@
 
 //Hero block
 .dgwltd-block--feature {
-
+    &.has-bg, 
     &.has-image {
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
-      background-color:var(--footer);
       grid-column: 1 / span 3 !important;
       padding:0 !important;
       h2 {
@@ -26,16 +25,9 @@
         .dgwltd-feature__inner {
           //Snap back to our container
           grid-column: 2 / span 1;
-          padding:var(--gap-40) var(--gap-20);
+          padding:var(--gap-large) var(--gap-medium);
         }
       }
     }
-
-    &.has-overlay {
-      h2, h3, p, .govuk-body {
-        color: white;
-      }
-    }
-    
      
   }

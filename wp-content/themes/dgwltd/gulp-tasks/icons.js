@@ -36,7 +36,7 @@ const favicon = () => {
             }
             )
         )
-        .pipe(dest('./dist/images/fav'))
+        .pipe(dest('./src/images/fav'))
 };
 
 module.exports = favicon;

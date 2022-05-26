@@ -1,4 +1,6 @@
 //Z-index
+@use "sass:math";
+
 $z-low: 1;
 $z-high: 10;
 $z-higher: 11;
@@ -15,41 +17,90 @@ $text-color: #414042;
 $black: black;
 $white: white;
 
+//Z-indexes
+$z-low: 3; //Move above hero
+$z-high: 10;
+$z-higher: 11;
+$z-highest-1: 998;
+$z-highest: 999;
+
+//Scale - used for iteration over breakpoints (keys only)
+$scale: ('sm','md','lg','xl');
+
 //Measures - for margin / padding
 $gaps: (5, 10, 15, 20, 25, 30, 35, 40, 50, 80);
 
-$sizes: (
-  80: 5rem,
-  48: 3rem,
-  36: 2.25rem,
-  32: 2rem,
-  27: 1.688rem,
-  24: 1.5rem,
-  19: 1.188rem,
-  16: 1rem,
-  14: 0.875rem,
+
+//Custom typgraphy - maps to theme.json
+$type-huge: 3.157;
+$type-extra-large: 2.369;
+$type-large: 1.777;
+$type-medium: 1.333;
+$type-normal: 1.125;
+$type-small: 1;
+$type-tiny: 0.7;
+
+//Spacing - usedin fluid spacing
+$spaces: (
+    gaps: (
+      xlarge: (
+        lg: 8,
+        sm: 4
+      ),
+      large: (
+        lg: 4,
+        sm: 2
+      ),
+      medium: (
+        lg: 2,
+        sm: 1
+      ),
+      small: (
+        lg: 1,
+        sm: 1
+      ),
+      none: (
+        lg: 0, 
+        sm: 0
+      )
+    )
 );
+
+//Fetch nested spaces
+@function map-deep-get($spaces, $keys) {
+  $value: $spaces;
+  @each $key in $keys {
+      $value: map-get($value, $key);
+  }
+  @return $value;
+}
+
+//Calc rems 
+@mixin rem($value) {
+  width: math.div($value, 16) + rem;
+}
 
 //Redeclare from vendor/_mq.scss -- https://github.com/sass-mq/sass-mq
 $mq-breakpoints: (
-  mobile: 320px,
-  tablet: 641px,
-  desktop: 769px,
-) !default;
+  sm: 320px,
+  md: 768px,
+  lg: 992px, 
+  xl: 1200px, 
+  xxl: 1400px
+);
 
 //CSS Vars - usage var(--background)
 :root {
 
   --containerWidth: 70rem; //1120px
   --contentWidth: 52rem; //832px
-
-  //Typefaces, 300, 600, 700
-  --serif: Georgia, serif; 
+  --contentWidthSmall: 38rem; //608px
 
   //System font as default
-  --sans: -apple-system, BlinkMacSystemFont,"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell","Fira Sans", "Droid Sans","Helvetica Neue",sans-serif;
-
+  --body: -apple-system, BlinkMacSystemFont,"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell","Fira Sans", "Droid Sans","Helvetica Neue",sans-serif;
+  
   --background: #ffffff;
+  --footer: #000000;
   --alt: #fafafa;
 
   --card: #f2f2f2; 
@@ -61,49 +112,149 @@ $mq-breakpoints: (
   --radius: 1rem;
 
   --text-color: hsl(98, 0%, 0%);
-  --highlight: hsl(205, 100%, 20%); //#00466e
+  --highlight: hsla(176, 78%, 29%); //#00466e
 
-  --color-primary:184, 94%;
-  --color-secondary: 282, 84%;
-  --l: 88%;
-  --primary: hsl(var(--color-primary),var(--l)); //blue
-  --primary-darker: hsl(var(--color-primary),calc(var(--l) - 10%));
-  --secondary: hsl(var(--color-secondary),var(--l));  //pink
-  --secondary-darker: hsl(var(--color-secondary),calc(var(--l) - 10%));
+  // --color-primary:184, 94%;
+  // --color-secondary: 282, 84%;
+  // --l: 88%;
+  // --primary: hsl(var(--color-primary),var(--l)); //blue
+  // --primary-darker: hsl(var(--color-primary),calc(var(--l) - 10%));
+  // --secondary: hsl(var(--color-secondary),var(--l));  //pink
+  // --secondary-darker: hsl(var(--color-secondary),calc(var(--l) - 10%));
 
-  --hover: hsl(205, 100%, 10%);
-  --visited: #4c2c92;
+  --hover: hsla(176, 78%, 19%);
+  --visited: hsla(176, 78%, 29%);
 
   --active: hsl(203, 70%, 81%);
-  --focus: #fd0;
+  --focus: #00FFD9;
 
   --success: #00703c;
   --error: #d4351c;
 
   --button-text-color: white;
-  --button-background: hsl(205, 100%, 18%);
-  --button-hover: hsl(205, 100%, 10%);
+  --button-background: hsl(15, 87%, 50%);
+  --button-hover: hsl(15, 87%, 40%);
+  --button-focus: hsl(15, 87%, 25%);
   --button-disabled: hsl(12, 10%, 91%);
 
-  --button-background-secondary: hsla(86, 45%, 53%);
-  --button-hover-secondary: hsla(86, 45%, 43%);
+  --primary: hsl(253, 83%, 29%); //#270d88
+  --secondary: hsl(15, 87%, 50%); //#ed4911
+  --dark: hsl(98, 0%, 0%);
+  --light: hsl(0, 0%, 98%);
 
-  --button-light-background: #ffffff;
-  --button-light-hover: hsl(231, 92%, 90%);
+  --azul: hsla(231, 80%, 16%); //#081248
+  --teal:  hsla(176, 78%, 29%); //#10827b
+  --neon:  hsla(171, 100%, 50%); //#00ffd9
+  --red:  #bf1238;
 
-  --submenu-offset: 0;
+  --error:  #d4351c;
+
+  --plum: hsla(320, 71%, 27%); //#761456
+  --fuchsia:  hsla(327, 70%, 65%); //#e465ab
+  --peach:  hsla(17, 100%, 74%); //#ffa07a
 
   @each $gap in $gaps {
     --gap-#{$gap}: #{$gap}px;
   }
 
-  @each $key, $value in $sizes {
-    --size-#{$key}: #{$value};
-  }
+  //Named gaps
+  --gap-xlarge: 5rem; //80px;
+  --gap-large: 2.5rem; //40px;
+  --gap-medium: 1.25rem; //20px; //Matches --wp--custom--spacing--baseline
+  --gap-small: 0.625rem; //10px;
+  
+  //Menu height
+  --submenu-offset: 0;
+
+  //Z-index
+  --layer-1: 1;
+  --layer-2: 2;
+  --layer-3: 3;
+  --layer-4: 4;
+  --layer-5: 5;
+  --layer-important: 2147483647;
 
 }
+//Custom spacing
+//--wp--custom--spacing--baseline: 1.25rem; //20px
+//--wp--custom--spacing--blockgap: 1.25rem; //20px
 
-//Generates classes for margin and padding, e.g .m-t-10, p.b.20. 
+$palettes: (
+    themes: (
+      primary: (
+          background: var(--primary),
+          text: var(--light), 
+          border: var(--light), 
+          highlight: var(--secondary), 
+          inverse: var(--dark)
+      ),
+      secondary: (
+          background: var(--secondary),
+          text: var(--light), 
+          border: var(--light), 
+          highlight: var(--primary), 
+          inverse: var(--dark)
+      ),
+      black: (
+          background: var(--dark),
+          text: var(--light), 
+          border: var(--light), 
+          highlight: var(--light), 
+          inverse: var(--dark)
+      ),
+      white: (
+          background: var(--light),
+          text: var(--dark), 
+          border: var(--dark), 
+          highlight: var(--dark), 
+          inverse: var(--light)
+      ), 
+      azul: (
+          background: var(--azul),
+          text: var(--light), 
+          border: var(--light), 
+          highlight: var(--light), 
+          inverse: var(--dark)
+      ),
+      teal: (
+          background: var(--teal),
+          text: var(--light), 
+          border: var(--light), 
+          highlight: var(--light), 
+          inverse: var(--dark)
+      ),
+      neon: (
+          background: var(--neon),
+          text: var(--dark), 
+          border: var(--dark), 
+          highlight: var(--dark), 
+          inverse: var(--light)
+      ),
+      plum: (
+          background: var(--plum),
+          text: var(--light), 
+          border: var(--light), 
+          highlight: var(--light), 
+          inverse: var(--dark)
+      ),
+      fuchsia: (
+          background: var(--fuchsia),
+          text: var(--dark), 
+          border: var(--dark), 
+          highlight: var(--dark), 
+          inverse: var(--light)
+      ),
+      peach: (
+          background: var(--peach),
+          text: var(--dark), 
+          border: var(--dark), 
+          highlight: var(--dark), 
+          inverse: var(--light)
+      ),
+    )
+);
+
+//Generates classes for margin and padding, e.g .m-t-10, p-b-20. 
 @each $prop, $abbrev in (margin: m, padding: p) {
   @each $gap in $gaps {
 
@@ -116,11 +267,80 @@ $mq-breakpoints: (
   }
 }
 
+/// Remove the unit of a length
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return math.div($number, $number * 0 + 1);
+  }
 
-//PX To EM
-//Usage font-size: em(32);
-@function em($pixels, $context: 16) {
-  @return #{$pixels/$context}em;
+  @return $number;
+}
+
+@function clampCalc($minFontSize, $maxFontSize, $minWidth: sm, $maxWidth: lg) {
+  //Based on https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/#for-those-who-dont-mind-that-edge-case
+  
+  // slope = (maxFontSize - minFontSize) / (maxBreakpoint - minBreakpoint) 
+  // yAxisIntersection = -maxBreakpoint * slope + minBreakpoint 
+  // preferredValue = yAxisIntersection[rem] + (slope * 100)[vw] 
+
+  /* Usage
+  padding: clampCalc(1.5, 3, sm, md); //fluid padding between 15px and 30px on small and medium screens
+   font-size: clampCalc(4.5, 5.5, sm, md); //45 to 55px on small and medium screens
+   @include mq($from: md) {
+    font-size: clampCalc(5.5, 8, md, lg); 55 to 80px on medium and large screens snaps to max 80px
+   }
+  */
+
+  $smBreakpoint: null;
+  $lgBreakpoint: null;
+  
+  //Breakpoints based on Bootstrap breakpoints, 320, 768, 992, 1200, 1400
+  @if $minWidth == sm {
+    $smBreakpoint: 20;
+  } @else if $minWidth == md {  
+    $smBreakpoint: 48;
+  } @else if $minWidth == lg {  
+    $smBreakpoint: 62;
+  } @else if $minWidth == xl {  
+    $smBreakpoint: 75;
+  } @else if $minWidth == xxl {  
+    $smBreakpoint: 87.5;
+  } @else {
+    @error "Unknown direction #{$minWidth}.";
+  }
+
+  @if $maxWidth == sm {
+    $lgBreakpoint: 20;
+  } @else if $maxWidth == md {  
+    $lgBreakpoint: 48;
+  } @else if $maxWidth == lg {  
+    $lgBreakpoint: 62;
+  } @else if $maxWidth == xl {  
+    $lgBreakpoint: 75;
+  } @else if $maxWidth == xxl {  
+    $lgBreakpoint: 87.5;
+  } @else {
+    @error "Unknown direction #{$maxWidth}.";
+  }
+
+  // $slope: math.div(($maxFontSize - $minFontSize), ($lgBreakpoint - $smBreakpoint));
+  $slope: math.div(($maxFontSize - $minFontSize), ($lgBreakpoint - $smBreakpoint));
+  $yAxisIntersection: $minFontSize - ($smBreakpoint * $slope);
+  //clamp (minFontSize, yAxisIntersection[rem] + (slope * 100)[vw], maxFontSize)
+  @return clamp( ($minFontSize * 1rem), ($yAxisIntersection * 1rem) + (($slope * 100) * 1vw) , ($maxFontSize) * 1rem );
+}
+
+//Mixing for responsive typography
+// Usage @include fluidType(1.25, 1.3333, 1.5, 1.5, sm, md);
+@mixin fluidType($minFontSize: 1.25, $maxFontSize: 1.3333, $minLineHeight: 1.4, $maxLineHeight: 1.2, $breakpointSmall: sm, $breakpointLarge: md) {
+  //fallback for old browsers px values
+  font-size: $minFontSize; 
+  line-height: $minLineHeight; 
+  //modern browsers use clamp()
+  font-size: clampCalc($minFontSize, $maxFontSize, $breakpointSmall, $breakpointLarge);
+  line-height: clampCalc($minLineHeight, $maxLineHeight, $breakpointSmall, $breakpointLarge);
 }
 
 //Color contrast
@@ -146,9 +366,15 @@ $mq-breakpoints: (
 @mixin rhythm($sizeValue: 16, $heightValue: 20) {
   //Font sizes px + rem
   font-size: $sizeValue + px; //fallback for old browsers
-  font-size: (0.0625 * $sizeValue) + rem;
+  font-size: (0.625 * $sizeValue) + rem;
   //Line height - unitless
   line-height: math.div($heightValue, $sizeValue);
+}
+
+//Convert px to rem
+@function toRem($value) {
+  $remValue: math.div($value, 16) + rem; 
+  @return $remValue;
 }
 
 //Aspect ratio
@@ -158,7 +384,7 @@ $mq-breakpoints: (
     display: block;
     content: "";
     width: 100%;
-    padding-top: ($height / $width) * 100%;
+    padding-top: math.div($height, $width) * 100%;
   }
   > .content {
     position: absolute;
@@ -168,6 +394,7 @@ $mq-breakpoints: (
     bottom: 0;
   }
 }
+
 
 
 @mixin dgwltd-shape-arrow($direction, $base, $height: null, $display: block) {

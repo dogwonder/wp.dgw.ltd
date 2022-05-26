@@ -1,3 +1,11 @@
+.dgwltd-block--embed {
+    padding: 0;
+    .dgwltd-embed__inner {
+        padding: var(--gap-large) 0;
+    }
+}
+
+
 lite-youtube {
     background-color: #000;
     position: relative;
@@ -38,6 +46,7 @@ lite-youtube::after {
 lite-youtube > iframe {
     width: 100%;
     height: 100%;
+    max-width: 100% !important;
     position: absolute;
     top: 0;
     left: 0;

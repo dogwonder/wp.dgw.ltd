@@ -1,18 +1,4 @@
 <?php
-
-/**
- * Define the internationalization functionality
- *
- * Loads and defines the internationalization files for this plugin
- * so that it is ready for translation.
- *
- * @link       https://dgw.ltd
- * @since      1.0.0
- *
- * @package    Dgwltd_Blocks
- * @subpackage Dgwltd_Blocks/includes
- */
-
 /**
  * Define the internationalization functionality.
  *
@@ -20,11 +6,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Dgwltd_Blocks
- * @subpackage Dgwltd_Blocks/includes
+ * @package    dgwltd_Blocks
+ * @subpackage dgwltd_Blocks/includes
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class Dgwltd_Blocks_I18n {
+class dgwltd_Blocks_I18n {
 
 
 	/**

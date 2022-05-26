@@ -10,10 +10,10 @@
 get_header();
 ?>
 
-	<div id="primary" class="govuk-width-container">
-		<div class="govuk-main-wrapper">
+	<div id="primary" class="dgwltd-content-wrapper">
 
-			<section class="error-404 not-found">
+			<div class="entry-content error-404 not-found">
+				
 				<div class="page-header">
 					<h1 class="page-title"><?php esc_html_e( '404, page not found', 'dgwltd' ); ?></h1>
 				</div><!-- .page-header -->
@@ -32,9 +32,8 @@ get_header();
 					?>
 
 				</div><!-- .page-content -->
-			</section><!-- .error-404 -->
-			
-		</div><!-- .govuk-main-wrapper -->
+			</div><!-- .error-404 -->
+
 	</div><!-- #primary -->
 
 <?php

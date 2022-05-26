@@ -1,6 +1,7 @@
 //Box sizing
 html {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -10,21 +11,21 @@ html {
 a {
   color: var(--text-color);
   text-decoration: underline;
-  text-decoration-thickness: unquote("max(1px, .0625rem)");
+  text-decoration-thickness: unquote("max(2px, .0625rem)");
   text-underline-offset: .1em;
   &:visited {
-    color: var(--visited);
+    color: var(--text-color);
   }
   &:hover {
     color: var(--hover);
-    text-decoration-thickness: unquote("max(3px, .1875rem, .12em)");
+    text-decoration-color: var(--hover);
   }
   &:active {
-    color: var(--highlight);
+    color: var(--text-color);
     text-decoration: none;
   }
   &:focus {
-    color: black !important;
+    color: var(--text-color);
     background-color: var(--focus);
     outline: 3px solid transparent;
     box-shadow: 0 -2px var(--focus), 0 4px #0b0c0c;
@@ -36,10 +37,7 @@ a {
 }
 
 hr {
-  margin: var(--gap-20) 0;
-  @include mq($from: tablet) {
-    margin: var(--gap-30) 0;
-  }
+  margin: var(--gap-medium) 0;
   height: 1px;
   border: 0;
   border-bottom: 1px solid var(--border);

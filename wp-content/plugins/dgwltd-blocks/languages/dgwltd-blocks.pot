@@ -1,0 +1,295 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DGW.ltd: Blocks\n"
+"POT-Creation-Date: 2022-03-31 09:51+0100\n"
+"PO-Revision-Date: 2022-03-31 09:50+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: dgwltd-blocks.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: includes/class-dgwltd-blocks-acf.php:25
+msgid "DGW.ltd Hero"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:26
+msgid "Hero block"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:45
+msgid "DGW.ltd Embed"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:46
+msgid "Embed block"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:64
+msgid "DGW.ltd Feature"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:65
+msgid "Feature block"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:83
+msgid "DGW.ltd Cards"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:84
+msgid "Card block for related pages"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:102
+msgid "DGW.ltd CTA"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:103
+msgid "Call to action"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:121
+msgid "DGW.ltd Details"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:122
+msgid "Detailed information"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:135
+msgid "DGW.ltd Image"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:136
+msgid "Image"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:149
+msgid "DGW.ltd Accordion"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:150
+msgid "Show and hide sections"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:163
+msgid "ONE Actionkit"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:164
+msgid "Actionkit block"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:182
+msgid "DGW.ltd Summary list"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:183
+msgid "Summarise information"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:196
+msgid "DGW.ltd Related pages"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-acf.php:197
+msgid "List of related links"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-patterns.php:26
+msgctxt "Block pattern category"
+msgid "DGW.ltd"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-patterns.php:41
+msgid "Supporters"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-patterns.php:42
+msgid "A group of images and links to list supporters."
+msgstr ""
+
+#: includes/class-dgwltd-blocks-patterns.php:62
+#: includes/class-dgwltd-blocks-patterns.php:79
+#: includes/class-dgwltd-blocks-patterns.php:96
+#: includes/class-dgwltd-blocks-patterns.php:113
+#: includes/class-dgwltd-blocks-patterns.php:172
+#: includes/class-dgwltd-blocks-patterns.php:185
+#: includes/class-dgwltd-blocks-patterns.php:198
+#: includes/class-dgwltd-blocks-patterns.php:233
+#: includes/class-dgwltd-blocks-patterns.php:246
+#: includes/class-dgwltd-blocks-patterns.php:259
+msgid "Pencil drawing of Don Quixote"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-patterns.php:134
+msgid "FAQ"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-patterns.php:135
+msgid "Columns for commonly asked questions."
+msgstr ""
+
+#: includes/class-dgwltd-blocks-patterns.php:157
+msgid "Columns - dark"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-patterns.php:158
+msgid "Columns for content with a dark background colour"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-patterns.php:218
+msgid "Columns - light"
+msgstr ""
+
+#: includes/class-dgwltd-blocks-patterns.php:219
+msgid "Columns for content with a light background colour"
+msgstr ""
+
+#: src/actionkit/disclaimer.php:4 src/actionkit/disclaimer.php:21
+#: src/actionkit/disclaimer.php:33 src/actionkit/privacy.php:47
+msgid "privacy policy"
+msgstr ""
+
+#: src/actionkit/disclaimer.php:6 src/actionkit/disclaimer.php:35
+#, php-format
+msgid ""
+"By signing you agree to ONE's %s, including to the transfer of your "
+"information to DGW.ltd's servers in the United States."
+msgstr ""
+
+#: src/actionkit/disclaimer.php:11 src/actionkit/disclaimer.php:22
+#: src/actionkit/disclaimer.php:44 src/actionkit/privacy.php:61
+#: src/actionkit/privacy.php:86
+msgid "unsubscribe"
+msgstr ""
+
+#: src/actionkit/disclaimer.php:13
+#, php-format
+msgid ""
+"You agree to receive occasional updates about ONE’s campaigns. You can %s at "
+"any time."
+msgstr ""
+
+#: src/actionkit/disclaimer.php:24
+#, php-format
+msgid ""
+"When you submit your details, you accept ONE's %1$s and will receive "
+"occasional updates about ONE's campaigns. You can %2$s at any time."
+msgstr ""
+
+#: src/actionkit/disclaimer.php:46
+#, php-format
+msgid ""
+"You agree to receive occasional updates about ONE's campaigns. You can %s at "
+"any time."
+msgstr ""
+
+#: src/actionkit/form.php:43
+msgid "Name"
+msgstr ""
+
+#: src/actionkit/form.php:49
+msgid "Email"
+msgstr ""
+
+#: src/actionkit/form.php:55
+msgid "Post/Zip code"
+msgstr ""
+
+#: src/actionkit/form.php:61
+msgid "Zip code"
+msgstr ""
+
+#: src/actionkit/form.php:67
+msgid "Phone"
+msgstr ""
+
+#: src/actionkit/form.php:73
+msgid "Country"
+msgstr ""
+
+#: src/actionkit/form.php:83
+msgid "Sign"
+msgstr ""
+
+#: src/actionkit/privacy.php:49
+#, php-format
+msgid ""
+"By signing you agree to ONE’s %s, including to the transfer of your "
+"information to ONE’s servers in the United States."
+msgstr ""
+
+#: src/actionkit/privacy.php:54
+msgid ""
+"Do you want to stay informed about how you can help fight against extreme "
+"poverty?"
+msgstr ""
+
+#: src/actionkit/privacy.php:63
+#, php-format
+msgid ""
+"Sign up to receive emails from ONE and join millions of people around the "
+"world taking action to end extreme poverty and preventable disease. We’ll "
+"only ever ask for your voice, not your money. You can %s at any time."
+msgstr ""
+
+#: src/actionkit/privacy.php:73
+msgid "Yes, sign me up"
+msgstr ""
+
+#: src/actionkit/privacy.php:80
+msgid "No, I'm already signed up or I don't want to be kept informed in future"
+msgstr ""
+
+#: src/actionkit/privacy.php:88
+#, php-format
+msgid ""
+"Are you sure? If you select 'Yes' we can let you know how you can make a "
+"difference. You can %s at any time."
+msgstr ""
+
+#: src/blocks/hero.php:160
+msgid "Watch"
+msgstr ""
+
+#: src/blocks/hero.php:265
+msgid "Play the video"
+msgstr ""
+
+#: src/blocks/related.php:26
+msgid "Related"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "DGW.ltd: Blocks"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://dgw.ltd"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "A collection of custom ACF blocks"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Dogwonder Ltd"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://richholman.com"
+msgstr ""

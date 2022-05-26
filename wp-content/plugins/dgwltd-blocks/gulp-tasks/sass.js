@@ -1,20 +1,17 @@
 const {dest, src} = require('gulp');
 const cleanCSS = require('gulp-clean-css');
-const sassProcessor = require('gulp-sass');
-
-// We want to be using canonical Sass, rather than node-sass
-sassProcessor.compiler = require('sass');
+const sassProcessor = require('gulp-sass')(require('sass'));
 
 // Flags wether we compress the output etc
 const isProduction = process.env.NODE_ENV === 'production';
 
 // An array of outputs that should be sent over to includes
 const editorialStyles = [
-  'editor.scss'
+  'dgwltd-blocks-editor.scss'
 ];
 
 const themeStyles = [
-  'theme.scss'
+  'dgwltd-blocks-theme.scss'
 ];
 
 // Takes the arguments passed by `dist` and determines where the output file goes

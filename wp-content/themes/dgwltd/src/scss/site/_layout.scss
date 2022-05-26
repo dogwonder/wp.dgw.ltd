@@ -1,122 +1,67 @@
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
-
 //Sticky footer
-.dgwltd-wrapper {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  margin: 0;
+@media only screen and (min-width: 64rem) {
+  .dgwltd-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
 }
 
 .dgwltd-container {
-  flex-grow: 1;
-  //Offset for mobile menu - calculated by javascript - toggleNav()
-  //margin-top: calc(var(--submenu-offset) - 1px); //with a 5px phantom offset
+  //We need this for IE11 to respect, flex:1 won't work on it's own
+  flex: 1 0 auto;
+  position: relative;
 }
 
-.dgwltd-masthead,
-.dgwltd-container,
-.dgwltd-footer {
-  flex-shrink: 0;
-}
-
-//Content spacing - for header, footer and main content area
-.govuk-width-container {
-  @extend %container;
-  //Pages exception
-  .page {
-    max-width: var(--contentWidth);
-  }
-}
-
-.govuk-main-wrapper {
+//Page layout
+.dgwltd-content-wrapper {
   padding:0;
-}
-
-//Full width
-.dgwltd-full-container {
-  .dgwltd-main-wrapper {
-    .entry-heading, 
-    .entry-content  {
-      //Allows for full width sections 
-      display: grid;
-      grid-template-columns: 1fr minmax(min-content, var(--containerWidth)) 1fr;
-      > * {
-        grid-column: 2 / span 1;
-        padding: 0 var(--gap-20);
-      }
-      > p, 
-      > h2, 
-      > h3 {
-        padding-bottom: 0;
-      }
-      > p:last-of-type {
-        margin: 0 0 var(--gap-40);
-      }
-      > ul, 
-      > ol {
-        margin-left: var(--gap-20);
-      }
+  max-width: 100%;
+  .entry-header, 
+  .entry-content, 
+  .entry-footer {
+    //Allows for full width sections 
+    display: grid;
+    grid-template-columns: 1fr minmax(min-content, var(--containerWidth)) 1fr;
+    > * {
+      grid-column: 2 / span 1;
+      padding: 0 var(--gap-medium);
     }
-    .entry-heading {
-      padding-top: var(--gap-40);
-      > * {
+  }
+  .entry-header {
+    padding-top: var(--gap-medium);
+  }
+  .entry-content {
+    //Alignment
+    .alignfull {
+      max-width: 100%;
+      grid-column: 1 / span all !important;
+      padding: 0;
+      &.wp-block-image {
         margin: 0;
-        padding: 0 var(--gap-20);
       }
     }
-    .entry-content {
-      //Exceptions
-      .dgwltd-block.dgwltd-block--image:last-of-type {
-        margin-bottom: 0;
-      }
-      .wp-block-separator {
-        margin: var(--gap-20);
-        padding:0;
-      }
-      //Image
-      .dgwltd-block--image {
-        padding:0;
-        &.full-width {
-          grid-column: 1 / span all;
-        }
-      }
-      //Groups
-      .wp-block-group {
-        grid-column: 1 / span all;
-        padding:0;
-        .wp-block-group__inner-container {
-          //Width
-          @extend %container;
-          > h1, 
-          > h2, 
-          > h3 {
-            @include mq($from: tablet) {
-              max-width: var(--contentWidth);
-            }
-          }
-          > p:last-of-type {
-            margin:0;
-          }
-        }
-        .wp-block-quote {
-          padding-left:0;
-          &:before {
-            left:0;
-          }
-        }
-      }
+    .alignwide {
+      grid-column: 1 / span all !important;
+      width: 100%;
+      max-width: var(--containerWidth);
+      margin: 0 auto;
     }
   }
 }
 
-.page-template-template-layout {
-  .dgwltd-footer {
-    margin:0;
+//Custom lists
+.entry-content {
+  > ul {
+    @extend %list;
+  }
+}
+
+//Exceptions
+.dgwltd-post {
+  .entry-header:has(.entry-meta) {
+    .entry-title {
+      margin-bottom: var(--gap-small)
+    }
   }
 }

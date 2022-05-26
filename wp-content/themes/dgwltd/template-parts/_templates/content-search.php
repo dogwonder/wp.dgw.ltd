@@ -17,10 +17,9 @@
 			</div><!-- .entry-meta -->
 	</div><!-- .entry-header -->
 	
-	<div class="dgwltd-list__wrapper">        
+	<div class="entry-content dgwltd-list__wrapper">        
 
 		<div class="dgwltd-list__content">
-			<div class="entry-content">
 				<?php
 				// Display the excerpt is exists
 				if ( has_excerpt( $post->ID ) ) {
@@ -29,7 +28,6 @@
 					echo esc_html( dgwltd_standfirst( 80, $post->ID ) );
 				}
 				?>
-			</div><!-- .entry-content -->
 		</div><!-- /content-->   
 
 	 </div><!-- /wrapper-->   

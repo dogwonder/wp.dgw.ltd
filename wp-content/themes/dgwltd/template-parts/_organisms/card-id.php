@@ -26,12 +26,12 @@ if ( ! empty( $dgwltd_tags ) ) {
 	$term_display     = '';
 }
 ?>
-<div class="dgwltd-card<?php echo ( has_post_thumbnail( $card->ID ) ? ' has-image' : '' ); ?> card-<?php echo $card_index; ?>" data-url="<?php echo esc_url( get_permalink( $card->ID ) ); ?>" data-theme="<?php echo ( $inverse ? 'light' : 'dark' ); ?>"<?php echo ( $reversed ? ' data-state="reversed"' : '' ); ?>> 
+<div class="dgwltd-card<?php echo ( has_post_thumbnail( $card->ID ) ? ' has-image' : '' ); ?> card-<?php echo $card_index; ?>" data-url="<?php echo esc_url( get_permalink( $card->ID ) ); ?>" <?php echo ( $reversed ? ' data-state="reversed"' : '' ); ?>> 
 	<div class="dgwltd-card__inner">
 	
-		<?php if ( ! empty( $image ) ) : ?>
+		<?php if ( ! empty( $image ) && !$hide_image ) : ?>
 		<figure class="dgwltd-card__image">
-		  <picture class="frame">
+		  <picture>
 			<?php if ( has_post_thumbnail( $card->ID ) ) { ?>
 			<source media="(min-width: 769px)" srcset="<?php echo ( $image_medium ? $image_medium : $image ); ?>">
 			<img src="<?php echo $image; ?>" alt="<?php echo ( $image_alt ? $image_alt : '' ); ?>" loading="lazy" />
@@ -59,7 +59,7 @@ if ( ! empty( $dgwltd_tags ) ) {
 			?>
 
 			<h3 class="dgwltd-card__heading"><a href="<?php echo esc_url( get_permalink( $card->ID ) ); ?>"><?php echo esc_html( get_the_title( $card->ID ) ); ?></a></h3>
-			
+			<?php if(!$hide_description) : ?>
 			<div class="dgwltd-card__description">
 			<?php
 			// Display the excerpt is exists
@@ -70,6 +70,7 @@ if ( ! empty( $dgwltd_tags ) ) {
 			}
 			?>
 			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>

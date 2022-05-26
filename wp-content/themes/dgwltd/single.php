@@ -10,19 +10,18 @@
 get_header();
 ?>
 
-	<div id="primary" class="govuk-width-container">
-		
-		<div class="govuk-main-wrapper">
-				<?php
-				while ( have_posts() ) :
+	<div id="primary" class="dgwltd-content-wrapper">
 
-					the_post();
+		<?php
+		while ( have_posts() ) :
 
-					get_template_part( 'template-parts/_templates/content', get_post_type() );
+			the_post();
 
-				endwhile; // End of the loop.
-				?>
-		</div><!-- .govuk-main-wrapper -->
+			get_template_part( 'template-parts/_templates/content', get_post_type() );
+
+		endwhile; // End of the loop.
+		?>
+
 	</div><!-- #primary -->
 
 <?php

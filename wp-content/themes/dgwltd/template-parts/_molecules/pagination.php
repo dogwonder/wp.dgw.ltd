@@ -10,7 +10,7 @@ $total_pages = $wp_query->max_num_pages;
 <ul class="dgwltd-pagination__list">
 	<?php
 	// If current page is not the first one
-	if ( $paged !== '1' ) :
+	if ( $paged !== '1' && $total_pages > 1 ) :
 		?>
 	<li class="dgwltd-pagination__item dgwltd-pagination__item--previous">
 		<a href="<?php echo $prev_url; ?>" class="dgwltd-pagination__link" rel="prev">
@@ -29,7 +29,7 @@ $total_pages = $wp_query->max_num_pages;
 	<?php endif; ?>
 	<?php
 	// If current page is not the same as the total number of pages
-	if ( $paged !== $total_pages ) :
+	if ( $paged !== $total_pages && $total_pages > 1 ) :
 		?>
 	<li class="dgwltd-pagination__item dgwltd-pagination__item--next">
 		<a href="<?php echo $next_url; ?>" class="dgwltd-pagination__link" rel="next">

@@ -17,12 +17,14 @@
             },
             "choices": {
                 "image": "Image",
-                "video": "Video"
+                "video": "Video",
+                "solid": "Solid"
             },
             "allow_null": 0,
             "default_value": "image",
             "layout": "horizontal",
-            "return_format": "value"
+            "return_format": "value",
+            "translations": "copy_once"
         },
         {
             "key": "field_5eb0434782e52",
@@ -57,6 +59,88 @@
             "mime_types": ""
         },
         {
+            "key": "field_624af22ca19c1",
+            "label": "Background image (mobile)",
+            "name": "background_image_mobile",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f8daff1da4cf",
+                        "operator": "==",
+                        "value": "image"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "translations": "copy_once"
+        },
+        {
+            "key": "field_6239ba7a445eb",
+            "label": "Popout image",
+            "name": "popout_image",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5f8daff1da4cf",
+                        "operator": "==",
+                        "value": "image"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_6230cac7adcaf",
+            "label": "Background color",
+            "name": "background_color",
+            "type": "color_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "enable_opacity": 0,
+            "return_format": "string"
+        },
+        {
             "key": "field_5f71d14d59e08",
             "label": "Video",
             "name": "video",
@@ -81,10 +165,10 @@
             "height": ""
         },
         {
-            "key": "field_5f0587bee98dc",
-            "label": "Vertical height",
-            "name": "vertical_height",
-            "type": "number",
+            "key": "field_623d968845b39",
+            "label": "Has height",
+            "name": "has_height",
+            "type": "true_false",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -93,13 +177,86 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": 100,
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "translations": "copy_once"
+        },
+        {
+            "key": "field_5f0587bee98dc",
+            "label": "Vertical height",
+            "name": "vertical_height",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_623d968845b39",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 60,
             "placeholder": "",
             "prepend": "",
             "append": "",
             "min": 20,
             "max": 100,
-            "step": 10
+            "step": 10,
+            "translations": "copy_once"
+        },
+        {
+            "key": "field_622f910f92ad7",
+            "label": "Overlay",
+            "name": "overlay",
+            "type": "color_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "enable_opacity": 0,
+            "return_format": "string"
+        },
+        {
+            "key": "field_622f912492ad8",
+            "label": "Overlay opacity",
+            "name": "overlay_opacity",
+            "type": "range",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_622f910f92ad7",
+                        "operator": "!=empty"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 70,
+            "min": "",
+            "max": "",
+            "step": 10,
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -119,5 +276,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1603121520
+    "show_in_rest": 0,
+    "modified": 1649080489
 }

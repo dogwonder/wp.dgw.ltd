@@ -45,6 +45,7 @@
 @import "site/list";
 
 // GUTENBERG BLOCKS
+@import "site/blocks/actionkit";
 @import "site/blocks/accordion";
 @import "site/blocks/cta";
 @import "site/blocks/cover";
@@ -55,7 +56,6 @@
 @import "site/blocks/image";
 @import "site/blocks/related";
 @import "site/blocks/summary";
-@import "site/blocks/team";
 
 // SECTIONS
 @import "site/sections";
@@ -63,14 +63,14 @@
 // CARDS
 @import "site/cards";
 
-// COOKIES - optional
-// @import "site/cookies";
-
 // CSS GRID
 @import "site/grid";
 
 // UTILITIES
 @import "modules/utilities";
 
-// EXCEPTIONS
-@import "site/exceptions";
+// THEMES
+@import "modules/themes";
+
+// EXTRAS
+@import "vendor/wpml";

@@ -10,10 +10,9 @@
     //Lists
     ul {
         li {
-            @extend %dgwltd-body-m;
             font-weight: bold;
             color:inherit;
-            margin-bottom: var(--gap-10);
+            margin-bottom: var(--gap-small);
             > a {
                 color: inherit;
             }
@@ -29,8 +28,7 @@
           color:white;
         }
         .gfield_label {
-            @extend %dgwltd-body-m;
-            margin-bottom:var(--gap-10);
+            margin-bottom:var(--gap-small);
         }
         input[type="text"],
         input[type="email"] {

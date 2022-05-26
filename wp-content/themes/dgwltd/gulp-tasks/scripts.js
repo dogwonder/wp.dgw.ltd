@@ -10,7 +10,7 @@ const { terser } = require("rollup-plugin-terser");
 const isProduction = process.env.NODE_ENV === 'production';
 
 const options = {
-  in: './src/scripts/app.js',
+  in: ['./src/scripts/app.js'],
   out: './dist/scripts'
 }
 
@@ -26,7 +26,8 @@ const scripts = () => {
   
   //ES6 see https://nshki.com/es6-in-gulp-projects/
   stream = stream
-  .pipe(rollup({ 
+  .pipe(
+    rollup({ 
     plugins: [
       resolve(), 
       commonjs(),
@@ -34,7 +35,7 @@ const scripts = () => {
         runtimeHelpers: true
       }),
       terser()
-    ] 
+    ]
   },{
     format: "umd"
   }))

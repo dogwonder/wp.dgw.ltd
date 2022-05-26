@@ -6,8 +6,8 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "start": "npx gulp && concurrently \"npx gulp watch\"",
-    "production": "NODE_ENV=production npx gulp"
+    "watch": "npx gulp && concurrently \"npx gulp watch\"",
+    "build": "NODE_ENV=production npx gulp"
   },
   "dependencies": {
     "@babel/core": "^7.12.10",
@@ -16,12 +16,12 @@
     "gulp": "^4.0.2",
     "gulp-better-rollup": "^4.0.1",
     "gulp-clean-css": "^4.3.0",
-    "gulp-sass": "^4.1.0",
+    "gulp-sass": "^5.1.0",
     "gulp-terser": "^2.0.0",
     "rollup": "^2.36.0",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "sass": "^1.26.9"
+    "sass": "^1.49.10"
   }
 }

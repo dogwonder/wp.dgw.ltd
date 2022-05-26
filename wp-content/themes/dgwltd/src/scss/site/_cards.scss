@@ -1,54 +1,34 @@
 //Add margin to top 
 h2 ~ .dgwltd-block--cards_inner {
-  margin-top:var(--gap-20);
+  margin-top:var(--gap-medium);
 }
 
-//Flexbox fallback
 .dgwltd-block--cards_inner {
-  display: block;
-  @include mq($from: tablet) {
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-    .dgwltd-card {
-      width: calc(33.3333% - 15px);
-    }
+  display: grid;
+  -ms-display: grid;
+  grid-column-gap: var(--gap-medium);
+  grid-template-columns: repeat(1, 1fr);
+  @include mq($from: md) {
+    grid-template-columns: 1fr 1fr 1fr;
   }
-}
 
-//If grid supported
-@supports (display: grid) {
-  .dgwltd-block--cards_inner {
-    display: grid;
-    -ms-display: grid;
-    grid-column-gap: var(--gap-30);
-    grid-template-columns: repeat(1, 1fr);
-    @include mq($from: tablet) {
-      grid-template-columns: 1fr 1fr 1fr;
-      .dgwltd-card {
-        width: 100%;
-      }
-    }
-
-    //Exceptions
-    .dgwltd-cards-2 & {
-      grid-template-columns: 1fr 1fr;
-      @include mq($from: desktop) {
-        grid-template-columns: 1fr 1fr 1fr;        
-      }
-    }
+  //Exceptions
+  .dgwltd-cards-3 & {
 
   }
+
+  .dgwltd-cards-2 & {
+    grid-template-columns: 1fr 1fr;
+    @include mq($from: lg) {
+      grid-template-columns: 1fr 1fr 1fr;        
+    }
+  }
+
 }
 
 //Single card
 .dgwltd-card {
-  margin-bottom: var(--gap-30);
-  @include mq($from: desktop) {
-    margin-bottom: var(--gap-40);
-  }
+  margin-bottom: var(--gap-medium);
   width: 100%;
 
   .dgwltd-card__inner {
@@ -56,7 +36,7 @@ h2 ~ .dgwltd-block--cards_inner {
     height: 100%;
     position: relative;
     text-decoration: none !important;
-    background-color: var(--card);
+    // background-color: var(--card);
     color: var(--text-color);
     text-align: left;
     &:hover {
@@ -85,28 +65,35 @@ h2 ~ .dgwltd-block--cards_inner {
     position: relative;
     display: flex;
     flex-direction: column;
+    aspect-ratio: 1 / 1;
+    picture {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
     img {
       margin: 0;
       max-width: 100%;
       width: 100%;
+      height: 100%;
       display: block;
       object-fit: cover;
     }
   }
 
   .dgwltd-card__caption {
-    @include rhythm(14, 16);
-    font-weight: 300;
-    color: var(--highlight);
+    @extend %dgwltd-body-s; 
+    display: block;
+    margin-bottom: var(--gap-5);
   }
 
   .dgwltd-card__heading {
-    @extend %dgwltd-heading-s;
+    @extend %dgwltd-heading-m;
+    text-transform: uppercase;
     display: inline-block;
     width: 100%;
-    margin: 0 0 var(--gap-10);
+    margin: 0 0 var(--gap-small);
     text-decoration: none;
-    color: var(--highlight);
     > a {
       color:inherit;
       text-decoration: none;
@@ -121,15 +108,15 @@ h2 ~ .dgwltd-block--cards_inner {
   }
 
   .dgwltd-card__content {
-    padding: var(--gap-20);
+    padding: var(--gap-medium) 0;
     p {
-      @include mq($from: tablet) {
+      @include mq($from: md) {
         max-width: 100%;
       }
     }
 
     .govuk-summary-list {
-      margin: var(--gap-10) 0 0;
+      margin: var(--gap-small) 0 0;
       .govuk-summary-list__key, 
       .govuk-summary-list__value {
         padding:var(--gap-5);

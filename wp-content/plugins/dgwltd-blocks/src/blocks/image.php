@@ -13,27 +13,31 @@ $block_id = 'block-' . $block['id'];
 if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
-// Create class attribute allowing for custom "className"
+
+// Create class attribute allowing for custom "className" and "align" values. and "align" values.
 $class_name = 'dgwltd-block dgwltd-block--image';
 if ( ! empty( $block['className'] ) ) {
 	$class_name .= ' ' . $block['className'];
 }
-$image              = get_field( 'image' ) ?: '';
+
+if ( ! empty( $block['align'] ) ) {
+	$class_name .= 'align' . $block['align'];
+}
+
+$image              = get_field( 'image' ) ? : '';
 $image_medium        = $image['sizes']['dgwltd-medium'];
 $image_large         = $image['sizes']['dgwltd-large'];
-$image_alt           = esc_attr( $image['alt'] ) ?: '';
+$image_alt           = esc_attr( $image['alt'] ) ? : '';
 $x                  = get_field( 'x' ) ? : '1';
 $y                  = get_field( 'y' ) ? : '1';
-$full_width         = get_field( 'full_width' ) ?: '';
+$full_width         = get_field( 'full_width' ) ? : '';
 $block_full_width   = $full_width ? 'full-width ' : '';
-$block_aspect_ratio = 'aspect-' . $x . '_' . $y ?: '';
+$block_aspect_ratio = 'aspect-' . $x . '_' . $y ? : '';
 $block_classes      = array( $class_name, $block_aspect_ratio, $block_full_width );
 ?>
 <?php if ( $block_aspect_ratio ) : ?>
   <style>
 	#<?php echo $block_id; ?> .frame {
-		--x: <?php echo $x; ?>;
-		--y: <?php echo $y; ?>;
 		aspect-ratio: <?php echo $x; ?>/<?php echo $y; ?>;
 	}
   </style>

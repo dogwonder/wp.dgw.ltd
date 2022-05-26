@@ -7,6 +7,38 @@
  * @package dgwltd
  */
 
+ /*********************
+SCRIPTS & ENQUEUEING
+*********************/
+$envs = array(
+	'development' => 'http://dev.sandbox.dev',
+	'staging'     => 'https://staging.dogwonder.dev',
+	'production'  => 'https://www.dogwonder.dev'
+  );
+
+  define('ENVIRONMENTS', serialize($envs));
+  
+  if ( ! function_exists( 'dgwltd_env' ) ) :
+	function dgwltd_env($env) {
+		$site_url = site_url();
+		switch ($env) {
+		case 'dev':
+				if(strpos($site_url, 'dev.dogwonder.dev') !== FALSE) {
+					return true;
+				}
+		break;
+		case 'staging':
+			if(strpos($site_url, 'staging.dogwonder.dev') !== FALSE) {
+				return true;
+			}
+		break;
+		default:
+			'prod';
+		break;
+		}
+	}
+endif;
+
 if ( ! function_exists( 'dgwltd_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -38,6 +70,7 @@ if ( ! function_exists( 'dgwltd_setup' ) ) :
 		add_image_size( 'dgwltd-tiny', 16, 0, false ); // For Low quality image placeholders (LQIP)
 		add_image_size( 'dgwltd-small', 320, 0, false );
 		add_image_size( 'dgwltd-medium', 640, 0, false );
+		add_image_size( 'dgwltd-medium-crop', 640, 640, array( 'center', 'center' ) );
 		add_image_size( 'dgwltd-large', 1536, 0, false );
 		add_image_size( 'dgwltd-social-image', 1200, 630 );
 
@@ -45,8 +78,8 @@ if ( ! function_exists( 'dgwltd_setup' ) ) :
 		register_nav_menus(
 			array(
 				'primary' => esc_html__( 'Primary', 'dgwltd' ),
-				'footer'  => esc_html__( 'Footer', 'dgwltd' ),
-				'legal'   => esc_html__( 'Legal', 'dgwltd' ),
+				'footer-links' => __( 'Footer Menu', 'dgwltd' ), 
+				'legal'   => esc_html__( 'Legal', 'dgwltd' )
 			)
 		);
 
@@ -67,109 +100,22 @@ if ( ! function_exists( 'dgwltd_setup' ) ) :
 			)
 		);
 
-		// Add support for Block Styles.
-		add_theme_support( 'wp-block-styles' );
-
 		// Add support for full and wide align images.
 		add_theme_support( 'align-wide' );
 
-		// Set up the WordPress core custom background feature.
-		add_theme_support(
-			'custom-background',
-			apply_filters(
-				'dgwltd_custom_background_args',
-				array(
-					'default-color' => 'ffffff',
-					'default-image' => '',
-				)
-			)
-		);
-
-		// Add theme support for selective refresh for widgets.
-		add_theme_support( 'customize-selective-refresh-widgets' );
-
-		// Add support for responsive embedded content.
-		add_theme_support( 'responsive-embeds' );
-
-		// Add support for custom line height controls.
-		add_theme_support( 'custom-line-height' );
-
-		// Add support for experimental cover block spacing.
-		add_theme_support( 'custom-spacing' );
-
-		/**
-		 * Add support for core custom logo.
-		 *
-		 * @link https://codex.wordpress.org/Theme_Logo
-		 */
-		$logo_width  = 300;
-		$logo_height = 100;
-
-		add_theme_support(
-			'custom-logo',
-			array(
-				'height'               => $logo_height,
-				'width'                => $logo_width,
-				'flex-width'           => true,
-				'flex-height'          => true,
-				'unlink-homepage-logo' => true,
-			)
-		);
-
-		// Add editor style
-		add_theme_support( 'editor-styles' );
-		// add_editor_style(get_template_directory_uri() . '/dist/css/editor.css');
-
-		/*
-		* Adds starter content to highlight the theme on fresh sites.
-		* This is done conditionally to avoid loading the starter content on every
-		* page load, as it is a one-off operation only needed once in the customizer.
-		*/
-		if ( is_customize_preview() ) {
-			require get_template_directory() . '/inc/starter-content.php';
-			add_theme_support( 'starter-content', dgwltd_get_starter_content() );
-		}
+		// Add support for block styles.
+		add_theme_support( 'wp-block-styles' );
 
 	}
 
 endif;
 add_action( 'after_setup_theme', 'dgwltd_setup' );
 
-
-// Add Access-Control-Allow-Origin
-// add_action( 'init', 'add_cors_http_header' );
-// function add_cors_http_header() {
-// header("Access-Control-Allow-Origin: *");
-// header("Access-Control-Allow-Methods: GET");
-// header("Access-Control-Allow-Headers: origin");
-// }
-
-// add_filter('allowed_http_origins', 'add_cors_http_header');
-// function add_cors_http_header($urls) {
-// $urls[] = array( 'https://www.dgw.ltd', 'http://www.dgw.ltd', 'https://dgw.ltd', 'http://dgw.ltd' ) ;
-// return $urls;
-// }
-
 // Remove admin stuff - e.g. Emojis
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
 remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 remove_action( 'admin_print_styles', 'print_emoji_styles' );
-
-/**
- * Set the content width in pixels, based on the theme's design and stylesheet.
- *
- * Priority 0 to make it available to lower priority callbacks.
- *
- * @global int $content_width
- */
-function dgwltd_content_width() {
-	// This variable is intended to be overruled from themes.
-	// Open WPCS issue: {@link https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/issues/1043}.
-	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-	$GLOBALS['content_width'] = apply_filters( 'dgwltd_content_width', 640 );
-}
-add_action( 'after_setup_theme', 'dgwltd_content_width', 0 );
 
 /**
  * Register widget area.
@@ -196,34 +142,94 @@ add_action( 'widgets_init', 'dgwltd_widgets_init' );
  */
 function dgwltd_scripts() {
 
-	$cache_buster = filemtime( get_template_directory() . '/dist/css/critical.css' );
-	if ( empty( $cache_buster ) ) {
-		$cache_buster = gmdate( 'U' );
-	}
+	// Register theme stylesheet.
+	$theme_version = wp_get_theme()->get( 'Version' );
 
-	wp_enqueue_style( 'dgwltd-style', get_stylesheet_uri() );
+	$version_string = is_string( $theme_version ) ? $theme_version : false;
+	wp_register_style(
+		'dgwltd-style',
+		get_template_directory_uri() . '/style.css',
+		array(),
+		$version_string
+	);
 
-	// wp_enqueue_style('dgwltd-main', get_template_directory_uri() . '/dist/css/vendor.css', false, $cache_buster);
+	// Add styles inline.
+	wp_add_inline_style( 'dgwltd-style', dgwltd_get_font_face_styles() );
 
-	// wp_enqueue_style('dgwltd-print', get_template_directory_uri() . '/dist/css/print.css', false, $cache_buster, 'print');
+	// Enqueue theme stylesheet.
+	wp_enqueue_style( 'dgwltd-style' );
 
-	// wp_enqueue_script('dgwltd-js', get_template_directory_uri() . '/dist/scripts/app.js', array('jquery'), $cache_buster, false);
-
-	// 3.5.1
 	wp_deregister_script( 'jquery' );
-	wp_register_script( 'jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', array(), null, false );
-	wp_enqueue_script( 'jquery' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+
 }
 add_action( 'wp_enqueue_scripts', 'dgwltd_scripts' );
 
-/**
- * Implement the Custom Header feature.
- */
-// require get_template_directory() . '/inc/custom-header.php';
+if ( ! function_exists( 'dgwltd_editor_styles' ) ) :
+
+	/**
+	 * Enqueue editor styles.
+	 *
+	 * @since Twenty Twenty-Two 1.0
+	 *
+	 * @return void
+	 */
+	function dgwltd_editor_styles() {
+
+		// Add styles inline.
+		wp_add_inline_style( 'wp-block-library', dgwltd_get_font_face_styles() );
+
+	}
+
+endif;
+
+add_action( 'admin_init', 'dgwltd_editor_styles' );
+
+
+if ( ! function_exists( 'dgwltd_get_font_face_styles' ) ) :
+
+	/**
+	 * Get font face styles.
+	 * Called by functions twentytwentytwo_styles() and twentytwentytwo_editor_styles() above.
+	 *
+	 * @since Twenty Twenty-Two 1.0
+	 *
+	 * @return string
+	 */
+	function dgwltd_get_font_face_styles() {
+
+		return "
+		@font-face {
+			font-family: 'Söhne Dreiviertelfett';
+			font-weight: 700;
+			font-style: normal;
+			font-display: swap;
+			src: url('" . get_theme_file_uri( 'dist/fonts/soehne/soehne-web-dreiviertelfett.woff2' ) . "') format('woff2');
+		  }
+		  
+		  @font-face {
+			font-family: 'Söhne Halbfett';
+			font-weight: 600;
+			font-style: normal;
+			font-display: swap;
+			src: url('" . get_theme_file_uri( 'dist/fonts/soehne/soehne-web-halbfett.woff2' ) . "') format('woff2');
+		  }
+		  
+		  @font-face {
+			font-family: 'Söhne Leicht';
+			font-weight: 300;
+			font-style: normal;
+			font-display: swap;
+			src: url('" . get_theme_file_uri( 'dist/fonts/soehne/soehne-web-leicht.woff2' ) . "') format('woff2');
+		  }
+		";
+
+	}
+
+endif;
 
 /**
  * Custom template tags for this theme.

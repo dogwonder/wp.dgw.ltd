@@ -1,4 +1,8 @@
 //Fallback for forms
+label {
+  line-height: 1.5;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -8,11 +12,12 @@ textarea {
   font-size: 1rem;
   line-height: 1.25;
   width: 100%;
-  height: 40px;
+  height: 54px;
+  line-height: 54px;
   margin: 0;
-  padding: var(--gap-5);
+  padding: var(--gap-5) var(--gap-small);
   border: 2px solid black;
-  border-radius: 0;
+  border-radius: 0.25rem;
   appearance: none;
   &:focus {
     outline: 3px solid var(--focus);
@@ -20,10 +25,10 @@ textarea {
     box-shadow: inset 0 0 0 2px;
   }
   &.dgwltd-input--error {
-    border: 4px solid var(--error);
+    border: 0.25rem solid var(--error);
     outline: 0;
   }
-  @include mq($from: tablet) {
+  @include mq($from: md) {
     &.large {
       width: 100%;
     }
@@ -38,17 +43,17 @@ textarea {
 
 // Selects
 select {
-  max-width: 100%;
-  height: 40px;
-  line-height: 40px;
-  border: 2px solid var(--border);
-  border-radius: 0;
+  width: 100%;
+  height: 54px;
+  line-height: 54px;
+  border: 2px solid black;
+  border-radius: 0.25rem;
   padding: 0 0.2em;
   font: inherit; //Inherit font family, size, and line height
   letter-spacing: inherit;
   word-spacing: inherit;
   margin: 0;
-  padding: var(--gap-5);
+  padding: var(--gap-5) var(--gap-small);
   -moz-appearance: menulist;
   -webkit-appearance: menulist;
   appearance: menulist;
@@ -77,6 +82,34 @@ input[type="submit"] {
   }
 }
 
+//Label positioned in form
+.ak-field {
+  position: relative;
+  .ak-userfield-label {
+    //Position absolutely
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    //Position
+    top: 14px;
+    left: 10px;
+    //Animate
+    transition: 150ms cubic-bezier(0.4, 0, 0.2, 1) all;
+    &[for="id_country"] {
+      @extend %visually-hidden;
+    }
+    &.has-content, 
+    &.active {
+      top: 6px;
+      font-size: 0.625rem;
+      line-height: 1;
+    }
+  }
+}
+
 //Gravity forms
 .gform_wrapper {
   //General styles and resets - (needs ul due to inheritance over .entry-content)
@@ -89,7 +122,7 @@ input[type="submit"] {
     list-style-type: none;
     .gfield {
       padding: 0;
-      margin-bottom: var(--gap-20);
+      margin-bottom: var(--gap-medium);
       //Field container with error
       &.gfield_error {
         margin-left: var(--gap-5);
@@ -109,8 +142,8 @@ input[type="submit"] {
   .gfield_radio {
     li {
       position: relative;
-      padding: 0 0 0 var(--gap-40);
-      margin: 0 0 var(--gap-10);
+      padding: 0 0 0 var(--gap-large);
+      margin: 0 0 var(--gap-small);
       line-height: 1.7;
     }
     label {
@@ -222,7 +255,7 @@ input[type="submit"] {
 
   //Input description - placed above input
   .gfield_description {
-    margin-bottom: var(--gap-10);
+    margin-bottom: var(--gap-small);
   }
 
   //HTML field
@@ -235,7 +268,7 @@ input[type="submit"] {
   .ginput_left,
   .ginput_right {
     width: 100%;
-    margin: 0 0 var(--gap-10);
+    margin: 0 0 var(--gap-small);
   }
   .ginput_full {
     display: block;
@@ -249,7 +282,7 @@ input[type="submit"] {
   .name_last, 
   .ginput_left,
   .ginput_right {
-    @include mq($from: tablet) {
+    @include mq($from: md) {
       width: 50%;
       float: left;
       padding: 0 var(--gap-15) 0 0;
@@ -260,13 +293,13 @@ input[type="submit"] {
   .ginput_container_address {
     .ginput_left,
     .ginput_right {
-      @include mq($from: tablet) {
+      @include mq($from: md) {
         width: 100%;
       }
     }
     .address_state,
     .address_city {
-      @include mq($from: tablet) {
+      @include mq($from: md) {
         width: 66.6666%;
       }
     }

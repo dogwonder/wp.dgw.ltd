@@ -1,0 +1,17 @@
+---
+pagination:
+  data: pages
+  size: 1
+  alias: dgwltd
+permalink: /{{ dgwltd.slug }}/index.html
+bodyClass: single-dgwltdPage
+---
+{% extends "layouts/layout.njk" %}
+{%- block htmlTitle %}{{dgwltd.title}}{%- endblock %}
+{% block content %}
+  <div id="page-content">
+    <h1 class="page-title">{{ dgwltd.title }}</h1>
+    {{ dgwltd.body | safe }}
+  </div>
+</div>
+{% endblock %}

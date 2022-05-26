@@ -11,10 +11,14 @@ $block_id = 'block-' . $block['id'];
 if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
-// Create class attribute allowing for custom "className"
+// Create class attribute allowing for custom "className" and "align" values. and "align" values.
 $class_name = 'dgwltd-block dgwltd-block--cta';
 if ( ! empty( $block['className'] ) ) {
 	$class_name .= ' ' . $block['className'];
+}
+
+if ( ! empty( $block['align'] ) ) {
+	$class_name .= 'align' . $block['align'];
 }
 
 // Block fields
@@ -23,6 +27,28 @@ $image = get_field( 'image' ) ? : '';
 // Block options
 $reversed         = get_field( 'reversed' ) ? : '';
 $background_color = get_field( 'background_color' ) ? : '';
+$background_color_array = array(
+	'#270d88' => 'primary', 
+	'#ed4911' => 'secondary', 
+	'#000000' => 'black', 
+	'#ffffff' => 'white', 
+	'#081248' => 'azul', 
+	'#10827b' => 'teal', 
+	'#00FFD9' => 'neon', 
+	'#761456' => 'plum', 
+	'#e465ab' => 'fuchsia', 
+	'#ffa07a' => 'peach'
+);
+//Loop though the array and create a class for each color
+foreach ($background_color_array as $key => $value) {
+	if ($background_color == $key) {
+		$background_color_name .= 'bg--' . $value;
+	}
+}
+//If not in array, add the default
+if (!$background_color_name) {
+	$custom_hex = $background_color;
+}
 $aspect_ratio     = get_field( 'image_aspect_ratio' ) ? : '';
 // Use if becuase of illegal offset error https://www.craigwilcox.com/acf-illegal-string-offset/
 if ( $aspect_ratio ) :
@@ -34,7 +60,7 @@ else :
 endif;
 
 // Classes
-$block_color   = $background_color ? 'dgwltd-section dgwltd-section--' . $background_color : '';
+$block_color   = $background_color ? 'dgwltd-section has-bg ' . $background_color_name : '';
 $block_image   = $image ? 'has-image ' : '';
 $block_classes = array( $class_name, $block_image, $block_color, $block_aspect_ratio );
 
@@ -59,13 +85,11 @@ $block_template = array(
 <?php if ( $block_aspect_ratio ) : ?>
   <style>
 	#<?php echo $block_id; ?> .dgwltd-cta__image .frame {
-		--x: <?php echo $x; ?>;
-		--y: <?php echo $y; ?>;
 		aspect-ratio: <?php echo $x; ?>/<?php echo $y; ?>;
 	}
   </style>
 <?php endif; ?>
- <div id="<?php echo $block_id; ?>" class="<?php echo esc_attr( implode( ' ', $block_classes ) ); ?>"<?php echo ( $reversed ? ' data-state="reversed"' : '' ); ?>>
+ <div id="<?php echo $block_id; ?>" class="<?php echo esc_attr( implode( ' ', $block_classes ) ); ?>"<?php echo ( $reversed ? ' data-state="reversed"' : '' ); ?> <?php echo ($custom_hex ? 'style="background-color: ' . $custom_hex . '"' : ''); ?>>
 	<div class="dgwltd-cta__inner dgwltd-section__inner">
 
 			<div class="dgwltd-cta__content">
@@ -88,7 +112,7 @@ $block_template = array(
 					$data   = file_get_contents( $image_tiny );
 					$base64 = 'data:image/' . $type . ';base64,' . base64_encode( $data );
 					?>
-				<figure class="dgwltd-cta__image transform">
+				<figure class="dgwltd-cta__image">
 					<picture class="frame">
 						<source media="(min-width: 769px)" srcset="<?php echo ( $image_medium ? $image_medium : $image_small ); ?>">
 						<img src="<?php echo $image_small; ?>" width="<?php echo $image_small_width; ?>" height="<?php echo $image_small_height; ?>" alt="<?php echo ( $image_alt ? $image_alt : '' ); ?>" loading="lazy" style="background-image: url(<?php echo $base64; ?>)" />

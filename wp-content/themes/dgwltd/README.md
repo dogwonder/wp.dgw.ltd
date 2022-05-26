@@ -11,8 +11,15 @@
 
 ## Build
 
-- `npm run start` — Compile assets when file changes are made
-- `npm run production` — Compile assets for production
+- `npm run watch` — Compile assets when file changes are made
+- `npm run build` — Compile assets for production
+
+## Config
+
+- dgwltd_env() - URL of current site
+- dgwltd_get_font_face_styles() - Fonts
+- Math div warning: `$ npm install -g sass-migrator` `$ sass-migrator division **/*.scss`
+- dgwltd-blocks/src/actionkit/form.php $source // $akID // $actionkit_page_redirect
 
 
 ## Overrides for Framework
@@ -25,7 +32,8 @@ In `vendor.scss` we need to overide the default font family.
 
 ```
 $govuk-include-default-font-face: false;
-$govuk-font-family: -apple-system, BlinkMacSystemFont,"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell","Fira Sans", "Droid Sans","Helvetica Neue",sans-serif ;
+$govuk-focus-colour: #00FFD9;
+$govuk-font-family: -apple-system, BlinkMacSystemFont,"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell","Fira Sans", "Droid Sans","Helvetica Neue",sans-serif;
 @import "../../node_modules/govuk-frontend/govuk/all.scss";
 ```
 
@@ -33,26 +41,8 @@ For the Javascript we need to [manually download](https://frontend.design-system
 
 ## Other notable 3rd party integrations
 
-- [Photoswipe](Photoswipe) integration for galleries
-- [Youtube](https://github.com/paulirish/lite-youtube-embed) and [Vimeo](https://github.com/slightlyoff/lite-vimeo) lite plugins (render the video as a screenshot until a user interacts with the video to save bandwidth)
-
-
-## Performance
-
-The site has been prepared for optimal performance with an overall lighthouse [score of 96](https://googlechrome.github.io/lighthouse/scorecalc/#FCP=2197.7309999999998&SI=2197.7309999999998&LCP=2449.9184999999998&TTI=2572.7309999999998&TBT=21&CLS=0&FCI=&FMP=&device=mobile&version=6.5.0) for the [style guide page](https://dgw.ltd/style-guide/)
-
-See more perf scores here. 
-
-- [Performance dashboard](https://perf.dgw.ltd/dgwltd/)
-
-
-## Analytics
-
-I am using [Plausible.io](https://plausible.io/simple-web-analytics) a simple privacy focused analyics service, as such I don't need to set a cookie banner. 
-
-Obviously you would want to add your own analytics so replace `<script async defer data-domain="dgw.ltd" src="https://analytics.dgw.ltd/js/index.js"></script>` from `header.php`
-
-Note: if you do use Plausible you can [exclude it](https://plausible.io/docs/excluding) recording your own visits by pasting this into the developer console `localStorage.plausible_ignore=true`
+- [Bootstrap](https://getbootstrap.com/docs/5.0/layout/grid/) only using the grid system see `vendor.scss`
+- [Youtube](https://github.com/paulirish/lite-youtube-embed) and [Vimeo](https://github.com/slightlyoff/lite-vimeo) lite plugins (render the video as a screenshot until a user interacts with the video to save bandwidth) -- note we changed the defulat thumbnail size to 1280px `https://i.ytimg.com/vi/${this.videoId}/maxresdefault.jpg`;
 
 
 ## Custom blocks (optional)
@@ -82,8 +72,6 @@ Included in the plugin *dgwltd: Blocks* alongside the custom blocks this allows 
 - FAQs
 - Columns - dark
 - Columns - light
-- Cover - columns
-- Meet the team
 
 ## Starter content (experimental)
 
@@ -113,29 +101,3 @@ Blog / posts list template
 ### Search results template
 
 `template-search.php`
-
-Search results template
-
-### Cookies template
-
-`template-cookies.php`
-
-Cookie settings template. If the optional cookies functionality is turned on this will allow users to save their cookie settings. 
-
-An initial cookie is set to save the users preferences where only stricly necessary cookies are set:
-
-{ "essential": true, "functional": false, "performance": false, "advertising": false };
-
-See `app.js` and the function `cookieScriptsEnable()` for more instructions on how to manually block third-party cookies
-
-header.php - uncomment `<script src="<?php echo get_template_directory_uri(); ?>/dist/scripts/cookies.js"></script>`
-header.php - uncomment `get_template_part('template-parts/_organisms/cookie-notice');` 
-app.js - uncomment `cookieBanner(), cookieSettingsPage(), cookieSettingsUpdate(), cookieSettingsUpdate(), cookieScriptsEnable()` 
-
-You can then use the PHP function `dgwltd_cookie_var()` to test for functional and analytics cookies. 
-
-## Gallery
-
-Add the Additional CSS class(es) `.dgwltd-gallery` to the block 'Gallery' make a Wordpress gallery block into a modal one (and make sure link to settings are Media file)
-
-Based on PhotoSwipe [Javascript gallery](https://photoswipe.com) 

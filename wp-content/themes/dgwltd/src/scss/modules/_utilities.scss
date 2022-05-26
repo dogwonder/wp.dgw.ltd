@@ -1,15 +1,39 @@
 //Accessibility
 
 //Text meant only for screen readers
-.screen-reader-text, //need for wordpress
-.visually-hidden {
-  clip: rect(1px, 1px, 1px, 1px);
+.visually-hidden, 
+%visually-hidden {
   height: 1px;
-  overflow: hidden;
-  position: absolute !important;
   width: 1px;
+  position: absolute !important;
+  overflow: hidden;
+  padding: 0;
   /* many screen reader and browser combinations announce broken words as they would appear visually */
   word-wrap: normal !important;
+  white-space: nowrap;
+  clip: rect(0, 0, 0, 0);
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  border: 0;
+  &:focus {
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+    clip: auto !important;
+    -webkit-clip-path: none;
+    clip-path: none;
+    color: var(--teal-dark);
+    display: block;
+    font-weight: 700;
+    height: auto;
+    right: 5px;
+    line-height: normal;
+    padding: 15px 23px 14px;
+    text-decoration: none;
+    top: 5px;
+    width: auto;
+    z-index: 100000;
+  }
 }
 
 //Skip link
@@ -37,11 +61,13 @@
   z-index: 100000;
 }
 
-//SVGs
+//For SVG patterns and sprites
 .defs-only {
-	position: absolute;
-	height: 0; width: 0; 
-	left: -100%;
+	position: absolute !important;
+	height: 0 !important; 
+  width: 0 !important;
+	overflow: none !important;
+	left: -100% !important;
 }
 
 //Add a little margin (2 x x-height) to jump links - https://piccalil.li/quick-tip/add-scroll-margin-to-all-elements-which-can-be-targeted
@@ -50,54 +76,87 @@
 }
 
 //Container
+//Wrapper utility https://piccalil.li/quick-tip/use-css-clamp-to-create-a-more-flexible-wrapper-utility
+//We reset the vertical padding on this for umbgrid and block--table components
 %container, 
 .container {
-  //Wrapper utility https://piccalil.li/quick-tip/use-css-clamp-to-create-a-more-flexible-wrapper-utility
-  //90vw is the ideal with 16rem (256px) as min and 70rem (1120px) as max
-  width: 100vw;
-  width: clamp(16rem, 100vw, var(--containerWidth));
-  max-width: 100%; //override gov.uk
+  width: 100%;
+  max-width: var(--containerWidth);
   position: relative;
   margin: 0 auto;
-  padding: var(--gap-20);
+  padding: var(--gap-medium);
 }
 
-//Aspect ratio
+
+// The stack
+// Usage <div class="stack"><div><!-- child --></div><div><!-- child --></div></div>
+// The mixin @include stack(1rem);
+@mixin stack($measure: 1em) {
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+
+	& > * + * {
+
+		margin-top: $measure;
+
+	}
+
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.stack > * {
+  /* ↓ Any extant vertical margins are removed */
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.stack > * + * {
+  /* ↓ Top margin is only applied to successive elements */
+  margin-top: var(--gap-medium) !important;
+}
+
+.stack-large > * + * {
+  margin-top: var(--gap-large) !important;
+}
+.stack-small > * + * {
+  margin-top: var(--gap-small) !important;
+}
+
+
+//More modern aspect ratio
 %frame, 
 .frame {
-  --x: 3;
-  --y: 2;
-  aspect-ratio: 3/2;
-  padding-bottom: calc((var(--y) / var(--x)) * 100%);
-  position: relative;
-  > * {
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  > img,
-  > video {
+  aspect-ratio: 3 / 2;
+  img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    margin: 0;
   }
 }
 
-@media screen and (-ms-high-contrast: active),
-  screen and (-ms-high-contrast: none) {
-  /* IE10+ specific styles go here */
-  .dgwltd-card__image {
-    display: block;
-  }
-  .frame > * {
-    position: relative;
+//Custom list items
+%list, 
+.list {
+  //CSS triangle
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  li {
+    padding: 0 0 0 25px;
+    margin-bottom: var(--gap-small);
+    &:before {
+      font-size: 80%;
+      content:"\25B6";
+      color: var(--secondary);
+      margin-right: 0.5rem;
+    }
   }
 }
 
@@ -156,7 +215,7 @@
   }
   .alert__message {
     flex: 1;
-    padding-left: var(--gap-10);
+    padding-left: var(--gap-small);
     > * {
       color:inherit;
     }
@@ -184,7 +243,7 @@
   color: #252f3f;
   background-color: var(--alt);
   padding:.25rem .625rem;
-  font-size:14px;
+  font-size: var(--wp--preset--font-size--tiny);
 }
 
 a.tag {
@@ -214,6 +273,41 @@ $heights: (
 @each $value, $height in $heights {
   .height--#{$value} {
     min-height: calc(#{$height} - 64px) !important;
+  }
+}
+
+
+//Fluid spacing - e.g. add mbf-large to .block-list--offices__title
+@each $key in map-keys(map-get($spaces, gaps)) {
+  .m-#{$key} {
+    margin: clampCalc(map-deep-get($spaces, gaps $key sm), map-deep-get($spaces, gaps $key lg), sm, lg) !important;
+  }
+  .p-#{$key} {
+    padding: clampCalc(map-deep-get($spaces, gaps $key sm), map-deep-get($spaces, gaps $key lg), sm, lg) !important;
+  }
+  .mtf-#{$key} {
+    margin-top: clampCalc(map-deep-get($spaces, gaps $key sm), map-deep-get($spaces, gaps $key lg), sm, lg) !important;
+  }
+  .mbf-#{$key} {
+    margin-bottom: clampCalc(map-deep-get($spaces, gaps $key sm), map-deep-get($spaces, gaps $key lg), sm, lg) !important;
+  }
+  .mrf-#{$key} {
+    margin-right: clampCalc(map-deep-get($spaces, gaps $key sm), map-deep-get($spaces, gaps $key lg), sm, lg) !important;
+  }
+  .mlf-#{$key} {
+    margin-left: clampCalc(map-deep-get($spaces, gaps $key sm), map-deep-get($spaces, gaps $key lg), sm, lg) !important;
+  }
+  .ptf-#{$key} {
+    padding-top: clampCalc(map-deep-get($spaces, gaps $key sm), map-deep-get($spaces, gaps $key lg), sm, lg) !important;
+  }
+  .pbf-#{$key} {
+    padding-bottom: clampCalc(map-deep-get($spaces, gaps $key sm), map-deep-get($spaces, gaps $key lg), sm, lg) !important;
+  }
+  .plf-#{$key} {
+    padding-left: clampCalc(map-deep-get($spaces, gaps $key sm), map-deep-get($spaces, gaps $key lg), sm, lg) !important;
+  }
+  .prf-#{$key} {
+    padding-right: clampCalc(map-deep-get($spaces, gaps $key sm), map-deep-get($spaces, gaps $key lg), sm, lg) !important;
   }
 }
 

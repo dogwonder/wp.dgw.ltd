@@ -1,28 +1,16 @@
 <?php
 
 /**
- * Define the block patterns
- *
- * Loads and defines the block patterns for this plugin
- *
- * @link       https://dgw.ltd
- * @since      1.0.0
- *
- * @package    Dgwltd_Blocks
- * @subpackage Dgwltd_Blocks/includes
- */
-
-/**
  * Define the blocks functionality.
  *
  * Loads and defines the block patterns for this plugin
  *
  * @since      1.0.0
- * @package    Dgwltd_Blocks
- * @subpackage Dgwltd_Blocks/includes
+ * @package    dgwltd_Blocks
+ * @subpackage dgwltd_Blocks/includes
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class Dgwltd_Blocks_Patterns {
+class dgwltd_Blocks_Patterns {
 
 
 		/**
@@ -173,7 +161,7 @@ class Dgwltd_Blocks_Patterns {
 					<div class="wp-block-group has-text-color has-background dgwltd-block-group dgwltd-block-group--dark" style="background-color:#00466e;color:#000000"><div class="wp-block-group__inner-container">
 
 					<!-- wp:heading {"level":2} -->
-					<h2 class="has-white-color has-text-color">Dogwonder Ltd. is a web development agency.</h2>
+					<h2 class="has-white-color has-text-color">DGW.ltd</h2>
 					<!-- /wp:heading -->
 
 					<!-- wp:columns -->
@@ -234,7 +222,7 @@ class Dgwltd_Blocks_Patterns {
 					<div class="wp-block-group has-text-color has-background dgwltd-block-group dgwltd-block-group--light" style="background-color:#fafafa;color:#000000"><div class="wp-block-group__inner-container">
 
 					<!-- wp:heading {"level":2} -->
-					<h2>Dogwonder Ltd. is a web development agency.</h2>
+					<h2>DGW.ltd</h2>
 					<!-- /wp:heading -->
 
 					<!-- wp:columns -->
@@ -285,108 +273,7 @@ class Dgwltd_Blocks_Patterns {
 				',
 			'categories'  => array( 'blocks' ),
 		);
-
-		$patterns['dgltd-block-patterns/cover-columns'] = [
-			'title'       => __( 'Cover - with columns', 'dgltd-block-patterns' ),
-			'description' => __( 'A cover block with two columns inside', 'dgltd-block-patterns' ),
-			'content'     => '
-			<!-- wp:cover {"url":"https:\/\/assets.codepen.io\/1801\/cover.jpg","className":"dgwltd-block\u002d\u002dcover dgwltd-section"} -->
-			<div class="wp-block-cover has-background-dim dgwltd-block--cover dgwltd-section"><img class="wp-block-cover__image-background" alt="" src="https:\/\/assets.codepen.io\/1801\/cover.jpg" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:columns -->
-			<div class="wp-block-columns"><!-- wp:column -->
-			<div class="wp-block-column"><!-- wp:heading -->
-			<h2>Column heading</h2>
-			<!-- /wp:heading --></div>
-			<!-- /wp:column -->
-			<!-- wp:column -->
-			<div class="wp-block-column"><!-- wp:list -->
-			<ul><li>List item 1</li><li>List item 2</li><li>List item 3</li></ul>
-			<!-- /wp:list --></div>
-			<!-- /wp:column --></div>
-			<!-- /wp:columns --></div></div>
-			<!-- /wp:cover -->
-			',
-			'categories'  => [ 'blocks' ],
-		];
 		
-
-		$patterns['dgwltd-blocks/team'] = array(
-			'title'       => __( 'Meet the team', 'dgwltd-blocks' ),
-			'description' => __( 'A grid of team members', 'dgwltd-blocks' ),
-			'content'     => '
-					<!-- wp:group -->
-					<div class="wp-block-group dgwltd-block-team"><div class="wp-block-group__inner-container">
-
-					<!-- wp:heading {"level":2} -->
-					<h2>Meet the team.</h2>
-					<!-- /wp:heading -->
-
-					<!-- wp:columns -->
-					<div class="wp-block-columns">
-						<!-- wp:column -->
-							<div class="wp-block-column">
-								<!-- wp:image {"align":"center","width":64,"height":64,"sizeSlug":"medium","className":"is-style-default"} -->
-								<div class="wp-block-image is-style-default"><figure class="aligncenter size-medium is-resized"><img src="https:\/\/s.w.org\/images\/core\/5.5\/don-quixote-03.jpg" alt="' . __( 'Pencil drawing of Don Quixote' ) . '" width="64" height="64"/></figure></div>
-								<!-- /wp:image -->
-                                <!-- wp:heading {"level":3} -->
-                                <h3>Name surname</h3>
-								<!-- /wp:heading -->
-								<!-- wp:heading {"level":4} -->
-                                <h4>Job Title</h4>
-					            <!-- /wp:heading -->
-								<!-- wp:social-links -->
-								<ul class="wp-block-social-links">
-									<!-- wp:social-link {"url":"https:\/\/www.linkedin.com\/company\/dogwonder-ltd\/","service":"linkedin"} /-->
-									<!-- wp:social-link {"url":"dogwonder@gmail.com","service":"mail"} /-->
-								</ul>
-								<!-- /wp:social-links -->
-							</div>
-						<!-- /wp:column -->
-						<!-- wp:column -->
-							<div class="wp-block-column">
-								<!-- wp:image {"align":"center","width":64,"height":64,"sizeSlug":"medium","className":"is-style-default"} -->
-								<div class="wp-block-image is-style-default"><figure class="aligncenter size-medium is-resized"><img src="https:\/\/s.w.org\/images\/core\/5.5\/don-quixote-03.jpg" alt="' . __( 'Pencil drawing of Don Quixote' ) . '" width="64" height="64"/></figure></div>
-								<!-- /wp:image -->
-                                <!-- wp:heading {"level":3} -->
-                                <h3>Name surname</h3>
-								<!-- /wp:heading -->
-								<!-- wp:heading {"level":4} -->
-                                <h4>Job Title</h4>
-					            <!-- /wp:heading -->
-								<!-- wp:social-links -->
-								<ul class="wp-block-social-links">
-									<!-- wp:social-link {"url":"https:\/\/www.linkedin.com\/company\/dogwonder-ltd\/","service":"linkedin"} /-->
-									<!-- wp:social-link {"url":"dogwonder@gmail.com","service":"mail"} /-->
-								</ul>
-								<!-- /wp:social-links -->
-							</div>
-						<!-- /wp:column -->
-						<!-- wp:column -->
-							<div class="wp-block-column">
-								<!-- wp:image {"align":"center","width":64,"height":64,"sizeSlug":"medium","className":"is-style-default"} -->
-								<div class="wp-block-image is-style-default"><figure class="aligncenter size-medium is-resized"><img src="https:\/\/s.w.org\/images\/core\/5.5\/don-quixote-03.jpg" alt="' . __( 'Pencil drawing of Don Quixote' ) . '" width="64" height="64"/></figure></div>
-								<!-- /wp:image -->
-                                <!-- wp:heading {"level":3} -->
-                                <h3>Name surname</h3>
-								<!-- /wp:heading -->
-								<!-- wp:heading {"level":4} -->
-                                <h4>Job Title</h4>
-					            <!-- /wp:heading -->
-								<!-- wp:social-links -->
-								<ul class="wp-block-social-links">
-									<!-- wp:social-link {"url":"https:\/\/www.linkedin.com\/company\/dogwonder-ltd\/","service":"linkedin"} /-->
-									<!-- wp:social-link {"url":"dogwonder@gmail.com","service":"mail"} /-->
-								</ul>
-								<!-- /wp:social-links -->
-							</div>
-						<!-- /wp:column -->
-					</div>
-					<!-- /wp:columns -->
-						
-					</div></div>
-					<!-- /wp:group -->
-				',
-			'categories'  => array( 'blocks' ),
-		);
 
 		$patterns = apply_filters( 'dgwltd_block_patterns', $patterns );
 

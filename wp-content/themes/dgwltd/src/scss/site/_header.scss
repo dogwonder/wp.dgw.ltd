@@ -1,21 +1,46 @@
 //Vars
 $nav-height: 64px;
 
+//Skip link
+.govuk-skip-link:link, 
+.govuk-skip-link:focus {
+  color: black !important;
+  text-decoration: underline;
+}
+
 //Masthead
 .dgwltd-masthead {
   margin: 0;
   padding: 0;
-  // position: sticky;
-  // top: 0;
   z-index: 9999;
   background-color: var(--background);
   .logo {
-    fill: var(--highlight);
-    width: 50px;
-    height: 50px;
+    width: toRem(44);
+    height: toRem(44);
+    padding-right: var(--gap-small);
+    margin-right: var(--gap-small);
   }
 }
 
+//Overlay
+.dgwltd-wrapper {
+  height: 100vh;
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: $z-highest-1; 
+    background-color: rgba(0,0,0,.9);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .25s cubic-bezier(.24,.26,.2,1),opacity .25s cubic-bezier(.24,.26,.2,1);
+  }
+}
 
 .dgwltd-masthead-container {
 
@@ -26,12 +51,15 @@ $nav-height: 64px;
   align-items: center;
 
   //Width
-  @extend %container;
   width:100%;
+  padding: var(--gap-small) var(--gap-medium);
 
   //Logo
   .dgwltd-masthead__logo {
     line-height: 1;
+    @include mq($until: lg) {
+      flex: 1;
+    }
     > a {
       display: flex;
       align-items: center;
@@ -41,148 +69,304 @@ $nav-height: 64px;
       }
       &:focus {
         box-shadow: none;
-        background-color: white;
+        background-color: transparent;
       }
     }
 
     svg {
       width: 60px;
       height: auto;
-      fill: black;
+      margin:0 var(--gap-medium) 0 0;
+      &.logo {
+        fill: black;
+      }
     }
   }
 
-  //CTA
-  .dgwltd-masthead__cta {
-    .dgwltd-button {
-      margin:0;
-    }
-  }
-
-
-}
-
-.govuk-skip-link:link, 
-.govuk-skip-link:focus {
-  color: black !important;
-  text-decoration: underline;
 }
 
 .dgwltd-nav {
   z-index: $z-low;
   display: flex;
+  order: 2;
+  @include mq($from: lg) {
+    order: initial;
+    flex: 1;
+  }
   
   .dgwltd-menu {
     margin:0;
     padding: 0;
     display: flex;
-    flex: 1;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-
+    flex-direction: column;
+    @include mq($from: lg) {
+      flex: 1;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+    }
     .menu-item {
       list-style-type: none;
-      @include rhythm(18, 60);
+      @extend %dgwltd-navigation;
+      line-height: 1;
       text-align: left;
       position: relative;
-      margin: 0;
       padding: 0;
+      margin: 0 0 var(--gap-small);
+      @include mq($until: lg) {
+
+        &.current-menu-item > a, 
+        &.current-page-ancestor > a {
+          width: calc(100% - 80px) !important;
+        }
+        .button-show-subnav {
+          position: absolute;
+          height: 50px;
+          width: 80px;
+          right: 0;
+          top: 0;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          appearance: none;
+          border: 0;
+          background-color: transparent;
+          padding: 0;
+          &:after {
+            //Chevron down
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            width: 0;
+            height: 0;
+            width: 1ex;
+            height: 1ex;
+            border-bottom: 3px solid #fff;
+            border-right: 3px solid #fff;
+            transform: rotate(45deg);
+            margin: 0 auto;
+          }
+          &[aria-expanded="true"] {
+            &:after {
+              border-bottom: transparent;
+              border-right: transparent;
+              border-top: 3px solid #fff;
+              border-left: 3px solid #fff;
+            }
+          }
+          @include mq($until: lg) {
+            justify-content: center;
+            &:before {
+                content: "";
+                display: block;
+                border-radius: 50%;
+                border: 1px solid #fff;
+                width: 40px;
+                height: 40px;
+            }
+            &:after {
+              position: absolute;
+              top: 17px;
+              right: 34px;
+            }
+            &[aria-expanded="true"] {
+              &:after {
+                top: 21px;
+              }
+            }
+          }
+          a {
+
+          }
+          span {
+            display: none;  
+          }
+          
+        }
+      }
+      @include mq($from: lg) {
+        line-height: toRem(60);
+        margin: 0 var(--gap-small) 0 0;
+        .button-show-subnav {
+          display: none;
+        }
+         //A11y menu active state
+        .button-show-subnav:focus {
+          position: relative;
+          top: 100%;
+        }
+      }
+      &:first-of-type {
+        @include mq($from: lg) {
+          a {
+            padding-left: 0;
+          }
+        }
+      }
       &:last-of-type {
         margin: 0;
       }
       a {
-        display: block;
+        display: inline-block;
         text-decoration: none;
-        padding:0 var(--gap-20);
-        @include mq($from: desktop) {
-          padding:0 8px;
+        padding:var(--gap-15) var(--gap-medium);
+        color: white;
+        width: 100%;
+        @include mq($from: lg) {
+          padding:0 var(--gap-medium);
+          color: var(--text-color);
+          padding:0 var(--gap-small);
           margin:0;
         }
-        display: inline-block;
-        color: var(--highlight);
         &:hover {
           text-decoration: underline;
         }
         &:focus {
-          text-decoration: none;
           border: 0;
-        }
-      }
-
-      // &.current-menu-ancestor,
-      &.current-menu-item {
-        > a {
-          color: var(--highlight);
+          background-color: transparent;
+          box-shadow: none;
           text-decoration: underline;
-          // font-weight: 700;
-          &:focus {
-            text-decoration: none;
+          outline: 0;
+          color: white !important;
+          text-decoration-color: white !important;
+          @include mq($from: lg) {
+            color: var(--text-color) !important;
+            text-decoration-color: var(--azul) !important;
           }
         }
       }
 
+
+      // Use a different one to .current-menu-item so we can toggle it in the mobile view
+      &.current_page_item, 
+      &.current_page_ancestor {
+        > a {
+          text-decoration: underline;
+        }
+      }
+
       &.menu-item-has-children {
-        @include mq($from: desktop) {
+        @include mq($from: lg) {
           display: flex;
           align-items: center;
           > a {
             padding-right:0;
             margin-right:0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            &:after {
+              //Chevron down
+              content: "";
+              display: block;
+              box-sizing: border-box;
+              width: 0;
+              height: 0;
+              width: 0.8ex;
+              height: 0.8ex;
+              border-bottom: 2px solid;
+              border-right: 2px solid;
+              transform: rotate(45deg);
+              margin-left: var(--gap-small);
+              margin-top: -0.4ex;
+            }
           }
         }
       }
 
-      //Hover/Click method
-      // &.menu-item-has-children:focus-within,
-      // &.menu-item-has-children:hover {
-      //   border-color: var(--border);
-      //   .sub-menu {
-      //     display: block;
-      //   }
-      // }
-
       //With JS - see a11yMenu()
-      &.menu-item-has-children a:hover {
-        ~ .sub-menu {
+      //Hover/Click method (including class name for JS to target)
+      &.menu-item-has-children.menu-open {
+        .sub-menu {
           display: block;
+          @include mq($from: lg) {
+            display: flex;
+          }
+        }
+      }
+
+      //We don't want hover events on smaller screens
+      &.menu-item-has-children:focus-within,
+      &.menu-item-has-children:hover {
+        .sub-menu {
+          @include mq($from: lg) {
+            display: flex;
+            transition-delay: 0s; /* react immediately on hover */
+          }
         }
       }
 
       &.menu-item-has-children.menu-open {
-        .sub-menu {
-          display: block;
-        }
         //a11y menu for opening menu via button
-        .button-show-subnav {
-          &:after {
-            @include mq($from: desktop) {
-              top: 6px;
-              @include dgwltd-shape-arrow(
-                $direction: up,
-                $base: 8px,
-                $display: inline-block
-              );
-            }
+        @include mq($from: lg) {
+          .sub-menu {
+            opacity: 1;
+            visibility: visible;
+            transition-delay: 250ms;
+          }
+        }
+      }
+
+      //If current menu open the sub-menu on mobile
+      &.menu-item-has-children.current-menu-item, 
+      &.menu-item-has-children.current-menu-ancestor {
+        .sub-menu {
+          @include mq($until: lg) {
+            display: block;
           }
         }
       }
 
     }
 
+    //Sub menu
+    .sub-menu {
+      display: none;
+      @include mq($until: lg) {
+        margin: var(--gap-small) 0 var(--gap-medium) var(--gap-small);
+        li {
+          line-height: var(--wp--custom--typography--line-height--small);
+          margin: 0;
+        }
+      }
+      @include mq($from: lg) {
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        visibility: hidden;
+        transition: visibility .25s cubic-bezier(.24,.26,.2,1),opacity .25s cubic-bezier(.24,.26,.2,1);
+        z-index: $z-high;
+        position: absolute;
+        left: auto;
+        right: 0;
+        top: 100%;
+        margin:0;
+        padding:0;
+        width: auto;
+        background-color: white;
+        min-width: 24rem;
+        .menu-item {
+          @include mq($from: lg) {
+            line-height: 1;
+            a {
+              padding: var(--gap-small);
+              display: block;
+            }
+          }
+        }
+      }
+    }
+
   }
 
 }
-
 
 //Navigation Toggle
 .nav-toggle {
   margin: 0 0 0 auto;
   padding: 0;
   display: none;
-  color: var(--alt);
   box-shadow: none;
-  font-size: var(--size-19);
   font-weight: bold;
   background-color: transparent;
   border:0;
@@ -192,58 +376,21 @@ $nav-height: 64px;
     background-color: transparent;
   }
   svg {
-    fill: var(--text-color);
-    width: 40px;
-    height: 40px;
+    width: toRem(40);
+    height: toRem(40);
     margin-left:auto;
     &.close {
-      stroke: white;
+      stroke: var(--text-color);
       stroke-width: 50;
     }
   }
+
 }
 
-%dgMenu {
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 0;
-  margin: 0;
-  z-index: 9998;
-  padding: var(--gap-20) 0 0;
-  font-size: var(--size-21);
-  background-color: rgba(26,30,30,.9);
-  backdrop-filter: blur(5px) contrast(.8);
-  width: 100%;
-  height: 100vh;
-  max-width: 100%;
-  .menu-item {
-    margin: 0;
-    padding: 0;
-    line-height: 1;
-    @include rhythm(21, 21);
-    > a {
-      display: block;
-      color: var(--alt);
-    }
-    &.menu-item-has-children {
-      @include mq($from: desktop) {
-        display: flex;
-      }
-    }
-  }
-  .sub-menu {
-    background-color: transparent;
-    margin-bottom: var(--gap-20);
-    .menu-item {
-      margin: 0;
-      @include rhythm(17, 17);
-    }
-  }
-}
 
 //Attempt at fixing Cumulative Layout Shift issue with menu before JS kicks in
 .no-js {
+
   .dgwltd-masthead {
     /* browser decide if x is ok to scroll and show bars on, y hidden */
     overflow: auto hidden;
@@ -275,38 +422,68 @@ $nav-height: 64px;
 
 //JS progressive enhancement
 .js-enabled {
-  .dgwltd-menu { 
-    //Cumulative Layout Shift fix - hide the menu if JS is enabled to avoid layout shift, maybe becuase ResizeObserver is too slow? 🤷
-    @include mq($until: tablet) {
-      display: none;  
+
+  //Desktop menu is open
+  &.masthead-expanded {
+    .dgwltd-wrapper {
+      position: relative;
+      &:before {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+    .sub-menu {
+      z-index: $z-highest;
     }
   }
-  .dgwltd-masthead {
 
+  //Mobile menu is open
+  &.nav-open {
+    .dgwltd-wrapper {
+      position: relative;
+      &:before {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+
+
+  .dgwltd-nav__wrapper { 
+    //Cumulative Layout Shift fix - hide the menu if JS is enabled to avoid layout shift, maybe becuase ResizeObserver is too slow? 🤷
+    display: none;  
+    @include mq($from: lg) {
+      display: flex;  
+      width: 100%;
+    }
+  }
+
+  .dgwltd-masthead {
+  
     //If we are in the mobile view (<769px), we need to show the burger menu
     &[enabled="true"] {
+
+      .dgwltd-nav {
+        align-items: center;
+      }
+
       .nav-toggle { 
         display: block; 
         .open {display: block;}
         .close {display: none;}
       }    
-      .dgwltd-menu { 
+
+      .dgwltd-nav__wrapper { 
         display: none;  
         content-visibility: hidden;
+        position: absolute;
+        width: 100%;
+        top: 90px;
+        left: 0;
       }
 
       //If the status is open and the menu is not visible, show the menu
-      [status="open"] {
-        
-        &.dgwltd-menu {
-          content-visibility: visible;
-          @extend %dgMenu;
-
-          .menu-item {
-            @include rhythm(21, 44);
-          }
-
-        }
+      [status="open"] { 
 
       }
       
@@ -314,9 +491,29 @@ $nav-height: 64px;
 
     //Switch the menu icons
     &.masthead-is-open {
+      z-index: $z-highest;
+      position: relative;
+      background-color: black;
+      .dgwltd-nav__wrapper {
+        content-visibility: visible;
+        display: block;
+        .dgwltd-menu, 
+        .dgwltd-menu-language {
+          display: flex;
+        }
+        .dgwltd-menu-language {
+          margin: var(--gap-medium);
+        }
+      }
+      .dgwltd-masthead__logo svg.logo {
+          fill: white;
+      }
+      .nav-toggle svg.close {
+        stroke: white;
+      }
       .nav-toggle {
         position: relative;
-        z-index:9999;
+        z-index: $z-highest;
         .open {display: none;}
         .close {display: block;}
       }
@@ -328,4 +525,69 @@ $nav-height: 64px;
 
   }
 
+}
+
+//Languages
+.dgwltd-menu-language {
+  list-style-type: none;
+  display: flex;
+  margin: 0 var(--gap-small);
+  @include mq($until: lg) {
+    display: none;  
+    margin: var(--gap-medium) var(--gap-medium) 0 0;
+  }
+  li {
+    @extend %dgwltd-navigation;
+    line-height: 1;
+    position: relative;
+    padding: 0;
+    margin: 0 var(--gap-small) 0 0;
+    display: inline-block;
+    @include mq($from: lg) {
+      line-height: toRem(60);
+      margin: 0 var(--gap-5) 0 0;
+    }
+    .active {
+      color: white;
+      @include mq($from: lg) {
+        color: var(--text-color);
+      }
+    }
+    a {
+      color: var(--border);
+      text-decoration: none;
+      &:hover {
+        color: var(--text-color);
+        text-decoration: underline; 
+      }
+      &:focus {
+        border: 0;
+        background-color: transparent;
+        box-shadow: none;
+        text-decoration: underline;
+        outline: 0;
+        color: white !important;
+        text-decoration-color: white !important;
+        @include mq($from: lg) {
+          color: var(--text-color) !important;
+          text-decoration-color: var(--azul) !important;
+        }
+      }
+    }
+    &:after {
+      content: "/";
+      color: var(--button-disabled);
+      @include mq($from: lg) {
+        color: var(--border);
+      }
+      display: inline-block;
+      margin-left: 5px;
+    }
+    &:last-of-type {
+      margin: 0;
+      &:after {
+        display: none;
+      }
+    }
+  }
 }

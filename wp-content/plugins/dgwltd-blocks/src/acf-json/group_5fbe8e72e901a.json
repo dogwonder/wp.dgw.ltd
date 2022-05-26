@@ -3,21 +3,13 @@
     "title": "Block: Feature",
     "fields": [
         {
-            "key": "field_5fbe8e72ede64",
+            "key": "field_622f8fafe240b",
             "label": "Background image",
             "name": "background_image",
             "type": "image",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5fbe8e72ede59",
-                        "operator": "==",
-                        "value": "image"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -35,9 +27,34 @@
             "mime_types": ""
         },
         {
-            "key": "field_5fbf7564fb688",
-            "label": "Overlay",
-            "name": "overlay",
+            "key": "field_624af210bac57",
+            "label": "Background image (mobile)",
+            "name": "background_image_mobile",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "translations": "copy_once"
+        },
+        {
+            "key": "field_6230cae99a035",
+            "label": "Background color",
+            "name": "background_color",
             "type": "color_picker",
             "instructions": "",
             "required": 0,
@@ -47,7 +64,53 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "#d3370f"
+            "default_value": "",
+            "enable_opacity": 0,
+            "return_format": "string"
+        },
+        {
+            "key": "field_5fbf7564fb688",
+            "label": "Overlay",
+            "name": "overlay",
+            "type": "color_picker",
+            "instructions": "Adds a colour overlay to the image",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "enable_opacity": 0,
+            "return_format": "string"
+        },
+        {
+            "key": "field_622f90e7a1de2",
+            "label": "Overlay opacity",
+            "name": "overlay_opacity",
+            "type": "range",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5fbf7564fb688",
+                        "operator": "!=empty"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 70,
+            "min": "",
+            "max": "",
+            "step": 10,
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_5fbf754ffb687",
@@ -86,5 +149,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1606383071
+    "show_in_rest": 0,
+    "modified": 1649080513
 }

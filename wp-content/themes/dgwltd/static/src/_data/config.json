@@ -1,0 +1,5 @@
+{
+    "graphqlUrl": "http://dev.sandbox.DGW.ltd?graphql",
+    "useCache": false, 
+    "ignoreEmbeddedImages": true
+}

@@ -14,7 +14,7 @@ if ( class_exists( 'acf' ) ) {
 	$hidden_title = get_field( 'hide_title' );
 }
 ?>
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('dgwltd-page stack'); ?>>
 
 	<?php if ( ! $hidden_title ) : ?>
 	<div class="entry-header">

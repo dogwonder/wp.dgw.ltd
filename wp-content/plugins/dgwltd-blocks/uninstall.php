@@ -22,7 +22,7 @@
  * @link       https://dgw.ltd
  * @since      1.0.0
  *
- * @package    Dgwltd_Blocks
+ * @package    dgwltd_Blocks
  */
 
 // If uninstall not called from WordPress, then exit.

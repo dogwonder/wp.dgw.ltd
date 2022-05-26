@@ -8,7 +8,7 @@
  */
 
 ?>
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'dgwltd-post' ); ?> itemscope itemtype="http://schema.org/BlogPosting">
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'dgwltd-post stack' ); ?> itemscope itemtype="http://schema.org/BlogPosting">
 
 	<div class="entry-header">
 		<?php
