@@ -32,7 +32,6 @@ $rand = substr( md5( microtime() ), wp_rand( 0, 26 ), 5 );
 $block_type      = get_field( 'block_type' ) ? : '';
 $image           = get_field( 'background_image' ) ? : '';
 $image_mobile    = get_field( 'background_image_mobile' ) ? : '';
-$imagePopout     = get_field( 'popout_image' ) ? : '';
 $video           = get_field( 'video', false, false );
 
 $background_color = get_field( 'background_color' ) ? : '';
@@ -72,7 +71,6 @@ $vertical_height = get_field( 'vertical_height' ) ? : '';
 // Classes
 $block_image   = $image ? 'has-image ' : '';
 $block_type_class	= $block_type ? 'block-type--' . $block_type : '';
-$block_image_popout   = $imagePopout ? 'has-popout ' : '';
 $block_video   = $video ? 'has-video ' : '';
 $block_height = $has_height ? 'has-height ' : '';
 $block_align = $block['align'] ? 'align' . $block['align'] : '';
@@ -83,7 +81,7 @@ if($block_height) {
 $block_overlay  = $overlay ? 'has-overlay ' : '';
 $block_color   = $background_color ? 'has-bg ' . $background_color_name : '';
 
-$block_classes = array( $class_name, $block_type_class, $block_align, $block_image, $block_image_popout, $block_video, $block_height, $block_overlay, $block_color);
+$block_classes = array( $class_name, $block_type_class, $block_align, $block_image, $block_video, $block_height, $block_overlay, $block_color);
 
 // JSX Innerblocks - https://www.billerickson.net/innerblocks-with-acf-blocks/
 $allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/list', 'core/button' );
@@ -176,17 +174,6 @@ $block_template = array(
 
 					</div>
 				</div>
-				
-				<?php if ( ! empty( $imagePopout ) && $block_type == 'image' ) : ?>
-				<?php
-				$image_popout_small       = $imagePopout['sizes']['dgwltd-medium'];
-				$image_popout_small_width  = esc_attr( $imagePopout['sizes']['dgwltd-small-width'] );
-				$image_popout_small_height = esc_attr( $imagePopout['sizes']['dgwltd-small-height'] );
-				?>
-				<figure class="image-popout">
-					<img src="<?php echo $image_popout_small; ?>" alt="" loading="lazy" width="<?php echo $image_small_width; ?>" height="<?php echo $image_small_height; ?>" />
-				</figure>
-				<?php endif; ?>
 
 			</div>
 

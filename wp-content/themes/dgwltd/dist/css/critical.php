@@ -952,7 +952,6 @@ h2 {
 .dgwltd-card .dgwltd-card__heading, .entry-content .wp-block-quote cite,
 .dgwltd-heading-m,
 h3 {
-  font-family: var(--wp--preset--font-family--soehne-halbfett);
   font-size: clamp(1.333rem, 1.1215714286rem + 1.0571428571vw, 1.777rem);
   line-height: var(--wp--custom--typography--line-height--small);
   margin-bottom: var(--gap-small);
@@ -1016,8 +1015,7 @@ p {
 
 .dgwltd-menu-language li, .dgwltd-nav .dgwltd-menu .menu-item,
 .dgwltd-navigation {
-  text-transform: uppercase;
-  font-family: var(--wp--preset--font-family--soehne-leicht);
+  font-family: var(--wp--preset--font-family--soehne-halbfett);
   font-size: var(--wp--preset--font-size--medium);
   line-height: 1;
 }
@@ -1851,13 +1849,6 @@ lite-youtube.lyt-activated > .lty-playbtn {
 .dgwltd-nav {
   z-index: 3;
   display: flex;
-  order: 2;
-}
-@media (min-width: 62em) {
-  .dgwltd-nav {
-    order: initial;
-    flex: 1;
-  }
 }
 .dgwltd-nav .dgwltd-menu {
   margin: 0;
@@ -2523,12 +2514,13 @@ lite-youtube.lyt-activated > .lty-playbtn {
 .entry-content .wp-block-quote cite {
   position: relative;
   z-index: 2;
-  font-style: normal;
+  font-family: var(--wp--preset--font-family--soehne-dreiviertelfett);
 }
 .entry-content .wp-block-quote p {
   z-index: 2;
   position: relative;
   text-indent: 0;
+  font-family: var(--wp--preset--font-family--soehne-dreiviertelfett);
   line-height: 1;
 }
 .entry-content .wp-block-quote p:last-child {
@@ -2554,6 +2546,10 @@ lite-youtube.lyt-activated > .lty-playbtn {
 }
 .entry-footer .cat-links:first-of-type > a {
   margin-left: 0;
+}
+
+.entry-meta {
+  font-family: var(--wp--preset--font-family--soehne-halbfett);
 }
 
 .error404 .dgwltd-menu-404 {
@@ -3173,22 +3169,6 @@ lite-youtube.lyt-activated > .lty-playbtn {
 .dgwltd-block--hero.has-popout .dgwltd-hero__inner {
   align-self: center;
   padding-bottom: 6.25rem;
-}
-.dgwltd-block--hero.has-popout .image-popout {
-  align-self: end;
-  max-width: var(--containerWidth);
-  z-index: 3;
-  margin: 0;
-  margin-bottom: -6.25rem;
-}
-.dgwltd-block--hero.has-popout .image-popout img {
-  width: auto;
-  max-height: 10rem;
-}
-@media (min-width: 62em) {
-  .dgwltd-block--hero.has-popout .image-popout img {
-    max-height: 12.5rem;
-  }
 }
 .dgwltd-block--hero.block-type--solid {
   min-height: auto !important;

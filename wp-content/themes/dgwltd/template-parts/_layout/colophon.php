@@ -6,7 +6,7 @@
 			
 				<div class="dgwltd-footer__links">
 				<?php
-				if ( has_nav_menu( 'footer-links-1' ) ) {
+				if ( has_nav_menu( 'footer-links' ) ) {
 					wp_nav_menu(
 						array(
 							'theme_location' => 'footer-links',
@@ -20,7 +20,7 @@
 				</div>
 			
 				<div class="dgwltd-footer__social">
-					<p class="dgwltd-heading-s"><?php esc_html_e( 'Connect with us', 'dgwltd' ); ?></p>
+					<p class="visually-hidden"><?php esc_html_e( 'Connect', 'dgwltd' ); ?></p>
 					<?php get_template_part( 'template-parts/_molecules/social-links' ); ?>
 				</div>
 

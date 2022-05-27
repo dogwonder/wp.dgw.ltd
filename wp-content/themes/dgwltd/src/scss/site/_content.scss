@@ -100,13 +100,14 @@
     cite {
       position: relative;
       z-index: 2;
-      font-style: normal;
+      font-family: var(--wp--preset--font-family--soehne-dreiviertelfett);
       @extend %dgwltd-heading-m;
     }
     p {
       z-index: 2;
       position: relative;
       text-indent: 0;
+      font-family: var(--wp--preset--font-family--soehne-dreiviertelfett);
       @extend %dgwltd-heading-l;
       line-height: 1;
       &:last-child {
@@ -144,4 +145,5 @@
 
 .entry-meta {
   @extend %dgwltd-body-s;
+  font-family: var(--wp--preset--font-family--soehne-halbfett);
 }

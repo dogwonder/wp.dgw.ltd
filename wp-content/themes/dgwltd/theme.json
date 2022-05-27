@@ -103,11 +103,6 @@
 					"fontFamily": "\"Söhne Halbfett\", sans-serif",
 					"name": "Söhne Halbfett",
 					"slug": "soehne-halbfett"
-				},
-				{
-					"fontFamily": "\"Söhne Leicht\", sans-serif",
-					"name": "Söhne Leicht",
-					"slug": "soehne-leicht"
 				}
 			],
 			"fontSizes": [

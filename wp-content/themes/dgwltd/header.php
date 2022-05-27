@@ -24,7 +24,6 @@ if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) || is_plugin_active( 'wordpr
 <link rel="preconnect" href="<?php echo esc_url( site_url() ); ?>" crossorigin>
 <link rel="preload" href="<?php echo get_template_directory_uri() ?>/dist/fonts/soehne/soehne-web-dreiviertelfett.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="<?php echo get_template_directory_uri() ?>/dist/fonts/soehne/soehne-web-halbfett.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="<?php echo get_template_directory_uri() ?>/dist/fonts/soehne/soehne-web-leicht.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="profile" href="https://gmpg.org/xfn/11">
 <?php wp_head(); ?>
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/dist/css/vendor.css" />

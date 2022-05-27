@@ -217,14 +217,6 @@ if ( ! function_exists( 'dgwltd_get_font_face_styles' ) ) :
 			font-display: swap;
 			src: url('" . get_theme_file_uri( 'dist/fonts/soehne/soehne-web-halbfett.woff2' ) . "') format('woff2');
 		  }
-		  
-		  @font-face {
-			font-family: 'Söhne Leicht';
-			font-weight: 300;
-			font-style: normal;
-			font-display: swap;
-			src: url('" . get_theme_file_uri( 'dist/fonts/soehne/soehne-web-leicht.woff2' ) . "') format('woff2');
-		  }
 		";
 
 	}

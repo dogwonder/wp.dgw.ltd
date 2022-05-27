@@ -127,6 +127,23 @@
                     "placeholder": "",
                     "translations": "copy_once",
                     "acfe_field_group_condition": 0
+                },
+                {
+                    "key": "field_628f8737c1010",
+                    "label": "Github link",
+                    "name": "github_link",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "acfe_field_group_condition": 0
                 }
             ]
         }
@@ -156,5 +173,5 @@
     "acfe_display_title": "",
     "acfe_meta": "",
     "acfe_note": "",
-    "modified": 1651676993
+    "modified": 1653573451
 }

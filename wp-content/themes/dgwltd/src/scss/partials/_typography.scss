@@ -73,7 +73,6 @@ h2 {
 .dgwltd-heading-m,
 h3 {
   // clamp(1.333rem,1.1215714286rem + 1.0571428571vw,1.777rem)
-  font-family: var(--wp--preset--font-family--soehne-halbfett);
   font-size: clampCalc($type-medium, $type-large, sm, lg);
   line-height: var(--wp--custom--typography--line-height--small);
   margin-bottom: var(--gap-small);
@@ -138,8 +137,7 @@ p {
 
 %dgwltd-navigation,
 .dgwltd-navigation {
-  text-transform: uppercase;
-  font-family: var(--wp--preset--font-family--soehne-leicht);
+  font-family: var(--wp--preset--font-family--soehne-halbfett);
   font-size: var(--wp--preset--font-size--medium);
   line-height: 1;
 } 

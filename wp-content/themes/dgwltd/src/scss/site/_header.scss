@@ -88,11 +88,6 @@ $nav-height: 64px;
 .dgwltd-nav {
   z-index: $z-low;
   display: flex;
-  order: 2;
-  @include mq($from: lg) {
-    order: initial;
-    flex: 1;
-  }
   
   .dgwltd-menu {
     margin:0;

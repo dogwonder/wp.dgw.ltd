@@ -72,20 +72,6 @@
         align-self: center;
         padding-bottom: 6.25rem; //Offset negative margin
       }
-      .image-popout {
-        align-self: end;
-        max-width: var(--containerWidth);
-        z-index: 3;
-        margin: 0;
-        margin-bottom: -6.25rem;
-        img {
-          width: auto;
-          max-height: 10rem;
-          @include mq($from: lg) {
-            max-height: 12.5rem;
-          }
-        }
-      }
     }
 
     &.block-type--solid {

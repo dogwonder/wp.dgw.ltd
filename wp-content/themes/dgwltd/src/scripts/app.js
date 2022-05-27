@@ -206,27 +206,6 @@
 
                     });
 
-                    //Observer for open/closed filter
-                    // const observer = new MutationObserver(function(mutations) {
-                    //     mutations.forEach(function(mutation) {
-                    //         if(mutation.type == 'attributes') {
-                    //             //console.log(mutation.target.getAttribute('aria-expanded'));
-                    //             //If we move to a sibling menu item, close the menu
-                    //             if(mutation.target.getAttribute('aria-expanded') == 'true') {
-                    //                 //console.log('menu is open');
-                    //                 document.body.classList.add('masthead-expanded');
-                    //             } else {
-                    //                 //console.log('menu is closed');
-                    //                 document.body.classList.remove('masthead-expanded'); 
-                                    
-                    //             }
-                    //         }
-                    //     });
-                    // });
-
-                    // // //Pass the target node, as well as the observer options
-                    // observer.observe(el.querySelector('a'), { attributes: true });
-
                     //Close menu if user hits the escape key
                     window.addEventListener('keydown', function(event) {
 

@@ -20,7 +20,7 @@
 - dgwltd_get_font_face_styles() - Fonts
 - Math div warning: `$ npm install -g sass-migrator` `$ sass-migrator division **/*.scss`
 - dgwltd-blocks/src/actionkit/form.php $source // $akID // $actionkit_page_redirect
-
+- Social links - in site settings option page: /wp-admin/admin.php?page=site-general-settings
 
 ## Overrides for Framework
 

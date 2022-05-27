@@ -92,38 +92,6 @@
             "translations": "copy_once"
         },
         {
-            "key": "field_6239ba7a445eb",
-            "label": "Popout image",
-            "name": "popout_image",
-            "type": "image",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_5f8daff1da4cf",
-                        "operator": "==",
-                        "value": "image"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "preview_size": "medium",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": ""
-        },
-        {
             "key": "field_6230cac7adcaf",
             "label": "Background color",
             "name": "background_color",
@@ -277,5 +245,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1649080489
+    "modified": 1653580437
 }
