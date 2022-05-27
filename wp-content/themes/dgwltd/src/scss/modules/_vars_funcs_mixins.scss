@@ -31,6 +31,10 @@ $scale: ('sm','md','lg','xl');
 $gaps: (5, 10, 15, 20, 25, 30, 35, 40, 50, 80);
 
 
+//Colors 
+$color-primary: #00bcd4;
+$color-secondary: #ff9800;
+
 //Custom typgraphy - maps to theme.json
 $type-huge: 6.854; //109.66px
 $type-extra-large: 4.236; //67.77px
@@ -111,19 +115,15 @@ $mq-breakpoints: (
   --border-dark: #414042;
   --radius: 1rem;
 
+  --color-primary: 205, 90%;
+  --color-secondary: 22, 90%;
+  --l: 50%;
+
   --text-color: hsl(98, 0%, 0%);
-  --highlight: hsla(176, 78%, 29%); //#00466e
+  --highlight: hsl(var(--color-primary),var(--l));
 
-  // --color-primary:184, 94%;
-  // --color-secondary: 282, 84%;
-  // --l: 88%;
-  // --primary: hsl(var(--color-primary),var(--l)); //blue
-  // --primary-darker: hsl(var(--color-primary),calc(var(--l) - 10%));
-  // --secondary: hsl(var(--color-secondary),var(--l));  //pink
-  // --secondary-darker: hsl(var(--color-secondary),calc(var(--l) - 10%));
-
-  --hover: hsla(176, 78%, 19%);
-  --visited: hsla(176, 78%, 29%);
+  --hover: hsl(var(--color-primary),calc(var(--l) - 10%));
+  --visited: hsl(var(--color-primary),var(--l));
 
   --active: hsl(203, 70%, 81%);
   --focus: #00FFD9;
@@ -132,13 +132,14 @@ $mq-breakpoints: (
   --error: #d4351c;
 
   --button-text-color: white;
-  --button-background: hsl(15, 87%, 50%);
-  --button-hover: hsl(15, 87%, 40%);
-  --button-focus: hsl(15, 87%, 25%);
-  --button-disabled: hsl(12, 10%, 91%);
+  --button-background: hsl(var(--color-primary),var(--l));
+  --button-hover: hsl(var(--color-primary),calc(var(--l) - 10%));
+  --button-focus: hsl(var(--color-primary),calc(var(--l) + 10%));
+  --button-disabled: hsl(var(--color-primary),calc(var(--l) + 90%));
 
-  --primary: hsl(253, 83%, 29%); //#270d88
-  --secondary: hsl(15, 87%, 50%); //#ed4911
+  --primary: hsl(var(--color-primary),var(--l));
+  --secondary: hsl(var(--color-secondary),var(--l));
+
   --dark: hsl(98, 0%, 0%);
   --light: hsl(0, 0%, 98%);
 
