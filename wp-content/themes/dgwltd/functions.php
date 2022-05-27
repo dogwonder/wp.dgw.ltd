@@ -203,20 +203,26 @@ if ( ! function_exists( 'dgwltd_get_font_face_styles' ) ) :
 
 		return "
 		@font-face {
+			font-family: 'Söhne Extrafett';
+			font-weight: 900;
+			font-style: normal;
+			font-display: swap;
+			src: url('" . get_theme_file_uri( 'dist/fonts/soehne/soehne-extrafett.woff2' ) . "') format('woff2');
+		}
+		@font-face {
 			font-family: 'Söhne Dreiviertelfett';
 			font-weight: 700;
 			font-style: normal;
 			font-display: swap;
-			src: url('" . get_theme_file_uri( 'dist/fonts/soehne/soehne-web-dreiviertelfett.woff2' ) . "') format('woff2');
-		  }
-		  
-		  @font-face {
-			font-family: 'Söhne Halbfett';
-			font-weight: 600;
+			src: url('" . get_theme_file_uri( 'dist/fonts/soehne/soehne-dreiviertelfett.woff2' ) . "') format('woff2');
+		}
+		@font-face {
+			font-family: 'Söhne Kraftig';
+			font-weight: 500;
 			font-style: normal;
 			font-display: swap;
-			src: url('" . get_theme_file_uri( 'dist/fonts/soehne/soehne-web-halbfett.woff2' ) . "') format('woff2');
-		  }
+			src: url('" . get_theme_file_uri( 'dist/fonts/soehne/soehne-kraftig.woff2' ) . "') format('woff2');
+		}
 		";
 
 	}

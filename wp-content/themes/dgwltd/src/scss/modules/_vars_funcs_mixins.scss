@@ -32,13 +32,13 @@ $gaps: (5, 10, 15, 20, 25, 30, 35, 40, 50, 80);
 
 
 //Custom typgraphy - maps to theme.json
-$type-huge: 3.157;
-$type-extra-large: 2.369;
-$type-large: 1.777;
-$type-medium: 1.333;
-$type-normal: 1.125;
-$type-small: 1;
-$type-tiny: 0.7;
+$type-huge: 6.854; //109.66px
+$type-extra-large: 4.236; //67.77px
+$type-large: 2.618; //41.89px
+$type-medium: 1.618; //25.89px
+$type-normal: 1.125; //18px
+$type-small: 1; //16px
+$type-tiny: 0.875; //14px
 
 //Spacing - usedin fluid spacing
 $spaces: (
@@ -142,17 +142,6 @@ $mq-breakpoints: (
   --dark: hsl(98, 0%, 0%);
   --light: hsl(0, 0%, 98%);
 
-  --azul: hsla(231, 80%, 16%); //#081248
-  --teal:  hsla(176, 78%, 29%); //#10827b
-  --neon:  hsla(171, 100%, 50%); //#00ffd9
-  --red:  #bf1238;
-
-  --error:  #d4351c;
-
-  --plum: hsla(320, 71%, 27%); //#761456
-  --fuchsia:  hsla(327, 70%, 65%); //#e465ab
-  --peach:  hsla(17, 100%, 74%); //#ffa07a
-
   @each $gap in $gaps {
     --gap-#{$gap}: #{$gap}px;
   }
@@ -208,49 +197,7 @@ $palettes: (
           border: var(--dark), 
           highlight: var(--dark), 
           inverse: var(--light)
-      ), 
-      azul: (
-          background: var(--azul),
-          text: var(--light), 
-          border: var(--light), 
-          highlight: var(--light), 
-          inverse: var(--dark)
-      ),
-      teal: (
-          background: var(--teal),
-          text: var(--light), 
-          border: var(--light), 
-          highlight: var(--light), 
-          inverse: var(--dark)
-      ),
-      neon: (
-          background: var(--neon),
-          text: var(--dark), 
-          border: var(--dark), 
-          highlight: var(--dark), 
-          inverse: var(--light)
-      ),
-      plum: (
-          background: var(--plum),
-          text: var(--light), 
-          border: var(--light), 
-          highlight: var(--light), 
-          inverse: var(--dark)
-      ),
-      fuchsia: (
-          background: var(--fuchsia),
-          text: var(--dark), 
-          border: var(--dark), 
-          highlight: var(--dark), 
-          inverse: var(--light)
-      ),
-      peach: (
-          background: var(--peach),
-          text: var(--dark), 
-          border: var(--dark), 
-          highlight: var(--dark), 
-          inverse: var(--light)
-      ),
+      )
     )
 );
 

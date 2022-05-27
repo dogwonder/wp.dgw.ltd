@@ -22,7 +22,7 @@
   .entry-footer {
     //Allows for full width sections 
     display: grid;
-    grid-template-columns: 1fr minmax(min-content, var(--containerWidth)) 1fr;
+    grid-template-columns: 0 minmax(min-content, var(--containerWidth)) 1fr;
     > * {
       grid-column: 2 / span 1;
       padding: 0 var(--gap-medium);

@@ -21,7 +21,7 @@ function one_acf_color_palette() {
 		<script type="text/javascript">
 		(function($) {
 			acf.add_filter('color_picker_args', function( args, $field ){
-				args.palettes = ['#270d88', '#ed4911', '#000000', '#ffffff', '#081248', '#10827b', '#00ffd9', '#761456', '#e465ab', '#ffa07a']
+				args.palettes = ['#270d88', '#ed4911', '#000000', '#ffffff']
 				return args;
 			});
 		})(jQuery);

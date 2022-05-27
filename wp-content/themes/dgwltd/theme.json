@@ -23,36 +23,6 @@
 					"slug": "background",
 					"color": "#ffffff",
 					"name": "Background"
-				},
-				{ 
-					"slug": "azul",
-					"color": "#081248",
-					"name": "Azul"
-				},
-				{
-					"slug": "teal",
-					"color": "#10827b",
-					"name": "Teal"
-				},
-				{
-					"slug": "neon",
-					"color": "#00FFD9",
-					"name": "Neon"
-				},
-				{
-					"slug": "plum",
-					"color": "#761456",
-					"name": "Plum"
-				},
-				{
-					"slug": "fuchsia",
-					"color": "#e465ab",	
-					"name": "Fuchsia"
-				},
-				{
-					"slug": "peach",
-					"color": "#ffa07a",
-					"name": "Peach"
 				}
 			]
 		},
@@ -95,14 +65,19 @@
 					"slug": "system-font"
 				},
 				{
+					"fontFamily": "\"Söhne Extrafett\", sans-serif",
+					"name": "Söhne Extrafett",
+					"slug": "soehne-extrafett"
+				}, 
+				{
 					"fontFamily": "\"Söhne Dreiviertelfett\", sans-serif",
 					"name": "Söhne Dreiviertelfett",
 					"slug": "soehne-dreiviertelfett"
 				}, 
 				{
-					"fontFamily": "\"Söhne Halbfett\", sans-serif",
-					"name": "Söhne Halbfett",
-					"slug": "soehne-halbfett"
+					"fontFamily": "\"Söhne Kraftig\", sans-serif",
+					"name": "Söhne Kraftig",
+					"slug": "soehne-kraftig"
 				}
 			],
 			"fontSizes": [
@@ -205,7 +180,7 @@
 			},
 			"h3": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--soehne-halbfett)",
+					"fontFamily": "var(--wp--preset--font-family--soehne-kraftig)",
 					"fontWeight": "normal",
 					"lineHeight": "var(--wp--custom--typography--line-height--small)",
 					"fontSize": "var(--wp--preset--font-size--large)"
@@ -213,7 +188,7 @@
 			},
 			"h4": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--soehne-halbfett)",
+					"fontFamily": "var(--wp--preset--font-family--soehne-kraftig)",
 					"fontWeight": "normal",
 					"lineHeight": "var(--wp--custom--typography--line-height--small)",
 					"fontSize": "var(--wp--preset--font-size--normal)"
@@ -221,7 +196,7 @@
 			},
 			"h5": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--soehne-halbfett)",
+					"fontFamily": "var(--wp--preset--font-family--soehne-kraftig)",
 					"fontWeight": "normal",
 					"textTransform": "uppercase",
 					"lineHeight": "var(--wp--custom--typography--line-height--normal)",
@@ -230,7 +205,7 @@
 			},
 			"h6": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--soehne-halbfett)",
+					"fontFamily": "var(--wp--preset--font-family--soehne-kraftig)",
 					"fontWeight": "normal",
 					"textTransform": "uppercase",
 					"lineHeight": "var(--wp--custom--typography--line-height--normal)",
