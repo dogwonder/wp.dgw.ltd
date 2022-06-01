@@ -53,14 +53,14 @@
     &:focus {
       background-color: var(--highlight);
       .dgwltd-pagination__item {
-        border-top: 1px solid var(--text-color);
+        border-top: 1px solid var(--dark);
       }
       .dgwltd-pagination__link-title, 
       .dgwltd-pagination__link-label {
-        color: var(--text-color);
+        color: var(--light);
       }
       .dgwltd-pagination__link-icon {
-        fill: var(--text-color);
+        fill: var(--light);
       }
     }
   }
