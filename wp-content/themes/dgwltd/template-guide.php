@@ -45,11 +45,12 @@ if ( class_exists( 'acf' ) ) {
 				<h1 class="entry-title<?php echo ( $hidden_title ? ' visually-hidden' : '' ); ?>"><?php echo esc_html( get_the_title( $post->ID ) ); ?></h1>
 				<?php endif; ?>
 			</div><!-- .entry-header -->
-			<?php endif; ?>
-							
-			<?php get_template_part( 'template-parts/_molecules/contents-list' ); ?>
+			<?php endif; ?>	
 
 			<div class="entry-content">
+
+				<?php get_template_part( 'template-parts/_molecules/contents-list' ); ?>
+
 				<?php
 				// If this is the parent page (and an extra check for template type) then display the current page title (or custom title)
 				if ( $parent && $page_template === 'template-guide.php' ) :
@@ -61,9 +62,11 @@ if ( class_exists( 'acf' ) ) {
 					<?php endif; ?>
 				<?php endif; ?>
 				<?php the_content(); ?>
-			</div><!-- .entry-content -->
 
-			<?php get_template_part( 'template-parts/_molecules/contents-navigation' ); ?>
+		
+				<?php get_template_part( 'template-parts/_molecules/contents-navigation' ); ?>
+
+			</div>
 
 		</article><!-- #post-<?php the_ID(); ?> -->
 	<?php endwhile; // End of the loop. ?>
