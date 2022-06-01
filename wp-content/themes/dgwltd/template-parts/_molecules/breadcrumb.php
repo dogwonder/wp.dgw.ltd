@@ -9,7 +9,7 @@ $ancestors = get_post_ancestors( $post->ID );
 $parent = wp_get_post_parent_id( $currentpost_id );
 ?>
 
-<div class="govuk-breadcrumbs">
+<div class="govuk-breadcrumbs container">
 	<ol class="govuk-breadcrumbs__list">
 
 		<li class="govuk-breadcrumbs__list-item">
