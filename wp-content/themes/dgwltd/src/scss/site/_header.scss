@@ -14,12 +14,6 @@ $nav-height: 64px;
   padding: 0;
   z-index: 9999;
   background-color: var(--background);
-  .logo {
-    width: toRem(44);
-    height: toRem(44);
-    padding-right: var(--gap-small);
-    margin-right: var(--gap-small);
-  }
 }
 
 //Overlay
@@ -77,8 +71,8 @@ $nav-height: 64px;
       width: 60px;
       height: auto;
       margin:0 var(--gap-medium) 0 0;
-      &.logo {
-        fill: black;
+      &:hover {
+          fill: var(--highlight);
       }
     }
   }

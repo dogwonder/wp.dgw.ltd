@@ -30,11 +30,6 @@ $scale: ('sm','md','lg','xl');
 //Measures - for margin / padding
 $gaps: (5, 10, 15, 20, 25, 30, 35, 40, 50, 80);
 
-
-//Colors 
-$color-primary: #00bcd4;
-$color-secondary: #ff9800;
-
 //Custom typgraphy - maps to theme.json
 $type-huge: 6.854; //109.66px
 $type-extra-large: 4.236; //67.77px
@@ -115,18 +110,18 @@ $mq-breakpoints: (
   --border-dark: #414042;
   --radius: 1rem;
 
-  --color-primary: 205, 90%;
-  --color-secondary: 22, 90%;
-  --l: 50%;
+  --color-primary: 181.5, 83.2%; //#14D5DE Neon Blue
+  --color-secondary: 320.9, 100%; //#ff00a6 Neon Pink
+  --l: 46.7%;
 
   --text-color: hsl(98, 0%, 0%);
-  --highlight: hsl(var(--color-primary),var(--l));
+  --highlight: hsl(var(--color-secondary),var(--l)); //Pink
 
   --hover: hsl(var(--color-primary),calc(var(--l) - 10%));
   --visited: hsl(var(--color-primary),var(--l));
 
   --active: hsl(203, 70%, 81%);
-  --focus: #00FFD9;
+  --focus: hsl(var(--color-primary),var(--l));
 
   --success: #00703c;
   --error: #d4351c;

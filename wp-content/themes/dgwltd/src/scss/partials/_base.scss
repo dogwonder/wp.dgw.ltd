@@ -11,14 +11,13 @@ html {
 a {
   color: var(--text-color);
   text-decoration: underline;
-  text-decoration-thickness: unquote("max(2px, .0625rem)");
-  text-underline-offset: .1em;
+  text-decoration-thickness: unquote("max(0.0875em, .0625rem)");
+  text-underline-offset: 0.1em;
   &:visited {
     color: var(--text-color);
   }
   &:hover {
-    color: var(--hover);
-    text-decoration-color: var(--hover);
+    text-decoration-color: var(--highlight);
   }
   &:active {
     color: var(--text-color);
