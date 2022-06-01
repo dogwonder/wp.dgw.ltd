@@ -51,7 +51,7 @@
 
     &:active,
     &:focus {
-      background-color: var(--focus);
+      background-color: var(--highlight);
       .dgwltd-pagination__item {
         border-top: 1px solid var(--text-color);
       }
