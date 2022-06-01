@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Story book
+ * Template Name: Storybook
  *
  * The template for displaying all blocks
  *
@@ -41,8 +41,6 @@ $blog_query = new WP_Query( $post_args );
 			get_template_part( 'template-parts/_templates/content', 'page' );
 		endwhile; // End of the loop.
 		?>
-
-		<hr />
 
 		<?php
 
