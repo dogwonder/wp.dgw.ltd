@@ -1,4 +1,4 @@
-const CACHE = "dgwltd-0.327.0";
+const CACHE = "dgwltd-0.328.0";
 
 // This is the service worker with the Cache-first network
 const precacheFiles = [
@@ -9,7 +9,10 @@ const precacheFiles = [
   'wp-content/themes/dgwltd/dist/scripts/app.js',
   'wp-content/themes/dgwltd/dist/scripts/govuk-frontend-4.0.1.min.js', 
   'wp-content/themes/dgwltd/dist/images/fav/favicon.png',
-  'wp-content/themes/dgwltd/dist/images/fav/favicon-192x192.png'
+  'wp-content/themes/dgwltd/dist/images/fav/favicon-192x192.png', 
+  'wp-content/themes/dgwltd/dist/fonts/soehne/soehne-extrafett.woff2',
+  'wp-content/themes/dgwltd/dist/fonts/soehne/soehne-dreiviertelfett.woff2',
+  'wp-content/themes/dgwltd/dist/fonts/soehne/soehne-kraftig.woff2'
 ];
 
 self.addEventListener("install", function (event) {
@@ -97,7 +100,7 @@ self.addEventListener("activate", function(event) {
           })
         );
       }).then(function() {
-        console.log('[ServiceWorker] Claiming clients for version - 0.327.0');
+        console.log('[ServiceWorker] Claiming clients for version - 0.328.0');
         return self.clients.claim();
       })  
     );

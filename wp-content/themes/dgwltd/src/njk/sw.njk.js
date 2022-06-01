@@ -9,7 +9,10 @@ const precacheFiles = [
   'wp-content/themes/dgwltd/dist/scripts/app.js',
   'wp-content/themes/dgwltd/dist/scripts/govuk-frontend-4.0.1.min.js', 
   'wp-content/themes/dgwltd/dist/images/fav/favicon.png',
-  'wp-content/themes/dgwltd/dist/images/fav/favicon-192x192.png'
+  'wp-content/themes/dgwltd/dist/images/fav/favicon-192x192.png', 
+  'wp-content/themes/dgwltd/dist/fonts/soehne/soehne-extrafett.woff2',
+  'wp-content/themes/dgwltd/dist/fonts/soehne/soehne-dreiviertelfett.woff2',
+  'wp-content/themes/dgwltd/dist/fonts/soehne/soehne-kraftig.woff2'
 ];
 
 self.addEventListener("install", function (event) {
