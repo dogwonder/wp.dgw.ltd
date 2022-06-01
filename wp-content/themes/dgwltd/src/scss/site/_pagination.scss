@@ -35,7 +35,6 @@
     display: block;
     text-decoration: none;
     padding: var(--gap-15) var(--gap-small) var(--gap-medium);
-    color: var(--highlight);
     
     > * {
       color: currentColor;
@@ -43,29 +42,13 @@
 
     &:hover {
       > * {
-        color: var(--hover);
+        // color: var(--hover);
       }
       .dgwltd-pagination__link-icon {
         fill: var(--hover);
       }
     }
 
-    &:visited {
-      > * {
-        color: var(--visited);
-      }
-      .dgwltd-pagination__link-icon {
-        fill: var(--visited);
-      }
-      &:hover {
-        > * {
-          color: var(--hover);
-        }
-        .dgwltd-pagination__link-icon {
-          fill: var(--hover);
-        }
-      }
-    }
     &:active,
     &:focus {
       background-color: var(--focus);
