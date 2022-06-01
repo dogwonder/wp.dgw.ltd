@@ -42,10 +42,10 @@
 
     &:hover {
       > * {
-        // color: var(--hover);
+        color: var(--highlight);
       }
       .dgwltd-pagination__link-icon {
-        fill: var(--hover);
+        fill: var(--highlight);
       }
     }
 
