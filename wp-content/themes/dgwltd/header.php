@@ -22,6 +22,7 @@ if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) || is_plugin_active( 'wordpr
 <title><?php bloginfo( 'name' ); ?> &ndash; <?php is_front_page() ? bloginfo( 'description' ) : wp_title( '' ); ?></title>
 <?php endif; ?>
 <link rel="preconnect" href="<?php echo esc_url( site_url() ); ?>" crossorigin>
+<link rel="preconnect" href="//plausible.io" crossorigin>
 <link rel="preload" href="<?php echo get_template_directory_uri() ?>/dist/fonts/soehne/soehne-extrafett.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="<?php echo get_template_directory_uri() ?>/dist/fonts/soehne/soehne-dreiviertelfett.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="<?php echo get_template_directory_uri() ?>/dist/fonts/soehne/soehne-kraftig.woff2" as="font" type="font/woff2" crossorigin>
@@ -36,6 +37,7 @@ if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) || is_plugin_active( 'wordpr
 <meta name="apple-mobile-web-app-title" content="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" />
 <meta name="theme-color" content="#000000">
 <link rel="manifest" href="<?php echo get_template_directory_uri(); ?>/dist/images/fav/manifest.json">
+<script defer data-domain="dgw.ltd" src="https://plausible.io/js/plausible.js"></script>
 <?php
 // SEO plugin check
 if ( ! is_plugin_active( 'wordpress-seo/wp-seo.php' ) || ! is_plugin_active( 'wordpress-seo-premium/wp-seo-premium.php' ) ) :
