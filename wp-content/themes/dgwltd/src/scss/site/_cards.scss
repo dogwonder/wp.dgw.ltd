@@ -83,6 +83,7 @@ h2 ~ .dgwltd-block--cards_inner {
   .dgwltd-card__image-placeholder {
     width: 100%;
     min-height: 6rem;
+    aspect-ratio: 1 / 1;
     background-color: var(--primary);
   }
 
