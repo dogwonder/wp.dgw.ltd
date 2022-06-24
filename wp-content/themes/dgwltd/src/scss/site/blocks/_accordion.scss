@@ -1,8 +1,10 @@
-
 //Accordion
 .dgwltd-block--accordion {
     .govuk-accordion__section-header {
       border-color: var(--border);
+    }
+    .govuk-accordion__show-all, .govuk-accordion__section-toggle {
+      color: var(--highlight);
     }
     .govuk-accordion__section-button {
       font-weight: $bold;

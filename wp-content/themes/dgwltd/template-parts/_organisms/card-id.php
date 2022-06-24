@@ -41,6 +41,8 @@ if ( ! empty( $dgwltd_tags ) ) {
 			<?php } ?>
 		  </picture>
 		</figure>
+		<?php else : ?>
+			<div class="dgwltd-card__image-placeholder"></div>
 		<?php endif; ?>
 		
 		<div class="dgwltd-card__content">

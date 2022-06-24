@@ -220,7 +220,7 @@
 		},
 		"spacing": {
 			"baseline": "1.25rem", 
-			"blockGap": "1.25rem"
+			"blockGap": false
 		},
 		"typography": {
 			"fontFamily": "var(--wp--preset--font-family--system-font)",

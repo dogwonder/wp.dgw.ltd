@@ -7,6 +7,7 @@
     color: var(--text-color);
     margin-left: 0;
     margin-right: var(--gap-small);
+    display: flex;
     &:last-of-type {
       margin-right: 0;
       &:after {

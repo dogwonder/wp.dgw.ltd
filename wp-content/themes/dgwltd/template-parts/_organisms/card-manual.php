@@ -32,6 +32,8 @@
 		<img src="<?php echo $image_small; ?>" alt="<?php echo ( $image_alt ? $image_alt : '' ); ?>" loading="lazy" />
 		</picture>
 	</figure>
+	<?php else : ?>
+		<div class="dgwltd-card__image-placeholder"></div>
 	<?php endif; ?>
 	<div class="dgwltd-card__content">
 	<?php if ( ! empty( $heading ) ) : ?>

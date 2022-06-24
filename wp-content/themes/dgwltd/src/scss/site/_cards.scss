@@ -36,7 +36,6 @@ h2 ~ .dgwltd-block--cards_inner {
     height: 100%;
     position: relative;
     text-decoration: none !important;
-    // background-color: var(--card);
     color: var(--text-color);
     text-align: left;
     &:hover {
@@ -81,6 +80,12 @@ h2 ~ .dgwltd-block--cards_inner {
     }
   }
 
+  .dgwltd-card__image-placeholder {
+    width: 100%;
+    min-height: 6rem;
+    background-color: var(--primary);
+  }
+
   .dgwltd-card__caption {
     @extend %dgwltd-body-s; 
     display: block;
@@ -89,7 +94,6 @@ h2 ~ .dgwltd-block--cards_inner {
 
   .dgwltd-card__heading {
     @extend %dgwltd-heading-m;
-    text-transform: uppercase;
     display: inline-block;
     width: 100%;
     margin: 0 0 var(--gap-small);

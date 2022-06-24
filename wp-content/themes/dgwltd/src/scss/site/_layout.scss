@@ -28,9 +28,6 @@
       padding: 0 var(--gap-medium);
     }
   }
-  .entry-header {
-    padding-top: var(--gap-medium);
-  }
   .entry-content {
     //Alignment
     .alignfull {
@@ -61,7 +58,7 @@
 .dgwltd-post {
   .entry-header:has(.entry-meta) {
     .entry-title {
-      margin-bottom: var(--gap-small)
+      margin-bottom: var(--gap-small);
     }
   }
 }

@@ -19,6 +19,10 @@
 <script src="<?php echo get_template_directory_uri(); ?>/dist/scripts/app.js"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/dist/scripts/govuk-frontend-4.0.1.min.js"></script>
 <script>window.GOVUKFrontend.initAll()</script>
+<script type="module">
+	CSS.paintWorklet.addModule('<?php echo get_template_directory_uri() ?>/src/scripts/houdini.js');
+    document.documentElement.style.setProperty('--pattern-seed', Math.random() * 10000);
+</script>
 <script>
   if ('serviceWorker' in navigator) {
 	window.addEventListener('load', function() {

@@ -33,7 +33,6 @@ $blog_query = new WP_Query( $post_args );
 	}
 </style>
 <div id="primary" class="dgwltd-content-wrapper">
-	<div class="entry-content">
 
 		<?php
 		while ( have_posts() ) :
@@ -41,6 +40,8 @@ $blog_query = new WP_Query( $post_args );
 			get_template_part( 'template-parts/_templates/content', 'page' );
 		endwhile; // End of the loop.
 		?>
+
+		<div class="entry-content">
 
 		<?php
 
@@ -90,8 +91,8 @@ $blog_query = new WP_Query( $post_args );
 			echo '</div><hr />';
 		}
 		?>
+		</div>
 		
-		</div><!-- .govuk-main-wrapper -->		
 </div><!-- #primary -->
 <?php
 get_footer();

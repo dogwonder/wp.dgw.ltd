@@ -34,6 +34,9 @@ body {
 
 //Based on base size of 16px and 1.618 (golden ratio) type scale - https://type-scale.com
 
+// Use is
+// .post :is(h1,h2,h3,h4,h5,h6) { ... }
+
 //Typography
 h1,
 h2,
@@ -54,7 +57,7 @@ h6 {
 h1 {
   // clamp(2.369rem,1.9937619048rem + 1.8761904762vw,3.157rem)
   font-family: var(--wp--preset--font-family--soehne-extrafett);
-  font-size: clampCalc($type-extra-large, $type-huge, sm, lg);
+  font-size: clampCalc($type-large, $type-huge, sm, lg);
   line-height: var(--wp--custom--typography--line-height--tiny);
   margin-bottom: var(--gap-large);
   letter-spacing: 0.0125em;
@@ -64,7 +67,7 @@ h1 {
 .dgwltd-heading-l,
 h2 {
   // clamp(1.777rem,1.4950952381rem + 1.4095238095vw,2.369rem)
-  font-size: clampCalc($type-large, $type-extra-large, sm, lg);
+  font-size: clampCalc($type-medium, $type-extra-large, sm, lg);
   line-height: var(--wp--custom--typography--line-height--tiny);
   margin-bottom: var(--gap-medium);
   letter-spacing: 0.0125em;
@@ -74,7 +77,7 @@ h2 {
 .dgwltd-heading-m,
 h3 {
   // clamp(1.333rem,1.1215714286rem + 1.0571428571vw,1.777rem)
-  font-size: clampCalc($type-medium, $type-large, sm, lg);
+  font-size: clampCalc($type-normal, $type-large, sm, lg);
   line-height: var(--wp--custom--typography--line-height--small);
   margin-bottom: var(--gap-small);
   letter-spacing: 0;

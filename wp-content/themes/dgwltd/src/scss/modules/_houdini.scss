@@ -1,0 +1,34 @@
+@property --pattern-seed {
+    syntax: "<number>";
+    initial-value: 1000;
+    inherits: true;
+}
+
+@property --pattern-colors {
+    syntax: "<color>#";
+    initial-value: #161511, #dd6d45, #f2f2f2;
+    inherits: true;
+}
+
+@property --pattern-speck-count {
+    syntax: "<number>";
+    initial-value: 3000;
+    inherits: true;
+}
+
+@property --pattern-speck-min-size {
+    syntax: "<number>";
+    initial-value: 0;
+    inherits: true;
+}
+
+@property --pattern-speck-max-size {
+    syntax: "<number>";
+    initial-value: 3;
+    inherits: true;
+}
+
+.dgwltd-card .dgwltd-card__image-placeholder {
+    background-color: var(--primary);
+    background-image: paint(TinySpecksPattern);
+}
