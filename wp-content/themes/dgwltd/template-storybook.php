@@ -12,17 +12,6 @@
 get_header();
 
 global $post;
-$paged       = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-$numberposts = '10';
-
-$post_args = array(
-	'post_type'      => 'post',
-	'posts_per_page' => $numberposts,
-	'post_status'    => 'publish',
-	'paged'          => $paged,
-);
-
-$blog_query = new WP_Query( $post_args );
 ?>
 <style>
 	.story-book__item {

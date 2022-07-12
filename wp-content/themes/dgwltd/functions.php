@@ -106,6 +106,9 @@ if ( ! function_exists( 'dgwltd_setup' ) ) :
 		// Add support for block styles.
 		add_theme_support( 'wp-block-styles' );
 
+		// Prevent the loading of patterns from the WordPress.org Pattern Directory
+		add_filter( 'should_load_remote_block_patterns', '__return_false' );
+
 	}
 
 endif;

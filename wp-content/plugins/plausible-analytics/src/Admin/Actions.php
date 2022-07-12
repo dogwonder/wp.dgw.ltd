@@ -8,7 +8,7 @@
  * @subpackage Plausible Analytics
  */
 
- namespace Plausible\Analytics\WP\Admin;
+namespace Plausible\Analytics\WP\Admin;
 
 use Plausible\Analytics\WP\Includes\Helpers;
 
@@ -45,24 +45,51 @@ class Actions {
 		\wp_enqueue_script( 'plausible-admin', PLAUSIBLE_ANALYTICS_PLUGIN_URL . 'assets/dist/js/plausible-admin.js', '', PLAUSIBLE_ANALYTICS_VERSION, true );
 	}
 
+	/**
+	 * Save Admin Settings
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 */
 	public function save_admin_settings() {
-		$post_data = $_POST;
+		// Sanitize all the post data before using.
+		$post_data = Helpers::clean( $_POST );
 
 		// Security: Roadblock to check for unauthorized access.
-		check_admin_referer( 'plausible-analytics-settings-roadblock', 'roadblock' );
+		if (
+			'plausible_analytics_save_admin_settings' === $post_data['action'] &&
+			current_user_can( 'administrator' ) &&
+			(
+				! empty( $post_data['roadblock'] ) &&
+				wp_verify_nonce( $post_data['roadblock'], 'plausible-analytics-settings-roadblock' )
+			)
+		) {
+			// Unset unnecessary posted data to store into database.
+			unset( $post_data['action'] );
+			unset( $post_data['roadblock'] );
 
-		// Unset unnecessary posted data to store into database.
-		unset( $post_data['action'] );
-		unset( $post_data['roadblock'] );
+			if (
+				! empty( $post_data['domain_name'] ) &&
+				! empty( $post_data['custom_domain_prefix'] ) &&
+				! empty( $post_data['self_hosted_domain'] ) &&
+				! empty( $post_data['shared_link'] )
+			) {
+				$status = 'success';
+				update_option( 'plausible_analytics_settings', $post_data );
+				$message = esc_html__( 'Settings saved successfully.', 'plausible-analytics' );
+			} else {
+				$status = 'error';
+				$message = esc_html__( 'Something gone a wrong.', 'plausible-analytics' );
+			}
 
-		// Save Settings.
-		update_option( 'plausible_analytics_settings', $post_data );
-
-		// Send response.
-		wp_send_json_success(
-			[
-				'message' => esc_html__( 'Settings saved successfully.', 'plausible-analytics' ),
-			]
-		);
+			// Send response.
+			wp_send_json_success(
+				[
+					'message' => $message,
+					'status' => $status
+				]
+			);
+		}
 	}
 }

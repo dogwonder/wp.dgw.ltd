@@ -70,17 +70,17 @@ class Settings {
 		?>
 		<div class="plausible-analytics-header">
 			<div class="plausible-analytics-logo">
-				<img src="<?php echo PLAUSIBLE_ANALYTICS_PLUGIN_URL . '/assets/dist/images/icon.png'; ?>" alt="<?php esc_html_e( 'Plausible Analytics', 'plausible-analytics' ); ?>" />
+				<img src="<?php echo esc_url( PLAUSIBLE_ANALYTICS_PLUGIN_URL . '/assets/dist/images/icon.png' ); ?>" alt="<?php esc_html_e( 'Plausible Analytics', 'plausible-analytics' ); ?>" />
 			</div>
 			<div class="plausible-analytics-header-content">
 				<div class="plausible-analytics-title">
-					<h1><?php echo $name; ?></h1>
+					<h1><?php echo esc_html( $name ); ?></h1>
 				</div>
 				<div class="plausible-analytics-actions">
-					<a class="plausible-analytics-btn" href="https://github.com/plausible/wordpress/issues/new" target="_blank">
+					<a class="plausible-analytics-btn" href="<?php echo esc_url( 'https://github.com/plausible/wordpress/issues/new' ); ?>" target="_blank">
 						<?php esc_html_e( 'Report a bug', 'plausible-analytics' ); ?>
 					</a>
-					<a class="plausible-analytics-btn" href="https://docs.plausible.io" target="_blank">
+					<a class="plausible-analytics-btn" href="<?php echo esc_url( 'https://docs.plausible.io' ); ?>" target="_blank">
 						<?php esc_html_e( 'Documentation', 'plausible-analytics' ); ?>
 					</a>
 				</div>
@@ -99,10 +99,11 @@ class Settings {
 	 */
 	public function plausible_analytics_settings_page() {
 		$settings             = Helpers::get_settings();
-		$domain               = ! empty( $settings['domain_name'] ) ? $settings['domain_name'] : Helpers::get_domain();
-		$custom_domain_prefix = ! empty( $settings['custom_domain_prefix'] ) ? $settings['custom_domain_prefix'] : 'analytics';
-		$self_hosted_domain   = ! empty( $settings['self_hosted_domain'] ) ? $settings['self_hosted_domain'] : 'example.com';
-		$shared_link          = ! empty( $settings['shared_link'] ) ? $settings['shared_link'] : "https://plausible.io/share/{$domain}?auth=XXXXXXXXXXXX";
+
+		$domain               = ! empty( $settings['domain_name'] ) ? esc_attr( $settings['domain_name'] ) : Helpers::get_domain();
+		$custom_domain_prefix = ! empty( $settings['custom_domain_prefix'] ) ? esc_attr( $settings['custom_domain_prefix'] ) : 'analytics';
+		$self_hosted_domain   = ! empty( $settings['self_hosted_domain'] ) ? esc_attr( $settings['self_hosted_domain'] ) : 'example.com';
+		$shared_link          = ! empty( $settings['shared_link'] ) ? esc_url( $settings['shared_link'] ) : "https://plausible.io/share/{$domain}?auth=XXXXXXXXXXXX";
 
 		echo $this->get_header( esc_html__( 'Settings', 'plausible-analytics' ) );
 		?>
@@ -128,7 +129,7 @@ class Settings {
 							<label for="domain-connected">
 								<?php esc_html_e( 'Domain Name', 'plausible-analytics' ); ?>
 								<span class="plausible-analytics-admin-field-input">
-									<input type="text" name="plausible_analytics_settings[domain_name]" value="<?php echo $domain; ?>"/>
+									<input type="text" name="plausible_analytics_settings[domain_name]" value="<?php esc_attr_e( $domain, 'plausible-analytics' ); ?>"/>
 								</span>
 							</label>
 							<div>
@@ -154,8 +155,8 @@ class Settings {
 							<label for="custom-domain">
 								<?php esc_html_e( 'Custom Domain', 'plausible-analytics' ); ?>
 								<span class="plausible-analytics-admin-field-input">
-									<input type="text" name="plausible_analytics_settings[custom_domain_prefix]" value="<?php echo $custom_domain_prefix; ?>"/>
-									<?php echo ".{$domain}"; ?>
+									<input type="text" name="plausible_analytics_settings[custom_domain_prefix]" value="<?php esc_attr_e($custom_domain_prefix,'plausible-analytics' ); ?>"/>
+									<?php echo esc_html(".{$domain}"); ?>
 								</span>
 							</label>
 							<?php echo Helpers::display_toggle_switch( 'custom_domain' ); ?>
@@ -168,9 +169,9 @@ class Settings {
 								esc_url( 'https://docs.plausible.io/custom-domain/' ),
 								esc_html__( 'See how &raquo;', 'plausible-analytics' ),
 								esc_html__( 'Enable this setting and configure it to link with Plausible Analytics on your custom domain.', 'plausible-analytics' ),
-								__( 'For example,', 'plausible-analytics' ),
+								esc_html__( 'For example,', 'plausible-analytics' ),
 								"<code>stats.$domain</code>",
-								__( 'or', 'plausible-analytics' ),
+								esc_html__( 'or', 'plausible-analytics' ),
 								"<code>analytics.$domain</code>"
 							);
 
@@ -188,7 +189,7 @@ class Settings {
 							<label>
 								<?php esc_html_e( 'Shared Link:', 'plausible-analytics' ); ?>
 								<span class="plausible-analytics-admin-field-input">
-									<input style="width: 550px; max-width: 100%;" type="text" name="plausible_analytics_settings[shared_link]" value="<?php echo $shared_link; ?>" />
+									<input style="width: 550px; max-width: 100%;" type="text" name="plausible_analytics_settings[shared_link]" value="<?php echo esc_url( $shared_link ); ?>" />
 								</span>
 							</label>
 						</div>
@@ -226,7 +227,7 @@ class Settings {
 							<label for="self-hosted-analytics">
 								<?php esc_html_e( 'Self-hosted Plausible?', 'plausible-analytics' ); ?>
 								<span class="plausible-analytics-admin-field-input">
-									<input type="text" name="plausible_analytics_settings[self_hosted_domain]" value="<?php echo $self_hosted_domain; ?>"/>
+									<input type="text" name="plausible_analytics_settings[self_hosted_domain]" value="<?php esc_attr_e($self_hosted_domain,'plausible-analytics' ); ?>"/>
 								</span>
 							</label>
 							<?php echo Helpers::display_toggle_switch( 'is_self_hosted_analytics' ); ?>
@@ -251,6 +252,7 @@ class Settings {
 							class="plausible-analytics-btn plausible-analytics-save-btn"
 							data-default-text="<?php esc_html_e( 'Save Changes', 'plausible-analytics' ); ?>"
 							data-saved-text="<?php esc_html_e( 'Saved!', 'plausible-analytics' ); ?>"
+							data-saved-error="<?php esc_html_e( 'Something Went Wrong!', 'plausible-analytics' ); ?>"
 						>
 							<span><?php esc_html_e( 'Save Changes', 'plausible-analytics' ); ?></span>
 							<span class="plausible-analytics-spinner">
@@ -278,16 +280,14 @@ class Settings {
 		$settings            = Helpers::get_settings();
 		$domain              = Helpers::get_domain();
 		$can_embed_analytics = ! empty( $settings['embed_analytics'] ) ? $settings['embed_analytics'] : 'false';
-		$shared_link         = ! empty( $settings['shared_link'] ) ?
-			$settings['shared_link'] :
-			'';
+		$shared_link         = ! empty( $settings['shared_link'] ) ? $settings['shared_link'] : '';
 
 		// Display admin header.
 		echo $this->get_header( esc_html__( 'Analytics', 'plausible-analytics' ) );
 
 		if ( 'true' === $can_embed_analytics && ! empty( $shared_link ) ) {
 			?>
-			<iframe plausible-embed="" src="<?php echo "{$shared_link}&embed=true&theme=light&background=transparent"; ?>" scrolling="no" frameborder="0" loading="lazy" style="width: 100%; height: 1750px; "></iframe>
+			<iframe plausible-embed="" src="<?php echo esc_url( $shared_link ) . '&embed=true&theme=light&background=transparent'; ?>" scrolling="no" frameborder="0" loading="lazy" style="width: 100%; height: 1750px; "></iframe>
 			<script async="" src="https://plausible.io/js/embed.host.js"></script>
 			<?php
 		} else {
@@ -297,11 +297,11 @@ class Settings {
 				echo sprintf(
 					'%1$s <a href="%2$s">%3$s</a> %4$s %5$s <a href="%6$s">%7$s</a> %8$s',
 					esc_html( 'Please', 'plausible-analytics' ),
-					esc_url_raw( "https://plausible.io/{$domain}/settings/visibility" ),
+					esc_url( "https://plausible.io/{$domain}/settings/visibility" ),
 					esc_html( 'click here', 'plausible-analytics' ),
 					esc_html( 'to generate your shared link from your Plausible Analytics dashboard.', 'plausible-analytics' ),
 					esc_html( 'Now, copy the generated shared link and', 'plausible-analytics' ),
-					admin_url( 'options-general.php?page=plausible-analytics' ),
+					esc_url( admin_url( 'options-general.php?page=plausible-analytics' ) ),
 					esc_html( 'paste here', 'plausible-analytics' ),
 					esc_html( 'under Embed Analytics to view Plausible Analytics dashboard within your WordPress site.', 'plausible-analytics' )
 				);
