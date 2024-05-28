@@ -1,0 +1,6 @@
+[submodule "wp-content/plugins/dgwltd-site"]
+	path = wp-content/plugins/dgwltd-site
+	url = git@github.com:dogwonder/dgwltd-plugin.git
+[submodule "wp-content/themes/dgwltd"]
+	path = wp-content/themes/dgwltd
+	url = git@github.com:dogwonder/dgwltd-theme.git
