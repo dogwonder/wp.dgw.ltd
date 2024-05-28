@@ -2,11 +2,7 @@
 /**
  * Title: Blogging home
  * Slug: twentytwentyfour/page-home-blogging
-<<<<<<< HEAD
  * Categories: page
-=======
- * Categories: twentytwentyfour_page
->>>>>>> 6cbfa2e (first push)
  * Keywords: page, starter
  * Post Types: page, wp_template
  * Viewport width: 1400

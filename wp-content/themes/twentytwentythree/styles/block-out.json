@@ -76,11 +76,7 @@
 				{
 					"fluid": {
 						"max": "7rem",
-<<<<<<< HEAD
 						"min": "4rem"
-=======
-						"min": "4.3rem"
->>>>>>> 6cbfa2e (first push)
 					},
 					"size": "7rem",
 					"slug": "xx-large"

@@ -2,11 +2,7 @@
 /**
  * Title: Business home
  * Slug: twentytwentyfour/page-home-business
-<<<<<<< HEAD
  * Categories: page
-=======
- * Categories: twentytwentyfour_page
->>>>>>> 6cbfa2e (first push)
  * Keywords: starter
  * Block Types: core/post-content
  * Post Types: page, wp_template

@@ -45,15 +45,9 @@
 
 						<!-- wp:navigation {"overlayMenu":"never","layout":{"type":"flex","orientation":"vertical"},"style":{"typography":{"fontStyle":"normal","fontWeight":"400"},"spacing":{"blockGap":"var:preset|spacing|10"}},"fontSize":"small","ariaLabel":"<?php esc_attr_e( 'About', 'twentytwentyfour' ); ?>"} -->
 
-<<<<<<< HEAD
 						<!-- wp:navigation-link {"label":"Team","url":"#"} /-->
 						<!-- wp:navigation-link {"label":"History","url":"#"} /-->
 						<!-- wp:navigation-link {"label":"Careers","url":"#"} /-->
-=======
-						<!-- wp:navigation-link {"label":"<?php esc_html_e( 'Team', 'twentytwentyfour' ); ?>","url":"#"} /-->
-						<!-- wp:navigation-link {"label":"<?php esc_html_e( 'History', 'twentytwentyfour' ); ?>","url":"#"} /-->
-						<!-- wp:navigation-link {"label":"<?php esc_html_e( 'Careers', 'twentytwentyfour' ); ?>","url":"#"} /-->
->>>>>>> 6cbfa2e (first push)
 
 						<!-- /wp:navigation -->
 
@@ -74,15 +68,9 @@
 
 						<!-- wp:navigation {"overlayMenu":"never","layout":{"type":"flex","orientation":"vertical"},"style":{"typography":{"fontStyle":"normal","fontWeight":"400"},"spacing":{"blockGap":"var:preset|spacing|10"}},"fontSize":"small","ariaLabel":"<?php esc_attr_e( 'Privacy', 'twentytwentyfour' ); ?>"} -->
 
-<<<<<<< HEAD
 						<!-- wp:navigation-link {"label":"Privacy Policy","url":"#"} /-->
 						<!-- wp:navigation-link {"label":"Terms and Conditions","url":"#"} /-->
 						<!-- wp:navigation-link {"label":"Contact Us","url":"#"} /-->
-=======
-						<!-- wp:navigation-link {"label":"<?php esc_html_e( 'Privacy Policy', 'twentytwentyfour' ); ?>","url":"#"} /-->
-						<!-- wp:navigation-link {"label":"<?php esc_html_e( 'Terms and Conditions', 'twentytwentyfour' ); ?>","url":"#"} /-->
-						<!-- wp:navigation-link {"label":"<?php esc_html_e( 'Contact Us', 'twentytwentyfour' ); ?>","url":"#"} /-->
->>>>>>> 6cbfa2e (first push)
 
 						<!-- /wp:navigation -->
 
@@ -102,15 +90,9 @@
 
 						<!-- wp:navigation {"overlayMenu":"never","layout":{"type":"flex","orientation":"vertical"},"style":{"typography":{"fontStyle":"normal","fontWeight":"400"},"spacing":{"blockGap":"var:preset|spacing|10"}},"fontSize":"small","ariaLabel":"<?php esc_attr_e( 'Social Media', 'twentytwentyfour' ); ?>"} -->
 
-<<<<<<< HEAD
 						<!-- wp:navigation-link {"label":"Facebook","url":"#"} /-->
 						<!-- wp:navigation-link {"label":"Instagram","url":"#"} /-->
 						<!-- wp:navigation-link {"label":"Twitter/X","url":"#"} /-->
-=======
-						<!-- wp:navigation-link {"label":"<?php esc_html_e( 'Facebook', 'twentytwentyfour' ); ?>","url":"#"} /-->
-						<!-- wp:navigation-link {"label":"<?php esc_html_e( 'Instagram', 'twentytwentyfour' ); ?>","url":"#"} /-->
-						<!-- wp:navigation-link {"label":"<?php esc_html_e( 'Twitter/X', 'twentytwentyfour' ); ?>","url":"#"} /-->
->>>>>>> 6cbfa2e (first push)
 
 						<!-- /wp:navigation -->
 

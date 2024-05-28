@@ -120,11 +120,7 @@
 					"size": "3.2rem",
 					"fluid": {
 						"min": "3.2rem",
-<<<<<<< HEAD
 						"max": "5.653rem"
-=======
-						"max": "5.2rem"
->>>>>>> 6cbfa2e (first push)
 					},
 					"slug": "xx-large",
 					"name": "2X Large"

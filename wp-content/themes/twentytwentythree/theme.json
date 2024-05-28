@@ -278,11 +278,7 @@
 				},
 				{
 					"fluid": {
-<<<<<<< HEAD
 						"min": "4rem",
-=======
-						"min": "6.1rem",
->>>>>>> 6cbfa2e (first push)
 						"max": "10rem"
 					},
 					"size": "10rem",
@@ -734,7 +730,7 @@
 		{
 			"area": "uncategorized",
 			"name": "comments",
-			"title": "Comments Template Part"
+			"title": "Comments"
 		},
 		{
 			"area": "uncategorized",

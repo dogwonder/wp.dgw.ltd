@@ -86,13 +86,8 @@
 					"size": "10rem",
 					"slug": "xx-large",
 					"fluid": {
-<<<<<<< HEAD
 						"min": "4rem",
 						"max": "20rem"
-=======
-						"min": "10rem",
-						"max": "16.3rem"
->>>>>>> 6cbfa2e (first push)
 					}
 				}
 			]
