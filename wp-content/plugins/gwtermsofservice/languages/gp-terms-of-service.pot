@@ -1,0 +1,71 @@
+# Copyright (C) 2023 Gravity Wiz
+# This file is distributed under the GPLv2.
+msgid ""
+msgstr ""
+"Project-Id-Version: GP Terms of Service 1.4.5\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cloned-perk-93pXy0MpK\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2023-04-19T20:53:17+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: gp-terms-of-service\n"
+
+#. Plugin Name of the plugin
+msgid "GP Terms of Service"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://gravitywiz.com/documentation/gravity-forms-terms-of-service/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Add a \"Terms of Service\" field to your forms."
+msgstr ""
+
+#. Author of the plugin
+msgid "Gravity Wiz"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://gravitywiz.com"
+msgstr ""
+
+#: class-gp-terms-of-service.php:54
+#: includes/class-gf-field-terms-of-service.php:180
+msgid "Require Full Scroll"
+msgstr ""
+
+#: class-gp-terms-of-service.php:54
+msgid "Checking this option will disable the acceptance checkbox until the user has scrolled through the full Terms of Service."
+msgstr ""
+
+#: class-gp-terms-of-service.php:55
+#: includes/class-gf-field-terms-of-service.php:168
+msgid "The Terms"
+msgstr ""
+
+#: class-gp-terms-of-service.php:55
+msgid "Specify the terms the user is agreeing to here."
+msgstr ""
+
+#: includes/class-gf-field-terms-of-service.php:15
+#: includes/class-gf-field-terms-of-service.php:66
+msgid "Terms of Service"
+msgstr ""
+
+#: includes/class-gf-field-terms-of-service.php:20
+#: includes/class-gf-field-terms-of-service.php:21
+msgid "I agree to the Terms of Service"
+msgstr ""
+
+#: includes/class-gf-field-terms-of-service.php:55
+msgid "Require users to scroll through terms and check a checkbox."
+msgstr ""
+
+#: includes/class-gf-field-terms-of-service.php:313
+msgid "Terms will appear here when you preview the form."
+msgstr ""

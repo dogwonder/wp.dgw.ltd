@@ -1,0 +1,285 @@
+# Changelog
+
+## 1.1.17 | May 22, 2024
+
+- Added support for GP Populate Anything 2.1's new React-based field settings.
+- Fixed issue where the field map cache would not be properly flushed when adding/deleting columns in feed settings.
+
+## 1.1.16 | May 8, 2024
+
+- Fixed issue where HTTP timeouts would not be respected in requests to the Google Sheets API.
+
+## 1.1.15 | May 1, 2024
+
+- Added a feed conditional logic check before processing entry edit events (if "Edit rows when entries are edited" is enabled). This addresses an issue where entries could get added to sheets during delayed payment flows.
+
+## 1.1.14
+
+- Fixed issue where fetching spreadsheet/sheet information in the WordPress Admin could trigger an out-of-memory error for complex spreadsheets.
+
+## 1.1.13
+
+- Fixed a PHP deprecation notice caused by an optional parameter being declared before a required parameter.
+- Fixed a PHP deprecation notice that occurs upon activating the plugin without a previous version installed.
+
+## 1.1.12
+
+- Fixed an issue where the cache is not purged when an account is disconnected.
+- Fixed List field value formatting when sending to Google Sheets.
+
+## 1.1.11
+
+- Updated `gpgs_row_value` to fire for custom values as well.
+
+## 1.1.10
+
+- Updated the "Row Number" property in the Populate Anything Object Type to not support filtering as it is a hashed value and sorting will not produce an expectable result. Additionally, it has been renamed to "Row Hash" in the user interface. The main reason for keeping this property was to maintain backwards compatibility and to have a unique property to use when leveraging Field Value Objects.
+- Fixed issue where columns could be improperly cached which could cause `GPGS_EMPTY_HEADER_FOUND` to show in Populate Anything settings.
+
+## 1.1.9
+
+- Added support for reordering GP Google Sheets feeds.
+
+## 1.1.8
+
+- Updated the HTTP library used by the Google SDK to use `wp_remote_request()`.
+- Added additional debug logging.
+- Removed unnecessary `gf_apply_filters( array( 'gform_form_export_page', $form_id ) )` call when inserting rows into a sheet.
+- Fixed an issue where manually processing Google Sheets feeds then navigating to other entries using the arrows buttons could lead to other entries getting reprocessed.
+
+## 1.1.7
+
+- Fixed errors that could occur due to either malformed token arrays or missing plugin settings for legacy tokens.
+- Fixed error that could occur with the Populate Anything Object Type if there are no available Google Accounts.
+
+## 1.1.6
+
+- Fixed a PHP error that would occur if using a field with an array-based value as a filter with the Populate Anything Google Sheet Object Type.
+
+## 1.1.5
+
+- Fixed issue where empty strings could cause no results to be returned due to a `LOWER()` function call in the Populate Anything object type.
+- Added support for additional field types when inserting test rows.
+
+## 1.1.4
+
+- Updated Populate Anything Object Type filter behavior to be case-insensitive.
+- Fixed issue where entries would not be deleted from connected sheets when `GFAPI::delete_entry()` was called.
+
+## 1.1.3
+
+- Updated the max number of Google Sheets that the Populate Anything Spreadsheet dropdown could show to `1000`.
+- Fixed issue where unique column mappings would not work if multiple feeds pointed to the same spreadsheet.
+- Improved the logic for date detection in the Populate Anything Google Sheets Object Type.
+- Improved support for filtering by times when using the Populate Anything Google Sheet Object Type.
+- Added test values for GP Unique ID fields.
+- Improved compatibility with React in versions of WordPress older than 6.2.
+- Fixed issue where files in Shared Drives could be selected, but not used.
+- Fixed issue where query hashing in the Populate Anything Object Type could cause issues with Field Value Objects.
+
+## 1.1.2
+
+- Fixed issue where the cached column identifiers could be wrong with the GP Populate Anything Object Type resulting in no results being found. This would occur with empty column names.
+- Updated `require` calls to be `require_once` to avoid errors when using WP-CLI in some situations.
+- Fixed issue where creating a new spreadsheet with more than 26 columns would fail.
+
+## 1.1.1
+
+- Updated the feed re-processing behavior to edit already-inserted rows if "Update & Delete Rows" is enabled.
+
+## 1.1
+
+- Refactored JavaScript in the plugin settings and feed settings to use React to improve user experience and maintainability.
+- Refactored server-side PHP code to improve reliability and provide a more solid foundation moving forward.
+- Refactored how Google Accounts are handled. Multiple Google Accounts can now be added for users instead of one. Additionally, Google Accounts can be added directly from feed settings.
+- Renamed "Tokens" to "Google Accounts" in the Google Sheets plugin settings.
+- Added new "Issues" section in the Google Sheets plugin settings to quickly see what feeds and fields are encountering issues.
+- Added support for filtering Google Sheet Object Type values by `date` and `datetime` values.
+- Fixed issue with the Google Sheets object type where error would be thrown if "Only Show Unique Results" was not checked on a given field.
+- Fixed issue where entry edits going to Google Sheets would sometimes not work if the column mapping didn't include all of the columns.
+- Fixed potential fatal error with the Google Sheet Object Type for Populate Anything if using an Email field with confirmation enabled.
+- Updated script strings to use their own localization callbacks that should run less frequently.
+- Fixed issue where the column mapping couldn't update for legacy feeds.
+- Added an error notice if a feed's column map fails to update.
+- Updated the max number of Google Sheets that the Populate Anything Spreadsheet dropdown could show to `500`.
+
+## 1.0.4
+
+- Fixed issue when querying for values in a sheet that contains `"` or `&`.
+
+## 1.0.3
+
+- Fixed issue where columns could be inserted with too much column padding on the left if not giving an assignment to every column.
+- Fixed an issue with legacy tokens always being refreshed when used which could impact performance negatively.
+- Fixed issue where Google Sheet Object Type queries would sometimes be missing some or all row data.
+- Fixed issue where inserting test rows wouldn't work if the column mapping contained a Multi File Upload Field.
+- Fixed issue where empty cached results in the Populate Anything Object Type were not used.
+- Fixed issue where comparisons of numbers in string-based columns did not work as expected with the Populate Anything Object Type.
+- Fixed issue with Google Sheets Object Type where duplicate header names in a Google Sheet would throw an exception.
+- Updated the max number of Google Sheets that the Populate Anything Spreadsheet dropdown could show to `500`.
+
+## 1.0.2
+
+- Populate Anything Object Type: Fixed issue where the Google Sheets Object Type was not compatible with Populate Anything <2.0.
+- Populate Anything Object Type: Fixed the `contains` operator.
+- Populate Anything Object Type: Added `starts with`, `ends with`, and `does not contain` operators.
+- Populate Anything Object Type: Removed `is in` and `is not in` operators.
+
+## 1.0.1
+
+- Fixed issue where global tokens were not being refreshed upon access like feed tokens.
+- Fixed issue where `settings-global.ts` was loading for feed settings.
+- Fixed regression where the Populate Anything Integration settings were not displayed.
+- Fixed issue with the "Sheet" dropdown not populating correctly for the GP Populate Anything Object Type.
+
+## 1.0
+
+- Added new authentication flow/schema.
+- Added Token Health section to global settings for better token management.
+- Added `should_refresh_access_token()` method.
+- Improved error logging when adding entries to Google Sheets.
+- Improved feed connection error message and styling for clarity.
+- Improved UX by disabling Column Mapping section until a sheet has been selected.
+- Improved exception handling to catch all exceptions and not just those from Google's PHP API.
+- Updated feed creation step to skip OAuth if the current user has already authenticated with Google.
+- Refactored the Google Sheets Object Type (for Populate Anything) to be more performant in both the form editor and on the frontend. As a result of this, the "Row Number" property is deprecated.
+- Fixed issue where failing developer metadata creation requests would cause the add entry job to be retried resulting in the entry being added to the sheet multiple times.
+- Fixed issue where OAuth-ing with Google could result in the (absolutely hilarious) message "Error connecting to Google: Successfully authenticated with Google."
+
+## 1.0-beta-2.10
+
+- Fixed issue where if all columns are not provided in a feed mapping, the inserted values could be out of order.
+- Fixed an issue where Google Sheets Field Mappings would not be editable.
+
+## 1.0-beta-2.9
+
+- Updated the default HTTP request timeout to Google to be 15 seconds rather than 5 seconds. It is now filtered by `gpgs_http_request_timeout` instead of `http_request_timeout`.
+- Improved how we check if entries are spammed prior to sending the entry to Google Sheets. This addresses an issue where manually processing a feed wouldn't work in some situations.
+- Added a spinner to the feed creation flow to indicate when Google authentication or sheet selection is occurring.
+- Improved the feed creation flow by disabling options until they have been populated with the selected sheet's data.
+
+## 1.0-beta-2.8
+
+- Updated the Google API to use the same request timeout as WordPress. It defaults to `5` seconds and is controlled using the `http_request_timeout` filter hook.
+
+## 1.0-beta-2.7
+
+- Fixed issue with GP Populate Anything object type where row numbers were not always correct.
+
+## 1.0-beta-2.6
+
+- Fixed issue where populating values wouldn't work in some situations when using GP Populate Anything 2.0 or newer.
+- Fixed issue where deleting entries using GravityView would not sync the change to Google Sheets even if "Update & Delete Rows" was checked.
+
+## 1.0-beta-2.5
+
+- Improved efficiency of how metadata is added to new rows.
+- Fixed issue where feeds that fail to send to Google Sheets could sometimes prevent other feeds from sending data to Sheets.
+- Updated Action Scheduler to 3.6.1.
+- Fixed issues where "Select existing sheet" wouldn't work for users who did not have permission to activate/install plugins.
+- Added new `gpgs_show_action_scheduler_purge` PHP filter hook to show a panel in the GP Google Sheets settings to purge uncomplete actions from Action Scheduler.
+- Improved user experience by blocking "Select existing sheet" if a Gravity Perks license isn't present instead of nothing happening when clicking the radio button
+- Updated the developer metadata keys to be smaller to reduce the number of characters used as Google Sheets has character limits on the number of characters that can be in the metadata for each spreadsheet/sheet.
+- Improved caching of a few methods to reduce the number of read requests to the Google Sheets API.
+- Fixed issue where a required Gravity Forms class wouldn't be loaded in some cases when adding entries to Google Sheets.
+- Fixed issue where the column map would not save to the sheet for some feeds.
+- Fixed PHP 8.1 deprecation notices.
+
+## 1.0-beta-2.4
+
+- Added support for `>`, `<`, `>=`, and `<=` operators in the Google Sheet Object Type for Populate Anything.
+- Fixed PHP potential warning when refreshing tokens.
+- Fixed an issue where an internationalized string placeholder could be visible instead of the actual message.
+
+## 1.0-beta-2.3
+
+- Added additional debug logging when refreshing access tokens.
+
+## 1.0-beta-2.2
+
+- Fixed issue where GravityView edits would fail due to a missing function.
+- Fixed issue where the Google Sheet Object Type was hard-coded to a limit of 1,000 rows rather than using the query limit specified by Populate Anything.
+
+## 1.0-beta-2.1
+
+- Refactored core functionality that sends data to Google Sheets to utilize Action Scheduler to allow for automatic retrying of failed requests as well as more visibility into errors.
+- Improved caching behavior of the GP Populate Anything Object Type to reduce the likelihood of 429 errors with the Google Sheets API and to improve user experience.
+- Updated the license key permissions check to use `GravityPerks::can_manage_license()` instead of `is_admin()`.
+- Fixed an issue where leading zeros in numbers would be removed when the values are sent to Google Sheets.
+- Added support for sending GravityEdit Inline Edit changes to Google Sheets.
+- Fixed issue where if any but the first sheet within a spreadsheet was connected to a feed, entry edits and column remapping would fail.
+- Added support for "user entered values" which allows for formulas, numbers and dates to be stored in a connected sheet.
+- Fixed issue where feeds created with the legacy authentication system would sometimes write to the incorrect Google Sheet.
+- Fixed issue where selecting "Create New Sheet" during feed creation could result in entries getting saved to the wrong Google Sheet.
+
+## 1.0-beta-2
+
+- Refactored authentication flow with Google to improve user-experience and connection relability.
+- Fixed issue with legacy tokens not being used correctly after upgrading.
+- Added Google Sheets Object Type for Populate Anything.
+- Fixed issue where new rows could be inserted for entries that have already been inserted.
+- Added Google Sheets Workflow Step for Gravity Flow. Credit: @Idealien
+
+## 1.0-beta-1.10
+
+- Added new [`gpgs_row_value`](https://gravitywiz.com/documentation/gpgs_row_value) PHP filter hook.
+
+## 1.0-beta-1.9
+
+- Fixed PHP error that could occur in an external dependency on PHP 8.1 and newer.
+
+## 1.0-beta-1.8
+
+- Updated minimum supported PHP version to 7.3.
+- Added support for updating entry rows when payment statuses change.
+
+## 1.0-beta-1.7
+
+- Fixed issue where boolean values mapped to a Google Sheet could cause a feed error if editing an entry.
+- Fixed an issue where updating the custom value of a column would not work for some feeds.
+
+## 1.0-beta-1.6
+
+- Improved clarity around the "Sheet Column" in the Column Mapping. It now shows "Select a Column" instead of "Select a Field" and "Add New Column" instead of "Add Custom Key."
+- Fixed an issue where reconnecting a feed to a spreadsheet would not save in some cases.
+- Fixed issue where rows could be inserted in incorrect columns.
+- Added new icon to open spreadsheets from the Feed List.
+- Fixed PHP warning that could show while creating a new feed when using PHP 8.
+
+## 1.0-beta-1.5
+
+- Added explicit PHP minimum requirement of version 7.0.
+- Improved reliability of inserting rows when there are empty columns surrounding the columns that are being inserted.
+- Fixed issue where mappings with custom values could lose their mapping or insert the wrong value.
+- Improved disconnecting experience by reverting the mapping column keys back to a custom input if a custom key was ever used.
+- Improved disconnecting experience by triggering a refresh of the feed settings after clicking "Disconnect."
+- Fixed issue where disconnecting sheets would not work for sheets that were created by the feed.
+- Added `gpgs_should_delete_google_sheets_row` filter to disable deletion synchronization between Gravity Forms entries and Google Sheets.
+- Added `gp_google_sheets()` function to get the GP Google Sheets instance.
+- Fixed an issue with merge tags and entry properties not getting their values populated to Google Sheets.
+
+## 1.0-beta-1.4
+
+- Fixed an issue with our callback on `gform_post_update_entry` not accepting the correct parameters.
+
+## 1.0-beta-1.3
+
+- Fixed issue where feeds that only use a single column in Google Sheets would not correctly set developer metadata on the row which would prevent the row from being deleted if the entry is.
+
+## 1.0-beta-1.2
+
+- Improved support for List fields.
+- Fixed issue where an error could be encountered in the feed settings and it wouldn't show the error in the correct place.
+- Improved compatibility with Gravity Forms Populate Anything and other perks by filtering the form with `gform_pre_render` prior to getting values for a row being inserted.
+
+## 1.0-beta-1.1
+
+- Fixed issue where a suitable sheet could not be found for existing spreadsheets if the sheet isn't named "Sheet1" nor attached previously.
+- Improved error handling and logging.
+- Fixed error that could prevent rows from being edited in spreadsheets.
+- Fixed fatal error that could be encountered when deleting rows from the spreadsheet.
+- Updated the "Client Secret" setting to be a masked input.
+
+## 1.0-beta-1
+
+- Hello World!

@@ -1,0 +1,113 @@
+.gform-settings-panel__content input[type="text"][readonly]{
+	pointer-events: all !important;
+}
+
+/* Global token */
+#gpgs_connected_to_google {
+	margin-right: auto;
+}
+
+/* Spinners */
+#tab_gp-google-sheets .spinner{
+	float: none;
+	display: none;
+	background-size: 13px;
+	width: 13px;
+	height: 13px;
+	margin: 0 -3px 0 3px;
+}
+
+#tab_gp-google-sheets .spinner.is-active{
+	display: inline-block;
+}
+
+#gform-settings-section-gpgs-token-health td {
+	vertical-align: middle;
+}
+
+#gform-settings-section-gpgs-token-health table.gpgs_token_connected_feed_table td {
+	padding: 0.8125rem 1.125rem;
+}
+
+#gform-settings-section-gpgs-token-health td span {
+	vertical-align: middle;
+	display: inline-block;
+}
+
+#gform-settings-section-gpgs-token-health tr.gpgs-token-feeds > td {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.gpgs_google_account_status {
+	/* Center the connected status icons */
+	text-align: center;
+}
+
+/* Token health status feeds */
+.gform-admin .gform-table .gpgs-token-feeds-visible {
+	border-bottom: 0;
+	box-shadow: -5px 0px 0px 0px #3E7DA5;
+}
+
+.gform-admin .gform-table .gpgs-token-feeds {
+	border-bottom: 0.0625rem solid #ecedf8;
+	display: none;
+}
+
+.gform-admin .gform-table .gpgs-token-feeds-visible + .gpgs-token-feeds {
+	display: table-row;
+}
+
+.gform-admin .gform-table .gpgs-token-feeds ul {
+	padding: 0 0 0 1rem;
+}
+
+.gform-admin .gform-table .gpgs-token-feeds li {
+	list-style: disc;
+}
+
+.gpgs_light_grey_background {
+	background: #F6F9FC !important;
+}
+
+.gpgs_border_top {
+	border-top: 0.0625rem solid #ecedf8;
+}
+
+.gpgs_border_bottom {
+	border-bottom: 0.0625rem solid #ecedf8;
+}
+
+.gpgs_token_connected_feed_list_row td {
+	padding: 0.8125rem 1.125rem;
+}
+
+.gpgs_google_error_message {
+	line-height: 1.8;
+}
+
+.gpgs_how_to_fix_header {
+	margin-bottom: 0.3rem;
+	display: block;
+}
+
+.gpgs_token_legacy_token_warning {
+	color: #444;
+	font-weight: normal;
+	display: flex !important;
+	gap: .25rem;
+	margin-right: 1rem;
+}
+
+.gpgs_google_account_actions {
+	display: flex;
+	gap: 1rem;
+}
+
+/* Issues Section */
+#gform-settings-section-issues h3 {
+	font-size: 0.875rem;
+	margin: 0;
+	margin-top: 0.875rem;
+}

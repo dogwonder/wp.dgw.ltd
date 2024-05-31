@@ -1,0 +1,136 @@
+# Copyright (C) 2024 Gravity Wiz
+# This file is distributed under the GPL2.
+msgid ""
+msgstr ""
+"Project-Id-Version: GP Advanced Phone Field 1.0.24\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cloned-perk-jdpOQ9Qai\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-04-04T00:31:15+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.10.0\n"
+"X-Domain: gp-advanced-phone-field\n"
+
+#. Plugin Name of the plugin
+#: gp-advanced-phone-field.php
+#: class-gp-advanced-phone-field.php:284
+msgid "GP Advanced Phone Field"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: gp-advanced-phone-field.php
+msgid "https://gravitywiz.com/documentation/gravity-forms-advanced-phone-field/"
+msgstr ""
+
+#. Description of the plugin
+#: gp-advanced-phone-field.php
+msgid "Level up your Phone fields with automatic country code selection, real number validation, and stylish visuals."
+msgstr ""
+
+#. Author of the plugin
+#: gp-advanced-phone-field.php
+msgid "Gravity Wiz"
+msgstr ""
+
+#. Author URI of the plugin
+#: gp-advanced-phone-field.php
+msgid "https://gravitywiz.com/"
+msgstr ""
+
+#: class-gp-advanced-phone-field.php:273
+msgid "Enable Advanced Phone Field"
+msgstr ""
+
+#: class-gp-advanced-phone-field.php:285
+msgid "Enable GP Advanced Phone Field for the current field. Adds improved UI and validation."
+msgstr ""
+
+#: class-gp-advanced-phone-field.php:331
+msgid "Please provide a valid phone number."
+msgstr ""
+
+#: class-gp-advanced-phone-field.php:370
+msgid "Adv Phone Field"
+msgstr ""
+
+#: class-gp-advanced-phone-field.php:397
+msgid "Advanced Phone Field"
+msgstr ""
+
+#: class-gp-advanced-phone-field.php:401
+msgid "Default Country"
+msgstr ""
+
+#: class-gp-advanced-phone-field.php:402
+msgid "Select the default country that should be used for the country code selector."
+msgstr ""
+
+#: class-gp-advanced-phone-field.php:408
+msgid "Determine by visitor location (GeoIP)"
+msgstr ""
+
+#: class-gp-advanced-phone-field.php:415
+msgid "Preferred Countries"
+msgstr ""
+
+#: class-gp-advanced-phone-field.php:424
+msgid "Countries"
+msgstr ""
+
+#: class-gp-advanced-phone-field.php:429
+msgid "Include all countries"
+msgstr ""
+
+#: class-gp-advanced-phone-field.php:433
+msgid "Only include the following countries..."
+msgstr ""
+
+#: class-gp-advanced-phone-field.php:435
+msgid "Only the countries selected below will be available in the country code selector."
+msgstr ""
+
+#: class-gp-advanced-phone-field.php:438
+msgid "Exclude the following countries..."
+msgstr ""
+
+#: class-gp-advanced-phone-field.php:440
+msgid "Include all but the selected countries below in the country code selector."
+msgstr ""
+
+#. translators: placeholder is the label of the field with Advanced Phone Field enabled.
+#: class-gp-advanced-phone-field.php:523
+msgid "%s (Country Dialing Code)"
+msgstr ""
+
+#. translators: placeholder is the label of the field with Advanced Phone Field enabled.
+#: class-gp-advanced-phone-field.php:529
+msgid "%s (Type)"
+msgstr ""
+
+#. translators: placeholder is the label of the field with Advanced Phone Field enabled.
+#: class-gp-advanced-phone-field.php:534
+msgid "%s (National Number)"
+msgstr ""
+
+#. translators: placeholder is the label of the field with Advanced Phone Field enabled.
+#: class-gp-advanced-phone-field.php:539
+msgid "%s (Raw)"
+msgstr ""
+
+#. translators: placeholder is the label of the field with Advanced Phone Field enabled.
+#: class-gp-advanced-phone-field.php:544
+msgid "%s (Description)"
+msgstr ""
+
+#. translators: placeholder is the label of the field with Advanced Phone Field enabled.
+#: class-gp-advanced-phone-field.php:549
+msgid "%s (Carrier)"
+msgstr ""
+
+#. translators: placeholder is the label of the field with Advanced Phone Field enabled.
+#: class-gp-advanced-phone-field.php:554
+msgid "%s (Region Code)"
+msgstr ""
