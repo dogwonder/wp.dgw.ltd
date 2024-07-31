@@ -530,16 +530,16 @@ class GF_Field_Unique_ID extends GF_Field {
 		}
 	}
 
-	public function disable_completed_payment_notifications_until_uid_generated( $disable, $notification, $form, $entry, $data ) {
+	public function disable_completed_payment_notifications_until_uid_generated( $disable, $notification, $form, $entry, $data = array() ) {
 
 		// Delayed notification only applies to "Payment Completed" notifications.
 		if ( $notification['event'] !== 'complete_payment' ) {
 			return $disable;
 		}
 	
-		// Abort notification if unique IDs have not been generated.
+		// Abort notification if unique IDs have not been generated, and the UID field itself is not conditionally hidden.
 		foreach( $form['fields'] as $field ) {
-			if ( $field->type === 'uid' && ! rgar( $entry, $field->id ) && $this->is_wait_for_payment_enabled( $form, $field, array(), $entry ) ) {
+			if ( $field->type === 'uid' && ! rgar( $entry, $field->id ) && ! GFFormsModel::is_field_hidden( $form, $field, array(), $entry ) && $this->is_wait_for_payment_enabled( $form, $field, array(), $entry ) ) {
 				return true;
 			}
 		}

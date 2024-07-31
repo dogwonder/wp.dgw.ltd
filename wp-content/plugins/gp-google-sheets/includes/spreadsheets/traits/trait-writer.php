@@ -332,6 +332,10 @@ trait Writer {
 	 * @return void
 	 */
 	public function edit_row( $row_index, $row_data ) {
+
+		// Sort columns to ensure correct we get first and last array keys correctly on sorted data.
+		ksort( $row_data['columns'] );
+
 		$range = sprintf(
 			'%s%s:%s%s',
 			gpgs_number_to_column_letters( gpgs_array_key_first( $row_data['columns'] ) + 1 ),

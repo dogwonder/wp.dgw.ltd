@@ -3,9 +3,9 @@ Contributors: plausible, DaanvandenBergh
 Donate link: https://plausible.io/
 Tags: analytics, google analytics, web analytics, stats, privacy
 Requires at least: 5.3
-Tested up to: 6.4
+Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 2.0.9
+Stable tag: 2.1.0
 License: Massachusetts Institute of Technology (MIT) license
 License URI: https://opensource.org/licenses/MIT
 
@@ -47,9 +47,13 @@ Plausible is lightweight analytics. Our script is 45 times smaller than Google A
 
 Plausible is privacy-friendly analytics. All the site measurement is carried out absolutely anonymously. Cookies are not used and no personal data is collected. There are no persistent identifiers. No cross-site or cross-device tracking either. Your site data is not used for any other purposes. All visitor data is exclusively processed with servers owned and operated by European companies and it never leaves the EU. 
 
-### Track goal conversions, revenue and campaigns
+### Track events and marketing campaigns
 
-Plausible is useful. Segment your audience by any metric you click on. Answer the important questions about your visitors, content and referral sources. Analyze paid campaigns using UTM parameters. Track WooCommerce revenue, outbound link clicks, file downloads and 404 error pages. Create custom events with custom dimensions to track conversions and attribution. Increase conversions using funnel analysis.
+Plausible is useful. Segment your audience by any metric you click on. Answer the important questions about your visitors, content and referral sources. Analyze paid campaigns using UTM parameters. Track site search terms, outbound link clicks, file downloads, 404 error pages, post authors, post categories and custom taxonomies without manually configuring anything or writing any code.
+
+### Built-in WooCommerce analytics
+
+Plausible provides an automatic WooCommerce analytics solution to track conversions, revenue and attribution. Activities tracked include adding to cart, removing from cart, entering checkout and completing a purchase. A purchase funnel looking at the user journey from viewing a product to making a purchase is enabled to help you see the drop-off rates between the different steps, understand your cart abandonment rate and increase your conversions.
 
 ### Invite team members and share your dashboard
 
@@ -57,18 +61,18 @@ Plausible is shareable. Your stats are private by default but you can choose to 
 
 ### Transparent and open source software
 
-Plausible is open source analytics. Our source code is available and accessible on GitHub so anyone can read it, inspect it and review it to verify that our actions match with our words. We welcome feedback and have a public roadmap. If you're happy to manage your own infrastructure, you can self-host Plausible too. 
+Plausible is open source analytics. Our source code is available and accessible on GitHub so anyone can read it, inspect it and review it to verify that our actions match with our words. We welcome feedback and have a public roadmap. If you're happy to manage your own infrastructure, you can self-host Plausible too.
 
 ## Features
 
 * Our product is updated several times per week and with our WordPress plugin you always have access to all the latest features
 * Automatically includes tracking code in the header of your site
 * Simple plugin settings page with easy options and an onboarding guide 
-* Get more accurate stats by running the Plausible script as a first-party connection from your domain name
+* Get more accurate stats and count those who use adblockers by running the Plausible script as a first-party connection from your domain name
 * View your Plausible stats directly in your WordPress dashboard (you can grant access to other user roles too)
 * Tracking of admin users is disabled by default (you can also disable tracking of other user roles)
-* Enable ecommerce revenue, file downloads, external link clicks and 404 error pages tracking 
-* Enable automated tracking of post authors and post categories for better content analysis
+* Enable WooCommerce revenue, file downloads, external link clicks, site search terms and 404 error pages tracking 
+* Enable automated tracking of post authors, post categories and custom taxonomies for better content analysis
 * Custom events and custom dimensions can be setup using CSS class names directly in the WordPress editor
 * Integrate with Google Search Console so you can see search queries people use to find your site in Google's search results
 * Import your historical Google Analytics stats
@@ -80,12 +84,6 @@ Plausible is open source analytics. Our source code is available and accessible 
 For more information: [How to setup Plausible Analytics WordPress plugin](https://plausible.io/wordpress-analytics-plugin).
 
 == Installation ==
-
-= Minimum Requirements =
-
-* WordPress 4.8 or greater
-* PHP version 5.6 or greater
-* MySQL version 5.5 or greater
 
 = Automatic installation =
 
@@ -156,6 +154,14 @@ Contact us: https://plausible.io/contact
 Please make sure you make a backup of your database before updating any version to ensure that none of your data is lost.
 
 == Changelog ==
+
+= 2.1.0 | July 21st, 2024 =
+
+* Tested with WP 6.6
+* Added: WooCommerce integration. This is automatically enabled when the enhanced measurement Ecommerce Revenue is enabled. For current users who wish to switch to the WooCommerce integration, please disable and enable the option to make sure the required goals and funnel are created.
+* Added: Enhanced measuring for Search Queries.
+* Added: Cloudflare Rocket Loader compatibility.
+* Fixed: the plugin would crash the admin screen on instances not running cURL or with allow_url_fopen disabled.
 
 = v2.0.9 | May 22nd, 2024 =
 

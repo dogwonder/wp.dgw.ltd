@@ -15,6 +15,7 @@ import SettingGoogleAccount from '../settings/SettingGoogleAccount';
 const GoogleSheetSettings = () => {
 	const googleAccount = useFeedSettingsStore.use.googleAccount();
 	const notices = useFeedSettingsStore.use.notices();
+	const setErrorNotice = useFeedSettingsStore.use.setErrorNotice();
 	const sheetUrl = useFeedSettingsStore.use.googleSheetUrl();
 	const googleSpreadsheetId = useFeedSettingsStore.use.googleSpreadsheetId();
 	const googleSheetId = useFeedSettingsStore.use.googleSheetId();
@@ -50,13 +51,24 @@ const GoogleSheetSettings = () => {
 				return;
 			}
 
-			updateColumnMappingSection({
-				sheetId: googleSheetId,
-				sheetName: sheets?.find(
-					(sheet: any) => sheet.id === googleSheetId
-				)?.title!,
-				sheetUrl,
-			});
+			(async () => {
+				try {
+					await updateColumnMappingSection(
+						'from_current_feed_mappings',
+						{
+							sheetId: googleSheetId,
+							sheetName: sheets?.find(
+								(sheet: any) => sheet.id === googleSheetId
+							)?.title!,
+							sheetUrl,
+						}
+					);
+				} catch (error: any) {
+					setErrorNotice(
+						error.message || 'Failed to get column mappings.'
+					);
+				}
+			})();
 		} else if (!sheetUrl || googleErrorMessage) {
 			disableColumnMappingSection();
 		}
@@ -67,6 +79,7 @@ const GoogleSheetSettings = () => {
 		googleAccount,
 		sheets,
 		googleErrorMessage,
+		setErrorNotice,
 	]);
 
 	// Sync updates to the hidden inputs for Gravity Forms.

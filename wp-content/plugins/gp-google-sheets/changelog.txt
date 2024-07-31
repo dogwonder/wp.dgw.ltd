@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.2.1 | July 17, 2024
+
+- Fixed issue with updating entries in some scenarios due to rearranged columns.
+
+## 1.2 | July 9, 2024
+
+- Added new button in feed settings to auto-map columns. If creating a new spreadsheet, a new column will be added for each field. If selecting an existing spreadsheet, auto-matching will be used to map the most relevant field for each column.
+
+## 1.1.19 | June 26, 2024
+
+- Fixed issue where Checkbox field choices with values of `0` were not written to Google Sheets.
+- Fixed potential issues where column mappings would be incorrectly read on a spreadsheet with multiple sheets using similar mappings. This didn't impact writing, but would impact the feed settings.
+
+## 1.1.18 | June 20, 2024
+
+- Fixed issue with Google Sheets' icon not displaying correctly if using Safari.
+
 ## 1.1.17 | May 22, 2024
 
 - Added support for GP Populate Anything 2.1's new React-based field settings.

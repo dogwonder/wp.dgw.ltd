@@ -12,6 +12,7 @@ namespace Plausible\Analytics\WP\Admin\Settings;
 
 use Exception;
 use Plausible\Analytics\WP\Client;
+use Plausible\Analytics\WP\ClientFactory;
 use Plausible\Analytics\WP\Helpers;
 
 class Page extends API {
@@ -60,6 +61,11 @@ class Page extends API {
 	public $fields = [];
 
 	/**
+	 * @var ClientFactory $client_factory
+	 */
+	private $client_factory;
+
+	/**
 	 * @var Client $client
 	 */
 	private $client;
@@ -77,8 +83,9 @@ class Page extends API {
 
 		$settings = Helpers::get_settings();
 
-		$this->client = new Client();
-		$this->fields = [
+		$this->client_factory = new ClientFactory();
+		$this->client         = $this->client_factory->build();
+		$this->fields         = [
 			'general'     => [
 				[
 					'label'  => esc_html__( 'Connect your website with Plausible Analytics', 'plausible-analytics' ),
@@ -118,6 +125,7 @@ class Page extends API {
 							'type'     => 'button',
 							'disabled' => empty( $settings[ 'domain_name' ] ) ||
 								empty( $settings[ 'api_token' ] ) ||
+								! $this->client instanceof Client ||
 								$this->client->is_api_token_valid(),
 						],
 					],
@@ -152,6 +160,13 @@ class Page extends API {
 							'slug'  => 'enhanced_measurements',
 							'type'  => 'checkbox',
 							'value' => 'file-downloads',
+						],
+						'search'         => [
+							'label' => esc_html__( 'Search queries', 'plausible-analytics' ),
+							'docs'  => 'https://plausible.io/wordpress-analytics-plugin#how-to-enable-site-search-tracking',
+							'slug'  => 'enhanced_measurements',
+							'type'  => 'checkbox',
+							'value' => 'search',
 						],
 						'tagged-events'  => [
 							'label' => esc_html__( 'Custom events', 'plausible-analytics' ),
@@ -649,7 +664,7 @@ class Page extends API {
 			<div id="plausible-analytics-stats">
 				<iframe plausible-embed=""
 						src="<?php echo "{$shared_link}&embed=true&theme=light&background=transparent"; ?>"
-						scrolling="no" loading="lazy" style="border: 0; width: 100%; height: 1750px; "></iframe>
+						loading="lazy" style="border: 0; width: 100%; height: 1750px; "></iframe>
 				<script async src="<?php echo $hosted_domain; ?>/js/embed.host.js"></script>
 				<script>
 					document.addEventListener('DOMContentLoaded', () => {

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL2.
 msgid ""
 msgstr ""
-"Project-Id-Version: GP Google Sheets 1.1.17\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cloned-perk-HFwQp_6cm\n"
+"Project-Id-Version: GP Google Sheets 1.2.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cloned-perk-bs7PEtIM_\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-05-23T01:50:07+00:00\n"
+"POT-Creation-Date: 2024-07-17T18:05:40+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: gp-google-sheets\n"
@@ -17,8 +17,8 @@ msgstr ""
 #. Plugin Name of the plugin
 #. translators: %s is the number of rows deleted.
 #: gp-google-sheets.php
-#: class-gp-google-sheets.php:1106
-#: class-gp-google-sheets.php:1134
+#: class-gp-google-sheets.php:1116
+#: class-gp-google-sheets.php:1144
 msgid "GP Google Sheets"
 msgstr ""
 
@@ -42,139 +42,139 @@ msgstr ""
 msgid "http://gravitywiz.com/"
 msgstr ""
 
-#: class-gp-google-sheets.php:322
+#: class-gp-google-sheets.php:332
 msgid "Create New Sheet"
 msgstr ""
 
-#: class-gp-google-sheets.php:323
+#: class-gp-google-sheets.php:333
 msgid "Create a new sheet inside the configured Google Drive account."
 msgstr ""
 
-#: class-gp-google-sheets.php:327
+#: class-gp-google-sheets.php:337
 msgid "Disconnect"
 msgstr ""
 
-#: class-gp-google-sheets.php:328
+#: class-gp-google-sheets.php:338
 msgid "Deletes the authorization token that grants us permission to edit the Google Sheet."
 msgstr ""
 
-#: class-gp-google-sheets.php:332
+#: class-gp-google-sheets.php:342
 msgid "Insert Test Row"
 msgstr ""
 
-#: class-gp-google-sheets.php:333
+#: class-gp-google-sheets.php:343
 msgid "Creates a new row in the Google Sheet containing sample data."
 msgstr ""
 
-#: class-gp-google-sheets.php:660
-#: class-gp-google-sheets.php:1254
-#: class-gp-google-sheets.php:1259
+#: class-gp-google-sheets.php:670
+#: class-gp-google-sheets.php:1264
+#: class-gp-google-sheets.php:1269
 msgid "Name"
 msgstr ""
 
-#: class-gp-google-sheets.php:678
+#: class-gp-google-sheets.php:688
 msgid "Open Spreadsheet"
 msgstr ""
 
 #. translators: placeholder is form name
-#: class-gp-google-sheets.php:1031
+#: class-gp-google-sheets.php:1041
 msgid "%s Feeds"
 msgstr ""
 
-#: class-gp-google-sheets.php:1105
+#: class-gp-google-sheets.php:1115
 msgid "Action Scheduler purge link has expired. Please go back and click the \"Purge Action Scheduler\" button again."
 msgstr ""
 
-#: class-gp-google-sheets.php:1130
+#: class-gp-google-sheets.php:1140
 msgid "GP Google Sheets actions have been successfully purged."
 msgstr ""
 
 #. translators: %s is the number of rows deleted.
-#: class-gp-google-sheets.php:1133
+#: class-gp-google-sheets.php:1143
 msgid "%s action was deleted."
 msgid_plural "%s actions were deleted."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: placeholder is the plugin short title
-#: class-gp-google-sheets.php:1167
+#: class-gp-google-sheets.php:1177
 msgid "Back to %s Settings"
 msgstr ""
 
-#: class-gp-google-sheets.php:1173
+#: class-gp-google-sheets.php:1183
 msgid "Activate Perk"
 msgstr ""
 
-#: class-gp-google-sheets.php:1259
+#: class-gp-google-sheets.php:1269
 msgid "Enter a feed name to uniquely identify this feed. If creating a new sheet, this will be used as the sheet's name."
 msgstr ""
 
-#: class-gp-google-sheets.php:1281
+#: class-gp-google-sheets.php:1291
 msgid "Google Sheet URL"
 msgstr ""
 
-#: class-gp-google-sheets.php:1291
+#: class-gp-google-sheets.php:1301
 msgid "Google Sheet ID"
 msgstr ""
 
 #. translators: %s is an error message.
-#: class-gp-google-sheets.php:1307
+#: class-gp-google-sheets.php:1317
 msgid "Unable to create sheet. Error: %s"
 msgstr ""
 
-#: class-gp-google-sheets.php:1315
+#: class-gp-google-sheets.php:1325
 msgid "Google Picker Token"
 msgstr ""
 
-#: class-gp-google-sheets.php:1322
+#: class-gp-google-sheets.php:1332
 msgid "Google Sheets Settings"
 msgstr ""
 
-#: class-gp-google-sheets.php:1333
+#: class-gp-google-sheets.php:1343
 msgid "Column Mapping"
 msgstr ""
 
-#: class-gp-google-sheets.php:1340
-#: includes/ajax/class-feed-settings.php:157
+#: class-gp-google-sheets.php:1350
+#: includes/ajax/class-feed-settings.php:297
 msgid "Sheet Column"
 msgstr ""
 
-#: class-gp-google-sheets.php:1341
-#: includes/ajax/class-feed-settings.php:158
+#: class-gp-google-sheets.php:1351
+#: includes/ajax/class-feed-settings.php:298
 msgid "Column heading"
 msgstr ""
 
-#: class-gp-google-sheets.php:1350
+#: class-gp-google-sheets.php:1360
 msgid "Additional Options"
 msgstr ""
 
-#: class-gp-google-sheets.php:1353
+#: class-gp-google-sheets.php:1363
 msgid "Update &amp; Delete Rows"
 msgstr ""
 
-#: class-gp-google-sheets.php:1356
+#: class-gp-google-sheets.php:1366
 msgid "When entries are edited, also edit the corresponding row in the Google Sheet. Delete rows from the Sheet when entries are moved to trash or marked as spam. Entries are re-appended to the bottom of the Sheet after being restored from trash or spam."
 msgstr ""
 
-#: class-gp-google-sheets.php:1359
+#: class-gp-google-sheets.php:1369
 msgid "Edit rows when entries are edited, and delete rows when entries are trashed or marked as spam"
 msgstr ""
 
-#: class-gp-google-sheets.php:1369
+#: class-gp-google-sheets.php:1379
 msgid "Conditional Logic"
 msgstr ""
 
 #. translators: %s is an error message.
-#: class-gp-google-sheets.php:1775
+#: class-gp-google-sheets.php:1785
 msgid "Failed to update sheet columns. Error: %s"
 msgstr ""
 
-#: class-gp-google-sheets.php:1871
-#: class-gp-google-sheets.php:1872
+#: class-gp-google-sheets.php:1881
+#: class-gp-google-sheets.php:1882
 msgid "M j, Y \\a\\t g:ia"
 msgstr ""
 
-#: class-gp-google-sheets.php:1894
+#: class-gp-google-sheets.php:1904
 msgid "To reprocess this feed, please reauthenticate with Google Sheets."
 msgstr ""
 
@@ -194,43 +194,52 @@ msgstr ""
 msgid "There was an error fetching the sheets for the spreadsheet. Double check that you have permissions to edit GP Google Sheets Settings and try again."
 msgstr ""
 
-#: includes/ajax/class-feed-settings.php:23
+#: includes/ajax/class-feed-settings.php:25
 msgid "There was an error disconnecting the current feed. Double check that you have permissions to use GP Google Sheets and try again."
 msgstr ""
 
-#: includes/ajax/class-feed-settings.php:30
+#: includes/ajax/class-feed-settings.php:32
 msgid "Form ID not provided."
 msgstr ""
 
-#: includes/ajax/class-feed-settings.php:74
+#: includes/ajax/class-feed-settings.php:76
 msgid "There was an error inserting a test row. Double check that you have permissions to use GP Google Sheets and try again."
 msgstr ""
 
-#: includes/ajax/class-feed-settings.php:81
+#: includes/ajax/class-feed-settings.php:83
 msgid "Test row insertion failed. Parameters not provided."
 msgstr ""
 
-#: includes/ajax/class-feed-settings.php:85
+#: includes/ajax/class-feed-settings.php:87
 msgid "Test row insertion failed."
 msgstr ""
 
-#: includes/ajax/class-feed-settings.php:96
+#: includes/ajax/class-feed-settings.php:98
 msgid "Could not connect to Google Sheets. Please check your Google Accounts and try again."
 msgstr ""
 
-#: includes/ajax/class-feed-settings.php:104
+#: includes/ajax/class-feed-settings.php:106
 msgid " Choose at least one field to send in the Column Mapping section."
 msgstr ""
 
-#: includes/ajax/class-feed-settings.php:129
-msgid "There was an error selecting the sheet. Double check that you have permissions to use GP Google Sheets and try again."
+#: includes/ajax/class-feed-settings.php:131
+msgid "There was an error accessing the sheet. Double check that you have permissions to use GP Google Sheets and try again."
 msgstr ""
 
-#: includes/ajax/class-feed-settings.php:139
+#: includes/ajax/class-feed-settings.php:155
+#: includes/ajax/class-feed-settings.php:196
 msgid "Could not connect to Google Sheets. Please check your credentials and try again."
 msgstr ""
 
-#: includes/ajax/class-feed-settings.php:194
+#: includes/ajax/class-feed-settings.php:191
+msgid "No Google Sheet columns were matched with form fields. Please manually map the columns."
+msgstr ""
+
+#: includes/ajax/class-feed-settings.php:202
+msgid "Incorrect `variant` sent with request."
+msgstr ""
+
+#: includes/ajax/class-feed-settings.php:334
 msgid "Feed not found."
 msgstr ""
 

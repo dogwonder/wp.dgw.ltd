@@ -3,7 +3,7 @@
  * Plugin Name: GP Advanced Phone Field
  * Description: Level up your Phone fields with automatic country code selection, real number validation, and stylish visuals.
  * Plugin URI: https://gravitywiz.com/documentation/gravity-forms-advanced-phone-field/
- * Version: 1.0.24
+ * Version: 1.0.26
  * Author: Gravity Wiz
  * Author URI: https://gravitywiz.com/
  * License: GPL2
@@ -12,7 +12,7 @@
  * Domain Path: /languages
  */
 
-define( 'GP_ADVANCED_PHONE_FIELD_VERSION', '1.0.24' );
+define( 'GP_ADVANCED_PHONE_FIELD_VERSION', '1.0.26' );
 
 require plugin_dir_path( __FILE__ ) . 'includes/class-gp-bootstrap.php';
 

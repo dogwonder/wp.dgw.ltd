@@ -375,7 +375,11 @@ class GF_Field_Terms_Of_Service extends GF_Field_Checkbox {
                 jQuery( document ).on( \'gform_post_conditional_logic\',  function() {
                     var $elem = jQuery( "#gw_terms_' . $field['id'] . '");
                     var isFullScroll = $elem.length && ( $elem.scrollTop() + $elem.height() >= $elem[0].scrollHeight - 20 );
-                    jQuery( "input#choice_' . $form['id'] . '_' . $field['id'] . '_1" ).prop( "disabled", ! isFullScroll );
+
+					if ( ! jQuery( "input#choice_' . $form['id'] . '_' . $field['id'] . '_1" ).is( ":checked" ) ) {
+						jQuery( "input#choice_' . $form['id'] . '_' . $field['id'] . '_1" ).prop( "disabled", ! isFullScroll );
+					}
+
                     gwTosScroll( jQuery( this ), ' . $field['id'] . ', ' . $form['id'] . ' );
                 });';
 

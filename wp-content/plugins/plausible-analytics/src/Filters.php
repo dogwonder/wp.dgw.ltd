@@ -27,7 +27,6 @@ class Filters {
 	 */
 	public function __construct() {
 		add_filter( 'script_loader_tag', [ $this, 'add_plausible_attributes' ], 10, 2 );
-		add_filter( 'rest_url', [ $this, 'wpml_compatibility' ], 10, 1 );
 		add_filter( 'plausible_analytics_script_params', [ $this, 'maybe_add_custom_params' ] );
 	}
 
@@ -43,47 +42,31 @@ class Filters {
 	 * @return string
 	 */
 	public function add_plausible_attributes( $tag, $handle ) {
-		// Bailout, if not `Plausible Analytics` script.
+		// Bail if it's not our script.
 		if ( 'plausible-analytics' !== $handle ) {
 			return $tag; // @codeCoverageIgnore
 		}
 
 		$settings    = Helpers::get_settings();
 		$api_url     = Helpers::get_data_api_url();
-		$domain_name = esc_html( $settings[ 'domain_name' ] );
+		$domain_name = Helpers::get_domain();
 
 		// We need the correct id attribute for IE compatibility.
-		$tag    = preg_replace( "/\sid=(['\"])plausible-analytics-js(['\"])/", " id=$1plausible$2", $tag );
-		$params = "defer data-domain='{$domain_name}' data-api='{$api_url}'";
+		$tag = preg_replace( "/\sid=(['\"])plausible-analytics-js(['\"])/", " id=$1plausible$2", $tag );
+		/**
+		 * the data-cfasync ensures this script isn't processed by CF Rocket Loader @see https://developers.cloudflare.com/speed/optimization/content/rocket-loader/ignore-javascripts/
+		 */
+		$params = "defer data-domain='{$domain_name}' data-api='{$api_url}' data-cfasync='false'";
 
 		// Triggered when exclude pages is enabled.
 		if ( ! empty( $settings[ 'excluded_pages' ] ) && $settings[ 'excluded_pages' ] ) {
-			$excluded_pages = $settings[ 'excluded_pages' ];
-			$params         .= " data-exclude='{$excluded_pages}'";
+			$excluded_pages = $settings[ 'excluded_pages' ]; // @codeCoverageIgnore
+			$params         .= " data-exclude='{$excluded_pages}'"; // @codeCoverageIgnore
 		}
 
 		$params = apply_filters( 'plausible_analytics_script_params', $params );
 
 		return str_replace( ' src', " {$params} src", $tag );
-	}
-
-	/**
-	 * WPML overrides the REST API URL to include the language 'subdirectory', which leads to 404s.
-	 * This forces it back to default behavior.
-	 *
-	 * @param mixed $url
-	 *
-	 * @return string|void
-	 * @throws Exception
-	 */
-	public function wpml_compatibility( $url ) {
-		$rest_endpoint = Helpers::get_rest_endpoint( false );
-
-		if ( strpos( $url, $rest_endpoint ) !== false ) {
-			return get_option( 'home' ) . $rest_endpoint; // @codeCoverageIgnore
-		}
-
-		return $url;
 	}
 
 	/**

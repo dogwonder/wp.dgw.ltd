@@ -92,6 +92,8 @@ return array(
     'GP_Google_Sheets\\Dependencies\\Firebase\\JWT\\JWT' => $baseDir . '/firebase/php-jwt/src/JWT.php',
     'GP_Google_Sheets\\Dependencies\\Firebase\\JWT\\Key' => $baseDir . '/firebase/php-jwt/src/Key.php',
     'GP_Google_Sheets\\Dependencies\\Firebase\\JWT\\SignatureInvalidException' => $baseDir . '/firebase/php-jwt/src/SignatureInvalidException.php',
+    'GP_Google_Sheets\\Dependencies\\Fuse\\Bitap\\Bitap' => $baseDir . '/loilo/fuse/src/Bitap/Bitap.php',
+    'GP_Google_Sheets\\Dependencies\\Fuse\\Fuse' => $baseDir . '/loilo/fuse/src/Fuse.php',
     'GP_Google_Sheets\\Dependencies\\Google\\AccessToken\\Revoke' => $baseDir . '/google/apiclient/src/AccessToken/Revoke.php',
     'GP_Google_Sheets\\Dependencies\\Google\\AccessToken\\Verify' => $baseDir . '/google/apiclient/src/AccessToken/Verify.php',
     'GP_Google_Sheets\\Dependencies\\Google\\AuthHandler\\AuthHandlerFactory' => $baseDir . '/google/apiclient/src/AuthHandler/AuthHandlerFactory.php',

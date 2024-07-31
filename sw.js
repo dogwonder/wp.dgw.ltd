@@ -1,5 +1,5 @@
 
-const CACHE_NAME = "dgwltd-1717164010805";
+const CACHE_NAME = "dgwltd-1717169183194";
 const MAX_CACHE_SIZE = 50; // Maximum cache size in entries
 const THEME_PATH = 'wp-content/themes/dgwltd/';
 

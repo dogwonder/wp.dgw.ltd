@@ -63,7 +63,7 @@ trait Reader {
 	/**
 	 * How many columns are in the Sheet? Read the first row.
 	 */
-	protected function get_first_row() {
+	public function get_first_row() {
 		$range = '1:1';
 
 		$range = $this->prepare_range( $range );
@@ -163,6 +163,11 @@ trait Reader {
 				$range        = $location->getDimensionRange();
 				$column_index = (int) $range->getStartIndex();
 				$value        = $metadata_obj->getDeveloperMetadata()->getMetadataValue();
+
+				// Skip metadata not in the current sheet
+				if ( (string) $range->getSheetId() !== (string) $this->get_sheet_id() ) {
+					continue;
+				}
 
 				if ( rgblank( $value ) ) {
 					continue;

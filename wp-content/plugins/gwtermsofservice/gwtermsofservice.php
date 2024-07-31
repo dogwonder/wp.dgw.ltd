@@ -3,7 +3,7 @@
  * Plugin Name: GP Terms of Service
  * Description: Add a "Terms of Service" field to your forms.
  * Plugin URI: https://gravitywiz.com/documentation/gravity-forms-terms-of-service/
- * Version: 1.4.5
+ * Version: 1.4.6
  * Author: Gravity Wiz
  * Author URI: http://gravitywiz.com
  * License: GPLv2
@@ -13,8 +13,8 @@
  * Update URI: https://gravitywiz.com/updates/gwtermsofservice
  */
 
-define( 'GP_TERMS_OF_SERVICE_VERSION', '1.4.5' );
+define( 'GP_TERMS_OF_SERVICE_VERSION', '1.4.6' );
 
-require 'includes/class-gp-bootstrap.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-gp-bootstrap.php';
 
 $gp_terms_of_service_bootstrap = new GP_Bootstrap( 'class-gp-terms-of-service.php', __FILE__ );

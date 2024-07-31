@@ -6202,8 +6202,9 @@ function __await(v) {
 function __asyncGenerator(thisArg, _arguments, generator) {
   if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
   var g = generator.apply(thisArg, _arguments || []), i, q = [];
-  return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-  function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+  return i = {}, verb("next"), verb("throw"), verb("return", awaitReturn), i[Symbol.asyncIterator] = function () { return this; }, i;
+  function awaitReturn(f) { return function (v) { return Promise.resolve(v).then(f, reject); }; }
+  function verb(n, f) { if (g[n]) { i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; if (f) i[n] = f(i[n]); } }
   function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
   function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
   function fulfill(value) { resume("next", value); }
@@ -6269,16 +6270,18 @@ function __classPrivateFieldIn(state, receiver) {
 function __addDisposableResource(env, value, async) {
   if (value !== null && value !== void 0) {
     if (typeof value !== "object" && typeof value !== "function") throw new TypeError("Object expected.");
-    var dispose;
+    var dispose, inner;
     if (async) {
-        if (!Symbol.asyncDispose) throw new TypeError("Symbol.asyncDispose is not defined.");
-        dispose = value[Symbol.asyncDispose];
+      if (!Symbol.asyncDispose) throw new TypeError("Symbol.asyncDispose is not defined.");
+      dispose = value[Symbol.asyncDispose];
     }
     if (dispose === void 0) {
-        if (!Symbol.dispose) throw new TypeError("Symbol.dispose is not defined.");
-        dispose = value[Symbol.dispose];
+      if (!Symbol.dispose) throw new TypeError("Symbol.dispose is not defined.");
+      dispose = value[Symbol.dispose];
+      if (async) inner = dispose;
     }
     if (typeof dispose !== "function") throw new TypeError("Object not disposable.");
+    if (inner) dispose = function() { try { inner.call(this); } catch (e) { return Promise.reject(e); } };
     env.stack.push({ value: value, dispose: dispose, async: async });
   }
   else if (async) {
@@ -6779,7 +6782,7 @@ const external_wp_privateApis_namespaceObject = window["wp"]["privateApis"];
 const {
   lock,
   unlock
-} = (0,external_wp_privateApis_namespaceObject.__dangerousOptInToUnstableAPIsOnlyForCoreModules)('I know using unstable features means my theme or plugin will inevitably break in the next version of WordPress.', '@wordpress/blocks');
+} = (0,external_wp_privateApis_namespaceObject.__dangerousOptInToUnstableAPIsOnlyForCoreModules)('I acknowledge private features are not for use in themes or plugins and doing so will break in the next version of WordPress.', '@wordpress/blocks');
 
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/registration.js
 /* eslint no-console: [ 'error', { allow: [ 'error', 'warn' ] } ] */
@@ -8110,7 +8113,6 @@ function collections(state = {}, action) {
 }
 function blockBindingsSources(state = {}, action) {
   if (action.type === 'REGISTER_BLOCK_BINDINGS_SOURCE') {
-    var _action$lockAttribute;
     return {
       ...state,
       [action.sourceName]: {
@@ -8119,7 +8121,7 @@ function blockBindingsSources(state = {}, action) {
         setValue: action.setValue,
         setValues: action.setValues,
         getPlaceholder: action.getPlaceholder,
-        lockAttributesEditing: (_action$lockAttribute = action.lockAttributesEditing) !== null && _action$lockAttribute !== void 0 ? _action$lockAttribute : true
+        canUserEditValue: action.canUserEditValue || (() => false)
       }
     };
   }
@@ -8143,8 +8145,6 @@ function blockBindingsSources(state = {}, action) {
 // EXTERNAL MODULE: ./node_modules/remove-accents/index.js
 var remove_accents = __webpack_require__(4793);
 var remove_accents_default = /*#__PURE__*/__webpack_require__.n(remove_accents);
-;// CONCATENATED MODULE: external ["wp","compose"]
-const external_wp_compose_namespaceObject = window["wp"]["compose"];
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/store/utils.js
 /**
  * Helper util to return a value from a certain path of the object.
@@ -8167,6 +8167,27 @@ const getValueFromObjectPath = (object, path, defaultValue) => {
   });
   return (_value = value) !== null && _value !== void 0 ? _value : defaultValue;
 };
+function utils_isObject(candidate) {
+  return typeof candidate === 'object' && candidate.constructor === Object && candidate !== null;
+}
+
+/**
+ * Determine whether a set of object properties matches a given object.
+ *
+ * Given an object of block attributes and an object of variation attributes,
+ * this function checks recursively whether all the variation attributes are
+ * present in the block attributes object.
+ *
+ * @param {Object} blockAttributes     The object to inspect.
+ * @param {Object} variationAttributes The object of property values to match.
+ * @return {boolean} Whether the block attributes match the variation attributes.
+ */
+function matchesAttributes(blockAttributes, variationAttributes) {
+  if (utils_isObject(blockAttributes) && utils_isObject(variationAttributes)) {
+    return Object.entries(variationAttributes).every(([key, value]) => matchesAttributes(blockAttributes?.[key], value));
+  }
+  return blockAttributes === variationAttributes;
+}
 
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/store/selectors.js
 /**
@@ -8397,18 +8418,48 @@ const selectors_getBlockVariations = (0,external_wp_data_namespaceObject.createS
  */
 function getActiveBlockVariation(state, blockName, attributes, scope) {
   const variations = selectors_getBlockVariations(state, blockName, scope);
-  const match = variations?.find(variation => {
+  if (!variations) {
+    return variations;
+  }
+  const blockType = selectors_getBlockType(state, blockName);
+  const attributeKeys = Object.keys(blockType?.attributes || {});
+  let match;
+  let maxMatchedAttributes = 0;
+  for (const variation of variations) {
     if (Array.isArray(variation.isActive)) {
-      const blockType = selectors_getBlockType(state, blockName);
-      const attributeKeys = Object.keys(blockType?.attributes || {});
-      const definedAttributes = variation.isActive.filter(attribute => attributeKeys.includes(attribute));
-      if (definedAttributes.length === 0) {
-        return false;
+      const definedAttributes = variation.isActive.filter(attribute => {
+        // We support nested attribute paths, e.g. `layout.type`.
+        // In this case, we need to check if the part before the
+        // first dot is a known attribute.
+        const topLevelAttribute = attribute.split('.')[0];
+        return attributeKeys.includes(topLevelAttribute);
+      });
+      const definedAttributesLength = definedAttributes.length;
+      if (definedAttributesLength === 0) {
+        continue;
       }
-      return definedAttributes.every(attribute => attributes[attribute] === variation.attributes[attribute]);
+      const isMatch = definedAttributes.every(attribute => {
+        const variationAttributeValue = getValueFromObjectPath(variation.attributes, attribute);
+        if (variationAttributeValue === undefined) {
+          return false;
+        }
+        let blockAttributeValue = getValueFromObjectPath(attributes, attribute);
+        if (blockAttributeValue instanceof external_wp_richText_namespaceObject.RichTextData) {
+          blockAttributeValue = blockAttributeValue.toHTMLString();
+        }
+        return matchesAttributes(blockAttributeValue, variationAttributeValue);
+      });
+      if (isMatch && definedAttributesLength > maxMatchedAttributes) {
+        match = variation;
+        maxMatchedAttributes = definedAttributesLength;
+      }
+    } else if (variation.isActive?.(attributes, variation.attributes)) {
+      // If isActive is a function, we cannot know how many attributes it matches.
+      // This means that we cannot compare the specificity of our matches,
+      // and simply return the best match we have found.
+      return match || variation;
     }
-    return variation.isActive?.(attributes, variation.attributes);
-  });
+  }
   return match;
 }
 
@@ -8782,6 +8833,16 @@ function selectors_hasBlockSupport(state, nameOrType, feature, defaultSupports) 
 }
 
 /**
+ * Normalizes a search term string: removes accents, converts to lowercase, removes extra whitespace.
+ *
+ * @param {string|null|undefined} term Search term to normalize.
+ * @return {string} Normalized search term.
+ */
+function getNormalizedSearchTerm(term) {
+  return remove_accents_default()(term !== null && term !== void 0 ? term : '').toLowerCase().trim();
+}
+
+/**
  * Returns true if the block type by the given name or object value matches a
  * search term, or false otherwise.
  *
@@ -8820,20 +8881,10 @@ function selectors_hasBlockSupport(state, nameOrType, feature, defaultSupports) 
  *
  * @return {Object[]} Whether block type matches search term.
  */
-function isMatchingSearchTerm(state, nameOrType, searchTerm) {
+function isMatchingSearchTerm(state, nameOrType, searchTerm = '') {
   const blockType = getNormalizedBlockType(state, nameOrType);
-  const getNormalizedSearchTerm = (0,external_wp_compose_namespaceObject.pipe)([
-  // Disregard diacritics.
-  //  Input: "média"
-  term => remove_accents_default()(term !== null && term !== void 0 ? term : ''),
-  // Lowercase.
-  //  Input: "MEDIA"
-  term => term.toLowerCase(),
-  // Strip leading and trailing whitespace.
-  //  Input: " media "
-  term => term.trim()]);
   const normalizedSearchTerm = getNormalizedSearchTerm(searchTerm);
-  const isSearchMatch = (0,external_wp_compose_namespaceObject.pipe)([getNormalizedSearchTerm, normalizedCandidate => normalizedCandidate.includes(normalizedSearchTerm)]);
+  const isSearchMatch = candidate => getNormalizedSearchTerm(candidate).includes(normalizedSearchTerm);
   return isSearchMatch(blockType.title) || blockType.keywords?.some(isSearchMatch) || isSearchMatch(blockType.category) || typeof blockType.description === 'string' && isSearchMatch(blockType.description);
 }
 
@@ -9202,7 +9253,8 @@ const processBlockType = (name, blockSettings) => ({
     save: () => null,
     ...bootstrappedBlockType,
     ...blockSettings,
-    variations: mergeBlockVariations(bootstrappedBlockType?.variations, blockSettings?.variations)
+    // blockType.variations can be defined as a filePath.
+    variations: mergeBlockVariations(Array.isArray(bootstrappedBlockType?.variations) ? bootstrappedBlockType.variations : [], Array.isArray(blockSettings?.variations) ? blockSettings.variations : [])
   };
   const settings = (0,external_wp_hooks_namespaceObject.applyFilters)('blocks.registerBlockType', blockType, name, null);
   if (settings.description && typeof settings.description !== 'string') {
@@ -9638,7 +9690,7 @@ function registerBlockBindingsSource(source) {
     setValue: source.setValue,
     setValues: source.setValues,
     getPlaceholder: source.getPlaceholder,
-    lockAttributesEditing: source.lockAttributesEditing
+    canUserEditValue: source.canUserEditValue
   };
 }
 
@@ -10078,6 +10130,9 @@ function getBlockTransforms(direction, blockTypeOrName) {
     if (t.type === 'raw') {
       return true;
     }
+    if (t.type === 'prefix') {
+      return true;
+    }
     if (!t.blocks || !t.blocks.length) {
       return false;
     }
@@ -10213,8 +10268,6 @@ const getBlockFromExample = (name, example) => {
 const external_wp_blockSerializationDefaultParser_namespaceObject = window["wp"]["blockSerializationDefaultParser"];
 ;// CONCATENATED MODULE: external ["wp","autop"]
 const external_wp_autop_namespaceObject = window["wp"]["autop"];
-;// CONCATENATED MODULE: external "React"
-const external_React_namespaceObject = window["React"];
 ;// CONCATENATED MODULE: external ["wp","isShallowEqual"]
 const external_wp_isShallowEqual_namespaceObject = window["wp"]["isShallowEqual"];
 var external_wp_isShallowEqual_default = /*#__PURE__*/__webpack_require__.n(external_wp_isShallowEqual_namespaceObject);
@@ -10268,8 +10321,9 @@ function serializeRawBlock(rawBlock, options = {}) {
   return isCommentDelimited ? getCommentDelimitedContent(blockName, attrs, content) : content;
 }
 
+;// CONCATENATED MODULE: external "ReactJSXRuntime"
+const external_ReactJSXRuntime_namespaceObject = window["ReactJSXRuntime"];
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/serializer.js
-
 /**
  * WordPress dependencies
  */
@@ -10300,6 +10354,7 @@ function serializeRawBlock(rawBlock, options = {}) {
  *
  * @return {string} The block's default class.
  */
+
 function getBlockDefaultClassName(blockName) {
   // Generated HTML classes for blocks follow the `wp-block-{name}` nomenclature.
   // Blocks provided by WordPress drop the prefixes 'core/' or 'core-' (historically used in 'core-embed/').
@@ -10360,7 +10415,9 @@ function getInnerBlocksProps(props = {}) {
     isInnerBlocks: true
   });
   // Use special-cased raw HTML tag to avoid default escaping.
-  const children = (0,external_React_namespaceObject.createElement)(external_wp_element_namespaceObject.RawHTML, null, html);
+  const children = /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_element_namespaceObject.RawHTML, {
+    children: html
+  });
   return {
     ...props,
     children
@@ -10471,6 +10528,11 @@ function getCommentAttributes(blockType, attributes) {
     // Ignore all attributes but the ones with an "undefined" source
     // "undefined" source refers to attributes saved in the block comment.
     if (attributeSchema.source !== undefined) {
+      return accumulator;
+    }
+
+    // Ignore all local attributes
+    if (attributeSchema.__experimentalRole === 'local') {
       return accumulator;
     }
 
@@ -12018,19 +12080,65 @@ function convertLegacyBlockNameAndAttributes(name, attributes) {
     newAttributes.legacy = true;
   }
 
+  // Column count was stored as a string from WP 6.3-6.6. Convert it to a number.
+  if (attributes.layout?.type === 'grid' && typeof attributes.layout?.columnCount === 'string') {
+    newAttributes.layout = {
+      ...newAttributes.layout,
+      columnCount: parseInt(attributes.layout.columnCount, 10)
+    };
+  }
+
+  // Column span and row span were stored as strings in WP 6.6. Convert them to numbers.
+  if (typeof attributes.style?.layout?.columnSpan === 'string') {
+    const columnSpanNumber = parseInt(attributes.style.layout.columnSpan, 10);
+    newAttributes.style = {
+      ...newAttributes.style,
+      layout: {
+        ...newAttributes.style.layout,
+        columnSpan: isNaN(columnSpanNumber) ? undefined : columnSpanNumber
+      }
+    };
+  }
+  if (typeof attributes.style?.layout?.rowSpan === 'string') {
+    const rowSpanNumber = parseInt(attributes.style.layout.rowSpan, 10);
+    newAttributes.style = {
+      ...newAttributes.style,
+      layout: {
+        ...newAttributes.style.layout,
+        rowSpan: isNaN(rowSpanNumber) ? undefined : rowSpanNumber
+      }
+    };
+  }
+
   // The following code is only relevant for the Gutenberg plugin.
   // It's a stand-alone if statement for dead-code elimination.
   if (true) {
     // Convert pattern overrides added during experimental phase.
     // Only four blocks were supported initially.
     // These checks can be removed in WordPress 6.6.
-    if (newAttributes.metadata?.bindings && (name === 'core/paragraph' || name === 'core/heading' || name === 'core/image' || name === 'core/button')) {
-      const bindings = ['content', 'url', 'title', 'alt', 'text', 'linkTarget'];
+    if (newAttributes.metadata?.bindings && (name === 'core/paragraph' || name === 'core/heading' || name === 'core/image' || name === 'core/button') && newAttributes.metadata.bindings.__default?.source !== 'core/pattern-overrides') {
+      const bindings = ['content', 'url', 'title', 'id', 'alt', 'text', 'linkTarget'];
+      // Delete any existing individual bindings and add a default binding.
+      // It was only possible to add all the default attributes through the UI,
+      // So as soon as we find an attribute, we can assume all default attributes are overridable.
+      let hasPatternOverrides = false;
       bindings.forEach(binding => {
-        if (newAttributes.metadata.bindings[binding]?.source?.name === 'pattern_attributes') {
-          newAttributes.metadata.bindings[binding].source = 'core/pattern-overrides';
+        if (newAttributes.metadata.bindings[binding]?.source === 'core/pattern-overrides') {
+          hasPatternOverrides = true;
+          newAttributes.metadata = {
+            ...newAttributes.metadata,
+            bindings: {
+              ...newAttributes.metadata.bindings
+            }
+          };
+          delete newAttributes.metadata.bindings[binding];
         }
       });
+      if (hasPatternOverrides) {
+        newAttributes.metadata.bindings.__default = {
+          source: 'core/pattern-overrides'
+        };
+      }
     }
   }
   return [name, newAttributes];
@@ -12543,7 +12651,7 @@ function toHTML(node) {
  *
  * @return {Function} hpq matcher.
  */
-function node_matcher(selector) {
+function matcher(selector) {
   external_wp_deprecated_default()('wp.blocks.node.matcher', {
     since: '6.1',
     version: '6.3',
@@ -12578,7 +12686,7 @@ function node_matcher(selector) {
   isNodeOfType,
   fromDOM,
   toHTML,
-  matcher: node_matcher
+  matcher
 });
 
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/children.js
@@ -12770,7 +12878,6 @@ function children_matcher(selector) {
 
 
 
-
 /**
  * Internal dependencies
  */
@@ -12788,21 +12895,7 @@ function children_matcher(selector) {
  *
  * @return {Function} Enhanced hpq matcher.
  */
-const toBooleanAttributeMatcher = matcher => (0,external_wp_compose_namespaceObject.pipe)([matcher,
-// Expected values from `attr( 'disabled' )`:
-//
-// <input>
-// - Value:       `undefined`
-// - Transformed: `false`
-//
-// <input disabled>
-// - Value:       `''`
-// - Transformed: `true`
-//
-// <input disabled="disabled">
-// - Value:       `'disabled'`
-// - Transformed: `true`
-value => value !== undefined]);
+const toBooleanAttributeMatcher = matcher => value => matcher(value) !== undefined;
 
 /**
  * Returns true if value is of the given JSON schema type, or false otherwise.
@@ -12938,11 +13031,13 @@ function isValidByEnum(value, enumSet) {
 const matcherFromSource = memize(sourceConfig => {
   switch (sourceConfig.source) {
     case 'attribute':
-      let matcher = attr(sourceConfig.selector, sourceConfig.attribute);
-      if (sourceConfig.type === 'boolean') {
-        matcher = toBooleanAttributeMatcher(matcher);
+      {
+        let matcher = attr(sourceConfig.selector, sourceConfig.attribute);
+        if (sourceConfig.type === 'boolean') {
+          matcher = toBooleanAttributeMatcher(matcher);
+        }
+        return matcher;
       }
-      return matcher;
     case 'html':
       return matchers_html(sourceConfig.selector, sourceConfig.multiline);
     case 'text':
@@ -12952,12 +13047,15 @@ const matcherFromSource = memize(sourceConfig => {
     case 'children':
       return children_matcher(sourceConfig.selector);
     case 'node':
-      return node_matcher(sourceConfig.selector);
+      return matcher(sourceConfig.selector);
     case 'query':
       const subMatchers = Object.fromEntries(Object.entries(sourceConfig.query).map(([key, subSourceConfig]) => [key, matcherFromSource(subSourceConfig)]));
       return query(sourceConfig.selector, subMatchers);
     case 'tag':
-      return (0,external_wp_compose_namespaceObject.pipe)([prop(sourceConfig.selector, 'nodeName'), nodeName => nodeName ? nodeName.toLowerCase() : undefined]);
+      {
+        const matcher = prop(sourceConfig.selector, 'nodeName');
+        return domNode => matcher(domNode)?.toLowerCase();
+      }
     default:
       // eslint-disable-next-line no-console
       console.error(`Unknown source type "${sourceConfig.source}"`);
@@ -13045,26 +13143,30 @@ function getHTMLRootElementClasses(innerHTML) {
  * @return {Object} Filtered block attributes.
  */
 function fixCustomClassname(blockAttributes, blockType, innerHTML) {
-  if (hasBlockSupport(blockType, 'customClassName', true)) {
-    // To determine difference, serialize block given the known set of
-    // attributes, with the exception of `className`. This will determine
-    // the default set of classes. From there, any difference in innerHTML
-    // can be considered as custom classes.
-    const {
-      className: omittedClassName,
-      ...attributesSansClassName
-    } = blockAttributes;
-    const serialized = getSaveContent(blockType, attributesSansClassName);
-    const defaultClasses = getHTMLRootElementClasses(serialized);
-    const actualClasses = getHTMLRootElementClasses(innerHTML);
-    const customClasses = actualClasses.filter(className => !defaultClasses.includes(className));
-    if (customClasses.length) {
-      blockAttributes.className = customClasses.join(' ');
-    } else if (serialized) {
-      delete blockAttributes.className;
-    }
+  if (!hasBlockSupport(blockType, 'customClassName', true)) {
+    return blockAttributes;
   }
-  return blockAttributes;
+  const modifiedBlockAttributes = {
+    ...blockAttributes
+  };
+  // To determine difference, serialize block given the known set of
+  // attributes, with the exception of `className`. This will determine
+  // the default set of classes. From there, any difference in innerHTML
+  // can be considered as custom classes.
+  const {
+    className: omittedClassName,
+    ...attributesSansClassName
+  } = modifiedBlockAttributes;
+  const serialized = getSaveContent(blockType, attributesSansClassName);
+  const defaultClasses = getHTMLRootElementClasses(serialized);
+  const actualClasses = getHTMLRootElementClasses(innerHTML);
+  const customClasses = actualClasses.filter(className => !defaultClasses.includes(className));
+  if (customClasses.length) {
+    modifiedBlockAttributes.className = customClasses.join(' ');
+  } else if (serialized) {
+    delete modifiedBlockAttributes.className;
+  }
+  return modifiedBlockAttributes;
 }
 
 ;// CONCATENATED MODULE: ./packages/blocks/build-module/api/parser/apply-built-in-validation-fixes.js
@@ -13368,7 +13470,7 @@ function applyBlockValidation(unvalidatedBlock, blockType) {
   // like custom classNames handling.
   const fixedBlock = applyBuiltInValidationFixes(unvalidatedBlock, blockType);
   // Attempt to validate the block once again after the built-in fixes.
-  const [isFixedValid, validationIssues] = validateBlock(unvalidatedBlock, blockType);
+  const [isFixedValid, validationIssues] = validateBlock(fixedBlock, blockType);
   return {
     ...fixedBlock,
     isValid: isFixedValid,
@@ -13756,9 +13858,6 @@ function listReducer(node) {
     if (prevListItem) {
       prevListItem.appendChild(list);
       parentList.removeChild(parentListItem);
-    } else {
-      parentList.parentNode.insertBefore(list, parentList);
-      parentList.parentNode.removeChild(parentList);
     }
   }
 
@@ -14199,7 +14298,11 @@ function rawHandler({
 }) {
   // If we detect block delimiters, parse entirely as blocks.
   if (HTML.indexOf('<!-- wp:') !== -1) {
-    return parser_parse(HTML);
+    const parseResult = parser_parse(HTML);
+    const isSingleFreeFormBlock = parseResult.length === 1 && parseResult[0].name === 'core/freeform';
+    if (!isSingleFreeFormBlock) {
+      return parseResult;
+    }
   }
 
   // An array of HTML strings and block objects. The blocks replace matched
@@ -14806,12 +14909,15 @@ function pasteHandler({
     // Check plain text if there is no HTML.
     const content = HTML ? HTML : plainText;
     if (content.indexOf('<!-- wp:') !== -1) {
-      return parser_parse(content);
+      const parseResult = parser_parse(content);
+      const isSingleFreeFormBlock = parseResult.length === 1 && parseResult[0].name === 'core/freeform';
+      if (!isSingleFreeFormBlock) {
+        return parseResult;
+      }
     }
   }
 
   // Normalize unicode to use composed characters.
-  // This is unsupported in IE 11 but it's a nice-to-have feature, not mandatory.
   // Not normalizing the content will only affect older browsers and won't
   // entirely break the app.
   // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize

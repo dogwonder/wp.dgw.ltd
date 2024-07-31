@@ -261,23 +261,19 @@ __webpack_require__.d(private_actions_namespaceObject, {
   setContext: () => (setContext)
 });
 
-;// CONCATENATED MODULE: external "React"
-const external_React_namespaceObject = window["React"];
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/extends.js
 function _extends() {
-  _extends = Object.assign ? Object.assign.bind() : function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
+  return _extends = Object.assign ? Object.assign.bind() : function (n) {
+    for (var e = 1; e < arguments.length; e++) {
+      var t = arguments[e];
+      for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
     }
-    return target;
-  };
-  return _extends.apply(this, arguments);
+    return n;
+  }, _extends.apply(null, arguments);
 }
+
+;// CONCATENATED MODULE: external "React"
+const external_React_namespaceObject = window["React"];
 ;// CONCATENATED MODULE: ./node_modules/@radix-ui/primitive/dist/index.module.js
 function $e42e1063c40fb3ef$export$b9ecd428b558ff10(originalEventHandler, ourEventHandler, { checkForDefaultPrevented: checkForDefaultPrevented = true  } = {}) {
     return function handleEvent(event) {
@@ -1769,8 +1765,9 @@ function __await(v) {
 function __asyncGenerator(thisArg, _arguments, generator) {
   if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
   var g = generator.apply(thisArg, _arguments || []), i, q = [];
-  return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-  function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+  return i = {}, verb("next"), verb("throw"), verb("return", awaitReturn), i[Symbol.asyncIterator] = function () { return this; }, i;
+  function awaitReturn(f) { return function (v) { return Promise.resolve(v).then(f, reject); }; }
+  function verb(n, f) { if (g[n]) { i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; if (f) i[n] = f(i[n]); } }
   function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
   function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
   function fulfill(value) { resume("next", value); }
@@ -1836,16 +1833,18 @@ function __classPrivateFieldIn(state, receiver) {
 function __addDisposableResource(env, value, async) {
   if (value !== null && value !== void 0) {
     if (typeof value !== "object" && typeof value !== "function") throw new TypeError("Object expected.");
-    var dispose;
+    var dispose, inner;
     if (async) {
-        if (!Symbol.asyncDispose) throw new TypeError("Symbol.asyncDispose is not defined.");
-        dispose = value[Symbol.asyncDispose];
+      if (!Symbol.asyncDispose) throw new TypeError("Symbol.asyncDispose is not defined.");
+      dispose = value[Symbol.asyncDispose];
     }
     if (dispose === void 0) {
-        if (!Symbol.dispose) throw new TypeError("Symbol.dispose is not defined.");
-        dispose = value[Symbol.dispose];
+      if (!Symbol.dispose) throw new TypeError("Symbol.dispose is not defined.");
+      dispose = value[Symbol.dispose];
+      if (async) inner = dispose;
     }
     if (typeof dispose !== "function") throw new TypeError("Object not disposable.");
+    if (inner) dispose = function() { try { inner.call(this); } catch (e) { return Promise.reject(e); } };
     env.stack.push({ value: value, dispose: dispose, async: async });
   }
   else if (async) {
@@ -3182,18 +3181,21 @@ function Icon({
 
 ;// CONCATENATED MODULE: external ["wp","primitives"]
 const external_wp_primitives_namespaceObject = window["wp"]["primitives"];
+;// CONCATENATED MODULE: external "ReactJSXRuntime"
+const external_ReactJSXRuntime_namespaceObject = window["ReactJSXRuntime"];
 ;// CONCATENATED MODULE: ./packages/icons/build-module/library/search.js
-
 /**
  * WordPress dependencies
  */
 
-const search = (0,external_React_namespaceObject.createElement)(external_wp_primitives_namespaceObject.SVG, {
+
+const search = /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_primitives_namespaceObject.SVG, {
   xmlns: "http://www.w3.org/2000/svg",
-  viewBox: "0 0 24 24"
-}, (0,external_React_namespaceObject.createElement)(external_wp_primitives_namespaceObject.Path, {
-  d: "M13 5c-3.3 0-6 2.7-6 6 0 1.4.5 2.7 1.3 3.7l-3.8 3.8 1.1 1.1 3.8-3.8c1 .8 2.3 1.3 3.7 1.3 3.3 0 6-2.7 6-6S16.3 5 13 5zm0 10.5c-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5 4.5 2 4.5 4.5-2 4.5-4.5 4.5z"
-}));
+  viewBox: "0 0 24 24",
+  children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_primitives_namespaceObject.Path, {
+    d: "M13 5c-3.3 0-6 2.7-6 6 0 1.4.5 2.7 1.3 3.7l-3.8 3.8 1.1 1.1 3.8-3.8c1 .8 2.3 1.3 3.7 1.3 3.3 0 6-2.7 6-6S16.3 5 13 5zm0 10.5c-2.5 0-4.5-2-4.5-4.5s2-4.5 4.5-4.5 4.5 2 4.5 4.5-2 4.5-4.5 4.5z"
+  })
+});
 /* harmony default export */ const library_search = (search);
 
 ;// CONCATENATED MODULE: ./packages/commands/build-module/store/reducer.js
@@ -3497,7 +3499,7 @@ const external_wp_privateApis_namespaceObject = window["wp"]["privateApis"];
 const {
   lock,
   unlock
-} = (0,external_wp_privateApis_namespaceObject.__dangerousOptInToUnstableAPIsOnlyForCoreModules)('I know using unstable features means my theme or plugin will inevitably break in the next version of WordPress.', '@wordpress/commands');
+} = (0,external_wp_privateApis_namespaceObject.__dangerousOptInToUnstableAPIsOnlyForCoreModules)('I acknowledge private features are not for use in themes or plugins and doing so will break in the next version of WordPress.', '@wordpress/commands');
 
 ;// CONCATENATED MODULE: ./packages/commands/build-module/store/index.js
 /**
@@ -3539,7 +3541,6 @@ const store = (0,external_wp_data_namespaceObject.createReduxStore)(STORE_NAME, 
 unlock(store).registerPrivateActions(private_actions_namespaceObject);
 
 ;// CONCATENATED MODULE: ./packages/commands/build-module/components/command-menu.js
-
 /**
  * External dependencies
  */
@@ -3559,6 +3560,9 @@ unlock(store).registerPrivateActions(private_actions_namespaceObject);
 /**
  * Internal dependencies
  */
+
+
+
 
 const inputLabel = (0,external_wp_i18n_namespaceObject.__)('Search commands and settings');
 function CommandMenuLoader({
@@ -3581,27 +3585,32 @@ function CommandMenuLoader({
   if (!commands.length) {
     return null;
   }
-  return (0,external_React_namespaceObject.createElement)(external_React_namespaceObject.Fragment, null, commands.map(command => {
-    var _command$searchLabel;
-    return (0,external_React_namespaceObject.createElement)(Le.Item, {
-      key: command.name,
-      value: (_command$searchLabel = command.searchLabel) !== null && _command$searchLabel !== void 0 ? _command$searchLabel : command.label,
-      onSelect: () => command.callback({
-        close
-      }),
-      id: command.name
-    }, (0,external_React_namespaceObject.createElement)(external_wp_components_namespaceObject.__experimentalHStack, {
-      alignment: "left",
-      className: dist_clsx('commands-command-menu__item', {
-        'has-icon': command.icon
-      })
-    }, command.icon && (0,external_React_namespaceObject.createElement)(icon, {
-      icon: command.icon
-    }), (0,external_React_namespaceObject.createElement)("span", null, (0,external_React_namespaceObject.createElement)(external_wp_components_namespaceObject.TextHighlight, {
-      text: command.label,
-      highlight: search
-    }))));
-  }));
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_ReactJSXRuntime_namespaceObject.Fragment, {
+    children: commands.map(command => {
+      var _command$searchLabel;
+      return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(Le.Item, {
+        value: (_command$searchLabel = command.searchLabel) !== null && _command$searchLabel !== void 0 ? _command$searchLabel : command.label,
+        onSelect: () => command.callback({
+          close
+        }),
+        id: command.name,
+        children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(external_wp_components_namespaceObject.__experimentalHStack, {
+          alignment: "left",
+          className: dist_clsx('commands-command-menu__item', {
+            'has-icon': command.icon
+          }),
+          children: [command.icon && /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(icon, {
+            icon: command.icon
+          }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("span", {
+            children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_components_namespaceObject.TextHighlight, {
+              text: command.label,
+              highlight: search
+            })
+          })]
+        })
+      }, command.name);
+    })
+  });
 }
 function CommandMenuLoaderWrapper({
   hook,
@@ -3622,13 +3631,12 @@ function CommandMenuLoaderWrapper({
       setKey(prevKey => prevKey + 1);
     }
   }, [hook]);
-  return (0,external_React_namespaceObject.createElement)(CommandMenuLoader, {
-    key: key,
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(CommandMenuLoader, {
     hook: currentLoader.current,
     search: search,
     setLoader: setLoader,
     close: close
-  });
+  }, key);
 }
 function CommandMenuGroup({
   isContextual,
@@ -3652,33 +3660,37 @@ function CommandMenuGroup({
   if (!commands.length && !loaders.length) {
     return null;
   }
-  return (0,external_React_namespaceObject.createElement)(Le.Group, null, commands.map(command => {
-    var _command$searchLabel2;
-    return (0,external_React_namespaceObject.createElement)(Le.Item, {
-      key: command.name,
-      value: (_command$searchLabel2 = command.searchLabel) !== null && _command$searchLabel2 !== void 0 ? _command$searchLabel2 : command.label,
-      onSelect: () => command.callback({
-        close
-      }),
-      id: command.name
-    }, (0,external_React_namespaceObject.createElement)(external_wp_components_namespaceObject.__experimentalHStack, {
-      alignment: "left",
-      className: dist_clsx('commands-command-menu__item', {
-        'has-icon': command.icon
-      })
-    }, command.icon && (0,external_React_namespaceObject.createElement)(icon, {
-      icon: command.icon
-    }), (0,external_React_namespaceObject.createElement)("span", null, (0,external_React_namespaceObject.createElement)(external_wp_components_namespaceObject.TextHighlight, {
-      text: command.label,
-      highlight: search
-    }))));
-  }), loaders.map(loader => (0,external_React_namespaceObject.createElement)(CommandMenuLoaderWrapper, {
-    key: loader.name,
-    hook: loader.hook,
-    search: search,
-    setLoader: setLoader,
-    close: close
-  })));
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(Le.Group, {
+    children: [commands.map(command => {
+      var _command$searchLabel2;
+      return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(Le.Item, {
+        value: (_command$searchLabel2 = command.searchLabel) !== null && _command$searchLabel2 !== void 0 ? _command$searchLabel2 : command.label,
+        onSelect: () => command.callback({
+          close
+        }),
+        id: command.name,
+        children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(external_wp_components_namespaceObject.__experimentalHStack, {
+          alignment: "left",
+          className: dist_clsx('commands-command-menu__item', {
+            'has-icon': command.icon
+          }),
+          children: [command.icon && /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(icon, {
+            icon: command.icon
+          }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("span", {
+            children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_components_namespaceObject.TextHighlight, {
+              text: command.label,
+              highlight: search
+            })
+          })]
+        })
+      }, command.name);
+    }), loaders.map(loader => /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(CommandMenuLoaderWrapper, {
+      hook: loader.hook,
+      search: search,
+      setLoader: setLoader,
+      close: close
+    }, loader.name))]
+  });
 }
 function CommandInput({
   isOpen,
@@ -3697,7 +3709,7 @@ function CommandInput({
       commandMenuInput.current.focus();
     }
   }, [isOpen]);
-  return (0,external_React_namespaceObject.createElement)(Le.Input, {
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(Le.Input, {
     ref: commandMenuInput,
     value: search,
     onValueChange: setSearch,
@@ -3778,37 +3790,44 @@ function CommandMenu() {
     }
   };
   const isLoading = Object.values(loaders).some(Boolean);
-  return (0,external_React_namespaceObject.createElement)(external_wp_components_namespaceObject.Modal, {
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(external_wp_components_namespaceObject.Modal, {
     className: "commands-command-menu",
     overlayClassName: "commands-command-menu__overlay",
     onRequestClose: closeAndReset,
     __experimentalHideHeader: true,
-    contentLabel: (0,external_wp_i18n_namespaceObject.__)('Command palette')
-  }, (0,external_React_namespaceObject.createElement)("div", {
-    className: "commands-command-menu__container"
-  }, (0,external_React_namespaceObject.createElement)(Le, {
-    label: inputLabel,
-    onKeyDown: onKeyDown
-  }, (0,external_React_namespaceObject.createElement)("div", {
-    className: "commands-command-menu__header"
-  }, (0,external_React_namespaceObject.createElement)(CommandInput, {
-    search: search,
-    setSearch: setSearch,
-    isOpen: isOpen
-  }), (0,external_React_namespaceObject.createElement)(icon, {
-    icon: library_search
-  })), (0,external_React_namespaceObject.createElement)(Le.List, {
-    ref: commandListRef
-  }, search && !isLoading && (0,external_React_namespaceObject.createElement)(Le.Empty, null, (0,external_wp_i18n_namespaceObject.__)('No results found.')), (0,external_React_namespaceObject.createElement)(CommandMenuGroup, {
-    search: search,
-    setLoader: setLoader,
-    close: closeAndReset,
-    isContextual: true
-  }), search && (0,external_React_namespaceObject.createElement)(CommandMenuGroup, {
-    search: search,
-    setLoader: setLoader,
-    close: closeAndReset
-  })))));
+    contentLabel: (0,external_wp_i18n_namespaceObject.__)('Command palette'),
+    children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)("div", {
+      className: "commands-command-menu__container",
+      children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(Le, {
+        label: inputLabel,
+        onKeyDown: onKeyDown,
+        children: [/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)("div", {
+          className: "commands-command-menu__header",
+          children: [/*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(CommandInput, {
+            search: search,
+            setSearch: setSearch,
+            isOpen: isOpen
+          }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(icon, {
+            icon: library_search
+          })]
+        }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsxs)(Le.List, {
+          ref: commandListRef,
+          children: [search && !isLoading && /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(Le.Empty, {
+            children: (0,external_wp_i18n_namespaceObject.__)('No results found.')
+          }), /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(CommandMenuGroup, {
+            search: search,
+            setLoader: setLoader,
+            close: closeAndReset,
+            isContextual: true
+          }), search && /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(CommandMenuGroup, {
+            search: search,
+            setLoader: setLoader,
+            close: closeAndReset
+          })]
+        })]
+      })
+    })
+  });
 }
 
 ;// CONCATENATED MODULE: ./packages/commands/build-module/hooks/use-command-context.js

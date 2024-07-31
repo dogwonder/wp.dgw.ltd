@@ -171,6 +171,16 @@ if ( class_exists( 'GP_Feed_Plugin' ) ) {
 					true,
 					true
 				);
+
+				$files = array_merge(
+					include plugin_dir_path( __FILE__ ) . 'third-party/vendor/autoload_files.php'
+				);
+
+				foreach ( $files as $hash => $path ) {
+					if ( str_contains( $path, '/loilo/fuse/src' ) ) {
+						require_once $path;
+					}
+				}
 			} catch ( \TypeError $e ) {
 				gp_google_sheets()->log_error( __METHOD__ . '(): Could not initialize autoloader. ' . $e->getMessage() );
 			}

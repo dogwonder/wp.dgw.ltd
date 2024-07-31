@@ -1,6 +1,14 @@
 
 # Changelog
 
+## 1.5.11 | July 9, 2024
+
+- Fixed PHP error when updating entries when using the Gravity Forms REST API.
+
+## 1.5.10 | June 20, 2024
+
+- Fixed issue where conditionally hidden Unique ID field failed to generate delayed payment notifications.
+
 ## 1.5.9 | May 22, 2024
 
 - Fixed issue where Unique ID field values were regenerated after payment was completed.

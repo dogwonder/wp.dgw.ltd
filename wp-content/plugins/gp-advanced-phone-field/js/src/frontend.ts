@@ -45,14 +45,14 @@ class GPAdvancedPhoneField implements GPAdvancedPhoneField {
 		}
 
 		/* Save value POSTed to input, so we can preserve it when navigating multi-page forms. */
-		const postedValue = $(this.$telInput).val();
+		let postedValue = $(this.$telInput).val();
 
 		this.disableMask();
 
 		let initialCountry = this.defaultCountry ?? 'auto';
 
 		// If we have a posted number, set the initial country to US to fix issues with region-less numbers.
-		if (postedValue) {
+		if (postedValue && initialCountry === 'auto') {
 			initialCountry = 'us';
 		}
 
@@ -146,6 +146,15 @@ class GPAdvancedPhoneField implements GPAdvancedPhoneField {
 		 * We don't use updateHiddenInputValue() as it requires the phone utils and may not be ready yet.
 		 */
 		if (postedValue) {
+			const telInputContainer = $(this.$telInput).parent();
+			const postedString = String(postedValue);
+			// Add the country code when the posted string does not have the country code.
+			if (postedString.length === 0 || postedString.charAt(0) !== '+') {
+				const intlCode = telInputContainer
+					.find('.iti__selected-dial-code')
+					.html();
+				postedValue = intlCode + postedValue;
+			}
 			$(this.$hiddenInput).val(postedValue);
 		}
 

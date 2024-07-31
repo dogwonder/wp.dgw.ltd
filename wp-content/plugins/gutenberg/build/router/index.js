@@ -42,25 +42,19 @@ __webpack_require__.d(__webpack_exports__, {
   privateApis: () => (/* reexport */ privateApis)
 });
 
-;// CONCATENATED MODULE: external "React"
-const external_React_namespaceObject = window["React"];
 ;// CONCATENATED MODULE: external ["wp","element"]
 const external_wp_element_namespaceObject = window["wp"]["element"];
 ;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/extends.js
 function extends_extends() {
-  extends_extends = Object.assign ? Object.assign.bind() : function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
+  return extends_extends = Object.assign ? Object.assign.bind() : function (n) {
+    for (var e = 1; e < arguments.length; e++) {
+      var t = arguments[e];
+      for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
     }
-    return target;
-  };
-  return extends_extends.apply(this, arguments);
+    return n;
+  }, extends_extends.apply(null, arguments);
 }
+
 ;// CONCATENATED MODULE: ./node_modules/history/index.js
 
 
@@ -896,12 +890,27 @@ function replace(params, state) {
     search
   }, state);
 }
+const locationMemo = new WeakMap();
+function getLocationWithParams() {
+  const location = history_history.location;
+  let locationWithParams = locationMemo.get(location);
+  if (!locationWithParams) {
+    locationWithParams = {
+      ...location,
+      params: Object.fromEntries(new URLSearchParams(location.search))
+    };
+    locationMemo.set(location, locationWithParams);
+  }
+  return locationWithParams;
+}
 history_history.push = push;
 history_history.replace = replace;
+history_history.getLocationWithParams = getLocationWithParams;
 /* harmony default export */ const build_module_history = (history_history);
 
+;// CONCATENATED MODULE: external "ReactJSXRuntime"
+const external_ReactJSXRuntime_namespaceObject = window["ReactJSXRuntime"];
 ;// CONCATENATED MODULE: ./packages/router/build-module/router.js
-
 /**
  * WordPress dependencies
  */
@@ -911,6 +920,7 @@ history_history.replace = replace;
  * Internal dependencies
  */
 
+
 const RoutesContext = (0,external_wp_element_namespaceObject.createContext)();
 const HistoryContext = (0,external_wp_element_namespaceObject.createContext)();
 function useLocation() {
@@ -919,29 +929,17 @@ function useLocation() {
 function useHistory() {
   return (0,external_wp_element_namespaceObject.useContext)(HistoryContext);
 }
-function getLocationWithParams(location) {
-  const searchParams = new URLSearchParams(location.search);
-  return {
-    ...location,
-    params: Object.fromEntries(searchParams.entries())
-  };
-}
 function RouterProvider({
   children
 }) {
-  const [location, setLocation] = (0,external_wp_element_namespaceObject.useState)(() => getLocationWithParams(build_module_history.location));
-  (0,external_wp_element_namespaceObject.useEffect)(() => {
-    return build_module_history.listen(({
-      location: updatedLocation
-    }) => {
-      setLocation(getLocationWithParams(updatedLocation));
-    });
-  }, []);
-  return (0,external_React_namespaceObject.createElement)(HistoryContext.Provider, {
-    value: build_module_history
-  }, (0,external_React_namespaceObject.createElement)(RoutesContext.Provider, {
-    value: location
-  }, children));
+  const location = (0,external_wp_element_namespaceObject.useSyncExternalStore)(build_module_history.listen, build_module_history.getLocationWithParams, build_module_history.getLocationWithParams);
+  return /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(HistoryContext.Provider, {
+    value: build_module_history,
+    children: /*#__PURE__*/(0,external_ReactJSXRuntime_namespaceObject.jsx)(RoutesContext.Provider, {
+      value: location,
+      children: children
+    })
+  });
 }
 
 ;// CONCATENATED MODULE: external ["wp","privateApis"]
@@ -954,7 +952,7 @@ const external_wp_privateApis_namespaceObject = window["wp"]["privateApis"];
 const {
   lock,
   unlock
-} = (0,external_wp_privateApis_namespaceObject.__dangerousOptInToUnstableAPIsOnlyForCoreModules)('I know using unstable features means my theme or plugin will inevitably break in the next version of WordPress.', '@wordpress/router');
+} = (0,external_wp_privateApis_namespaceObject.__dangerousOptInToUnstableAPIsOnlyForCoreModules)('I acknowledge private features are not for use in themes or plugins and doing so will break in the next version of WordPress.', '@wordpress/router');
 
 ;// CONCATENATED MODULE: ./packages/router/build-module/private-apis.js
 /**

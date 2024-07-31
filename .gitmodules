@@ -4,3 +4,6 @@
 [submodule "wp-content/themes/dgwltd"]
 	path = wp-content/themes/dgwltd
 	url = git@github.com:dogwonder/dgwltd-theme.git
+[submodule "wp-content/plugins/content-filter"]
+	path = wp-content/plugins/content-filter
+	url = git@github.com:dogwonder/content-filter.git

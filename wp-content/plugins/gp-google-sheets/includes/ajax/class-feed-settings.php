@@ -4,6 +4,8 @@ namespace GP_Google_Sheets\AJAX;
 defined( 'ABSPATH' ) or exit;
 
 use GP_Google_Sheets\Spreadsheets\Spreadsheet;
+use \GP_Google_Sheets\Dependencies\Fuse;
+
 
 class Feed_Settings extends AJAX {
 
@@ -14,8 +16,8 @@ class Feed_Settings extends AJAX {
 		//Handle an AJAX call behind the Insert Test Row button
 		add_action( 'wp_ajax_gpgs_insert_test_row', array( __CLASS__, 'insert_test_row' ) );
 
-		// Endpoint to be used after a sheet is selected
-		add_action( 'wp_ajax_gpgs_select_sheet', array( __CLASS__, 'ajax_select_sheet' ) );
+		// Endpoint to get column mappings HTML and Javascript.
+		add_action( 'wp_ajax_gpgs_get_column_mappings_html', array( __CLASS__, 'ajax_get_column_mappings_html' ) );
 	}
 
 	public static function disconnect() {
@@ -124,39 +126,177 @@ class Feed_Settings extends AJAX {
 		}
 	}
 
-	public static function ajax_select_sheet() {
+	public static function ajax_get_column_mappings_html() {
 		self::check_nonce_and_caps(
-			__( 'There was an error selecting the sheet. Double check that you have permissions to use GP Google Sheets and try again.', 'gp-google-sheets' ),
+			__( 'There was an error accessing the sheet. Double check that you have permissions to use GP Google Sheets and try again.', 'gp-google-sheets' ),
 			null,
 			gp_google_sheets()->get_capabilities( 'form_settings' ),
 		);
 
-		$fake_feed   = self::create_feed_from_get();
-		$spreadsheet = Spreadsheet::from_feed( $fake_feed );
+		$fake_feed = self::create_feed_from_get();
+		// Choices for the key field in the column mapping.
+		$choices = array();
+		// Message used to show an alert in the browser if needed. (e.g. if no Sheet columns were matched with form fields)
+		$alert_message = null;
 
-		if ( ! $spreadsheet ) {
-			wp_send_json_error( array(
-				'message' => __( 'Could not connect to Google Sheets. Please check your credentials and try again.', 'gp-google-sheets' ),
-			) );
+		switch ( rgget( 'variant' ) ) {
+			case 'from_current_feed_mappings':
+				/**
+				 * Get the column mappings markup based on the current feed meta.
+				 *
+				 * This will return the column mappings markup based on the current feed meta.
+				 */
+
+				$spreadsheet = Spreadsheet::from_feed( $fake_feed );
+				$choices     = $spreadsheet->field_map_key_field_choices();
+
+				if ( ! $spreadsheet ) {
+					wp_send_json_error( array(
+						'message' => __( 'Could not connect to Google Sheets. Please check your credentials and try again.', 'gp-google-sheets' ),
+					) );
+				}
+				break;
+			case 'from_form_fields':
+				/**
+				 * Get column mappings markup based on the fields of the form.
+				 *
+				 * There will be one mapping for each form field that can be validated (e.g. section
+				 * and page fields are omitted.)
+				 * For example: this can used for the initial feed setup as an optional time saving step.
+				 */
+
+				$column_mappings                     = self::column_mappings_from_form_fields( $fake_feed );
+				$fake_feed['meta']['column_mapping'] = $column_mappings;
+				break;
+			case 'from_sheet_columns':
+				/**
+				 * Get column mappings markup based on the column headers of the connecte Sheet.
+				 *
+				 * This attempts to fuzzy map column headers to form fields. If a match is found,
+				 * a mapping row is automatically added to the markup.
+				 */
+
+				$spreadsheet = Spreadsheet::from_feed( $fake_feed );
+				$choices     = $spreadsheet->field_map_key_field_choices();
+
+				$column_mappings = self::column_mappings_from_sheet_columns(
+					$fake_feed,
+					$spreadsheet
+				);
+
+				$fake_feed['meta']['column_mapping'] = $column_mappings;
+
+				$column_mapping = rgars( $fake_feed, 'meta/column_mapping' );
+				if ( empty( $column_mapping ) ) {
+					$alert_message = __( 'No Google Sheet columns were matched with form fields. Please manually map the columns.', 'gp-google-sheets' );
+				}
+
+				if ( ! $spreadsheet ) {
+					wp_send_json_error( array(
+						'message' => __( 'Could not connect to Google Sheets. Please check your credentials and try again.', 'gp-google-sheets' ),
+					) );
+				}
+				break;
+			default:
+				wp_send_json_error( array(
+					'message' => __( 'Incorrect `variant` sent with request.', 'gp-google-sheets' ),
+				) );
 		}
 
 		wp_send_json_success( array(
-			'controlsHTML' => self::force_field_markup_field_map( $fake_feed, $spreadsheet ),
+			'controlsHTML' => self::get_column_mapping_setting_markup( $fake_feed, $choices ),
+			'alertMessage' => $alert_message,
 		) );
 	}
 
 	/**
-	 * @param array $fake_feed
+	 * Fitlers fields that don't have an associated value. This is used to filter
+	 * out fields such as sections, pages, etc.
+	 */
+	protected static function filter_non_value_fields( $fields ) {
+		$filtered = array();
+		foreach ( $fields as $field ) {
+			if ( \GFFormDisplay::is_field_validation_supported( $field ) ) {
+				$filtered[] = $field;
+			}
+		}
+
+		return $filtered;
+	}
+
+	/**
+	 * Fuzzy matches spreadsheet column headings with fields in the form and then updates
+	 * the feed meta accordingly. This is used for automating creation of column mappings.
+	 *
+	 * @param array $feed
 	 * @param Spreadsheet $spreadsheet
 	 */
-	protected static function force_field_markup_field_map( $fake_feed, $spreadsheet ) {
+	protected static function column_mappings_from_sheet_columns( $feed, $spreadsheet ) {
+		$form   = \GFAPI::get_form( $feed['form_id'] );
+		$fields = self::filter_non_value_fields( $form['fields'] );
+
+		$column_mappings = array();
+
+		list( $header_row ) = $spreadsheet->get_first_row();
+		foreach ( $header_row as $idx => $val ) {
+			$options             = array(
+				'keys'            => array( 'label', 'adminLabel' ),
+				'shouldSort'      => true,
+				'includeScore'    => true,
+				'threshold'       => 0.5,
+				'ignoreLocation'  => true,
+				'findAllMatches'  => true,
+				'isCaseSensitive' => true,
+			);
+			$fuse                = new Fuse\Fuse( $fields, $options );
+			list( $first_match ) = $fuse->search( $val );
+
+			if ( $first_match ) {
+				$field = $first_match['item'];
+
+				// add 1 to $idx as Google Sheets columns are 1-indexed
+				$letters = gpgs_number_to_column_letters( $idx + 1 );
+
+				$column_mappings[] = array(
+					'key'          => $letters,
+					'custom_key'   => $val,
+					'value'        => $field['id'],
+					'custom_value' => '',
+				);
+			}
+		}
+		return $column_mappings;
+	}
+
+	protected static function column_mappings_from_form_fields( $feed ) {
+		$form            = \GFAPI::get_form( $feed['form_id'] );
+		$fields          = self::filter_non_value_fields( $form['fields'] );
+		$column_mappings = array();
+
+		foreach ( $fields as $field ) {
+			$column_mappings[] = array(
+				'key'          => 'gf_custom',
+				'custom_key'   => $field['label'],
+				'value'        => $field['id'],
+				'custom_value' => '',
+			);
+		}
+
+		return $column_mappings;
+	}
+
+	/**
+	 * @param array $fake_feed
+	 * @param array $choices
+	 */
+	protected static function get_column_mapping_setting_markup( $fake_feed, $choices = array() ) {
 		$fake_field = array(
 			'type'      => 'generic_map',
 			'name'      => 'column_mapping',
 			'key_field' => array(
 				'title'       => __( 'Sheet Column', 'gp-google-sheets' ),
 				'placeholder' => __( 'Column heading', 'gp-google-sheets' ),
-				'choices'     => $spreadsheet->field_map_key_field_choices(),
+				'choices'     => $choices,
 			),
 		);
 
@@ -194,6 +334,11 @@ class Feed_Settings extends AJAX {
 					'message' => __( 'Feed not found.', 'gp-google-sheets' ),
 				));
 			}
+		}
+
+		// Add the feed id to the feed manually if it's not already there. This is needed if the feed has not yet been saved in the DB.
+		if ( empty( rgar( $feed, 'form_id' ) ) && rgget( 'id' ) ) {
+			$feed['form_id'] = intval( rgget( 'id' ) );
 		}
 
 		$feed['meta']['google_sheet_url'] = sanitize_text_field( rgget( 'sheet_url' ) );

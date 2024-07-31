@@ -143,6 +143,32 @@ trait Entry_Writer {
 			default:
 				$field = GFAPI::get_field( $form, $field_id );
 
+				/*
+				 * If the field is a checkbox, and we're getting the selected choices, we need to bypass
+				 * $field->get_value_export() as it skips anything that's rgempty() instead of rgblank() which
+				 * means 0's are skipped.
+				 *
+				 * This is essentially duplicated logic from GF_Field_Checkbox::get_value_export() but with
+				 * the rgempty() replaced with rgblank() and an array_filter to remove empty values.
+				 */
+				if ( $field && $field->get_input_type() === 'checkbox' && $field_id == $field->id ) {
+					$selected = array();
+
+					foreach ( $field->inputs as $input ) {
+						$index = (string) $input['id'];
+
+						$selected[] = GFCommon::selection_display( rgar( $entry, $index ), $field, rgar( $entry, 'currency' ), false );
+					}
+
+					// Array filter $selected to remove empty values.
+					$selected = array_filter( $selected, function( $value ) {
+						return ! rgblank( $value );
+					} );
+
+					$value = apply_filters( 'gform_export_field_value', implode( ', ', $selected ), $form['id'], $field_id, $entry );
+					break;
+				}
+
 				$value          = is_object( $field ) ? $field->get_value_export( $entry, $field_id, false, true ) : rgar( $entry, $field_id );
 				$original_value = $value;
 
